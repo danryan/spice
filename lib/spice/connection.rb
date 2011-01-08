@@ -14,16 +14,28 @@ module Spice
       @default_headers = options[:headers] || {}
     end
     
+    def get(path, headers={})
+      response = RestClient::Request.execute(
+        :method => :GET,
+        :url => "#{@url}/#{path}",
+        :headers => build_headers(:GET, path)
+      )
+      JSON.parse(response)
+    end
+    
+    def post(path, payload, headers={})
+      response = RestClient::Request.execute(
+        :method => :POST,
+        :url => "#{@url}/#{path}",
+        :headers => build_headers(:POST, path, headers, JSON.generate(payload)),
+        :payload => JSON.generate(payload)
+      )
+      JSON.parse(response)
+    end
+    
     def clients
       # Client.all
-      method = :GET
-      path = "/clients"
-      response = RestClient::Request.execute(
-        :method => method,
-        :url => "#{@url}/#{path}",
-        :headers => build_headers(method, path)
-      )
-      JSON.parse(response).map {|c| Client.new(c[0])}
+      get("/clients").map {|c| Client.new(c[0])}
     end
     
     def cookbooks
