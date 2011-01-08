@@ -1,0 +1,29 @@
+PATH
+  remote: .
+  specs:
+    spice (0.0.1.alpha)
+      rest-client
+
+GEM
+  remote: http://rubygems.org/
+  specs:
+    diff-lcs (1.1.2)
+    mime-types (1.16)
+    rest-client (1.6.1)
+      mime-types (>= 1.16)
+    rspec (2.4.0)
+      rspec-core (~> 2.4.0)
+      rspec-expectations (~> 2.4.0)
+      rspec-mocks (~> 2.4.0)
+    rspec-core (2.4.0)
+    rspec-expectations (2.4.0)
+      diff-lcs (~> 1.1.2)
+    rspec-mocks (2.4.0)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  rest-client
+  rspec (= 2.4.0)
+  spice!
