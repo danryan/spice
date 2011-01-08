@@ -1,0 +1,1 @@
+c = Spice::Connection.new("http://chef.int.canvashosting.com:4000", "dryan", "/Users/dan/.chef/dryan.pem")
