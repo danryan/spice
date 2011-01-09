@@ -6,6 +6,8 @@ module Spice
       connection.get("/cookbooks")
     end
     
-    
+    def self.find(name)
+      connection.get("/cookbooks/#{name}")
+    end
   end
 end

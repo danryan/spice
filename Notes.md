@@ -1,0 +1,1 @@
+Spice::Chef.new(:host => "chef.int.canvashosting.com", :client_name => "dryan", :key_file => "/Users/dan/.chef/dryan.pem")

@@ -2,6 +2,7 @@ module Spice
   class Chef
     attr_accessor :host, :client_name, :key_file, :port, :path, :scheme, :connection
     
+
     def initialize(options={})
       @@client_name ||= @client_name = options[:client_name]
       @@key_file    ||= @key_file = options[:key_file]
@@ -27,15 +28,15 @@ module Spice
     end
     
     def clients
-      self.connection.get("/clients")
+      Client.all
     end
     
     def nodes
-      self.connection.get("/nodes")
+      Node.all
     end
     
     def data_bags
-      self.connection.get("/data")
+      DataBag.all
     end
   end
 end
