@@ -5,7 +5,8 @@ module Spice
     def self.all
       connection.get("/nodes")
     end
-    
-    
+    def self.find(name)
+      connection.get("/nodes/#{name}")
+    end
   end
 end

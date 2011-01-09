@@ -4,7 +4,6 @@ module Spice
   class Connection
     attr_accessor :client_name, :key_file, :auth_credentials, :url, :path, :port, :scheme
     
-    
     def initialize(options={})
       endpoint          = URI.parse(options[:url])
       @url              = options[:url]
@@ -15,7 +14,6 @@ module Spice
       @path = URI.parse(@url).path
       @auth_credentials = Authentication.new(options[:client_name], options[:key_file])
       @sign_on_redirect, @sign_request = true, true
-      super
     end
     
     def get(path, headers={})
@@ -24,22 +22,44 @@ module Spice
         :url => "#{@url}#{path}",
         :headers => build_headers(:GET, path, headers)
       )
-      Yajl.load(response)
+      JSON.parse(response)
     end
     
     def post(path, payload, headers={})
       response = RestClient::Request.execute(
         :method => :POST,
         :url => "#{@url}#{path}",
-        :headers => build_headers(:POST, path, headers, Yajl.dump(payload)),
-        :payload => Yajl.dump(payload)
+        :headers => build_headers(:POST, path, headers, JSON.generate(payload)),
+        :payload => JSON.generate(payload)
       )
-      Yajl.load(response)
+      JSON.parse(response)
     end
+    
+    def put(path, payload, headers={})
+      response = RestClient::Request.execute(
+        :method => :PUT,
+        :url => "#{@url}#{path}",
+        :headers => build_headers(:PUT, path, headers, JSON.generate(payload)),
+        :payload => JSON.generate(payload)
+      )
+      JSON.parse(response)
+    end
+    
+    def delete(path, payload, headers={})
+      response = RestClient::Request.execute(
+        :method => :DELETE,
+        :url => "#{@url}#{path}",
+        :headers => build_headers(:DELETE, path, headers, JSON.generate(payload)),
+        :payload => JSON.generate(payload)
+      )
+      JSON.parse(response)
+    end  
     
     def sign_requests?
       auth_credentials.sign_requests? && @sign_request
     end
+    
+    private
     
     def authentication_headers(method, path, json_body=nil)
       request_params = {
