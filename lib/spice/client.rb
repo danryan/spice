@@ -1,33 +1,24 @@
 module Spice
-  class Client < Spice::Chef
-    attr_accessor :name, :public_key
-
-    def initialize(options={})
-      @name = options[:name]
-      @public_key = options[:public_key]
-      @admin = options[:admin] || false
-      @chef_type = options[:client] || "Chef::ApiClient"
-      @_rev = options[:rev] || ""
-    end
-    
-    def self.all
-      connection.get("/clients").map { |c| c[0] }
+  class Client < Spice::Chef    
+    def self.all(options={})
+      if options[:complete]
+        results = []
+        connection.get("/clients").map { |c| c[0] }.each do |client|
+          results << connection.get("/clients/#{client}")
+        end
+        results
+      else
+        connection.get("/clients")
+      end
     end
     
     def self.[](name)
       connection.get("/clients/#{name}")
     end
     
-    def self.find(options={})
+    def self.show(options={})
       name = options.delete(:name)
       connection.get("/clients/#{name}")
-      # Client.new(
-      #   :name => client[:name], 
-      #   :public_key => client[:public_key],
-      #   :admin => client[:admin],
-      #   :chef_type => client[:chef_type],
-      #   :_rev => client[:rev]
-      # )
     end
     
     def self.create(options={})
@@ -40,7 +31,7 @@ module Spice
     end
     
     def self.delete(options={})
-      name = options[:name]
+      name = options.delete(:name)
       connection.delete("/clients/#{name}")
     end
   end

@@ -1,13 +1,30 @@
 module Spice
   class Cookbook < Spice::Chef
-    attr_accessor :name, :public_key
-
-    def self.all
-      connection.get("/cookbooks")
+    def self.all(options={})
+      connection.get("/cookbooks").map { |c| c[0] }
     end
     
-    def self.find(name)
+    def self.[](name)
       connection.get("/cookbooks/#{name}")
+    end
+    
+    def self.show(options={})
+      name = options.delete(:name)
+      connection.get("/cookbooks/#{name}")
+    end
+    
+    def self.create(options={})
+      connection.post("/cookbooks", options)
+    end
+    
+    def self.update(options={})
+      name = options.delete(:name)
+      connection.put("/cookbooks/#{name}", options)
+    end
+    
+    def self.delete(options={})
+      name = options.delete(:name)
+      connection.delete("/cookbooks/#{name}")
     end
   end
 end

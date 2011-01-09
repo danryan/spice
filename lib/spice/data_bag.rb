@@ -1,13 +1,30 @@
 module Spice
   class DataBag < Spice::Chef
-    attr_accessor :name, :public_key
-
-    def self.all
+    def self.all(options={})
       connection.get("/data")
     end
     
-    def self.find(name)
+    def self.[](name)
       connection.get("/data/#{name}")
+    end
+    
+    def self.show(options={})
+      name = options.delete(:name)
+      connection.get("/data/#{name}")
+    end
+    
+    def self.create(options={})
+      connection.post("/data", options)
+    end
+    
+    def self.update(options={})
+      name = options.delete(:name)
+      connection.put("/data/#{name}", options)
+    end
+    
+    def self.delete(options={})
+      name = options.delete(:name)
+      connection.delete("/data/#{name}")
     end
   end
 end
