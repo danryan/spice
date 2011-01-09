@@ -1,12 +1,11 @@
 module Spice
-  class Client
-    attr_reader :name
-    def initialize(name)
-      @name = name
+  class Client < Spice::Chef
+    attr_accessor :name, :public_key
+
+    def self.all
+      connection.get("/clients")
     end
     
-    def to_s
-      name
-    end
+    
   end
 end

@@ -1,4 +1,11 @@
 module Spice
-  class DataBag
+  class DataBag < Spice::Chef
+    attr_accessor :name, :public_key
+
+    def self.all
+      connection.get("/data")
+    end
+    
+    
   end
 end
