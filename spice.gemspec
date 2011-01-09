@@ -18,8 +18,9 @@ Gem::Specification.new do |s|
   s.add_dependency "mixlib-authentication"
   s.add_dependency "yajl-ruby"
   
-  s.add_development_dependency "rspec", "2.4.0"
-
+  s.add_development_dependency "rspec", "~> 2.4.0"
+  s.add_development_dependency "webmock", "~> 1.6.1"
+  
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
   s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }

@@ -1,8 +1,9 @@
-require 'yajl/json_gem'
-require 'rest-client'
+require 'bundler'
+Bundler.require
 
 require 'spice/authentication'
 require 'spice/chef'
+require 'spice/role'
 
 require 'spice/client'
 require 'spice/cookbook'
