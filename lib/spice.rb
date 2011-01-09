@@ -1,10 +1,15 @@
-require 'json'
+require 'yajl'
+require 'rest-client'
+require 'supermodel'
 
 require 'spice/authentication'
-require 'spice/connection'
+require 'spice/chef'
+
 require 'spice/client'
-require 'spice/node'
 require 'spice/cookbook'
+require 'spice/data_bag'
+require 'spice/node'
+require 'spice/connection'
 
 module Spice
   # Your code goes here...

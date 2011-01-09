@@ -16,6 +16,8 @@ Gem::Specification.new do |s|
   
   s.add_dependency "rest-client"
   s.add_dependency "mixlib-authentication"
+  s.add_dependency "yajl-ruby"
+  
   s.add_development_dependency "rspec", "2.4.0"
 
   s.files         = `git ls-files`.split("\n")

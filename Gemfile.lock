@@ -2,13 +2,18 @@ PATH
   remote: .
   specs:
     spice (0.0.1.alpha)
+      mixlib-authentication
       rest-client
+      yajl-ruby
 
 GEM
   remote: http://rubygems.org/
   specs:
     diff-lcs (1.1.2)
     mime-types (1.16)
+    mixlib-authentication (1.1.4)
+      mixlib-log
+    mixlib-log (1.2.0)
     rest-client (1.6.1)
       mime-types (>= 1.16)
     rspec (2.4.0)
@@ -19,11 +24,14 @@ GEM
     rspec-expectations (2.4.0)
       diff-lcs (~> 1.1.2)
     rspec-mocks (2.4.0)
+    yajl-ruby (0.7.8)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
+  mixlib-authentication
   rest-client
   rspec (= 2.4.0)
   spice!
+  yajl-ruby
