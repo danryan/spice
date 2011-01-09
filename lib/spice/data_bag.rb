@@ -6,6 +6,8 @@ module Spice
       connection.get("/data")
     end
     
-    
+    def self.find(name)
+      connection.get("/data/#{name}")
+    end
   end
 end
