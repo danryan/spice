@@ -1,6 +1,6 @@
 module Spice
   class Node < Spice::Chef
-    def self.all(options={})
+    def self.list(options={})
       connection.get("/nodes")
     end
     
@@ -24,7 +24,7 @@ module Spice
     
     def self.delete(options={})
       name = options.delete(:name)
-      connection.delete("/nodes/#{name}")
+      connection.delete("/nodes/#{name}", options)
     end
   end
 end

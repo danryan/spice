@@ -1,4 +1,48 @@
 module Spice
+  describe Chef do
+    describe "#initialize" do
+    end
+    
+    describe '#connection' do
+    end
+    
+    describe '.connection' do
+      it ""
+    end
+    
+    describe '#clients' do
+      it "should return a list of all clients" do
+        let(:clients) { Chef.clients }
+      end
+    end
+    
+    describe '#nodes' do
+      it "should return a list of all nodes" do
+        let(:nodes) { Chef.nodes }
+      end
+    end
+    
+    describe '#data_bags' do
+      it "should return a list of all data bags" do
+        let(:data_bags) { Chef.data_bags }
+      end
+    end
+    
+    describe '#roles' do
+      it "should return a list of all roles" do
+        let(:roles) { Chef.roles }
+      end
+    end
+    
+    describe '#cookbooks' do
+      it "should return a list of all cookbooks" do
+        let(:cookbooks) { Chef.cookbooks }
+      end
+    end
+  end
+end
+
+module Spice
   class Chef
     attr_accessor :host, :client_name, :key_file, :port, :path, :scheme, :connection
     
@@ -28,19 +72,14 @@ module Spice
       @connection || Spice.connection
     end
     
-    class << self
-      def clients
-        Client.list
-      end
-    
-      def nodes
-        Node.list
-      end
-    
-      def data_bags
-        DataBag.list
-      end
+    def clients
+      Client.all
     end
-  end
-end
-
+    
+    def nodes
+      Node.all
+    end
+    
+    def data_bags
+      DataBag.all
+    end

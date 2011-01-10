@@ -1,8 +1,8 @@
-require 'rest-client'
+require 'yajl/json_gem'
 
 module Spice
   class Connection
-    attr_accessor :client_name, :key_file, :auth_credentials, :url, :path, :port, :scheme
+    attr_accessor :client_name, :key_file, :auth_credentials, :url, :path, :port, :scheme, :host
     
     def initialize(options={})
       endpoint          = URI.parse(options[:url])

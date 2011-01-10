@@ -1,6 +1,6 @@
 module Spice
   class Cookbook < Spice::Chef
-    def self.all(options={})
+    def self.list(options={})
       connection.get("/cookbooks").map { |c| c[0] }
     end
     
@@ -24,7 +24,7 @@ module Spice
     
     def self.delete(options={})
       name = options.delete(:name)
-      connection.delete("/cookbooks/#{name}")
+      connection.delete("/cookbooks/#{name}", options)
     end
   end
 end

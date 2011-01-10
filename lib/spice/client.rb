@@ -1,6 +1,6 @@
 module Spice
   class Client < Spice::Chef    
-    def self.all(options={})
+    def self.list(options={})
       if options[:complete]
         results = []
         connection.get("/clients").map { |c| c[0] }.each do |client|
@@ -32,7 +32,7 @@ module Spice
     
     def self.delete(options={})
       name = options.delete(:name)
-      connection.delete("/clients/#{name}")
+      connection.delete("/clients/#{name}", options)
     end
   end
 end

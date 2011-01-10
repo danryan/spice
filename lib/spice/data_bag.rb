@@ -1,6 +1,6 @@
 module Spice
   class DataBag < Spice::Chef
-    def self.all(options={})
+    def self.list(options={})
       connection.get("/data")
     end
     
@@ -24,7 +24,7 @@ module Spice
     
     def self.delete(options={})
       name = options.delete(:name)
-      connection.delete("/data/#{name}")
+      connection.delete("/data/#{name}", options)
     end
   end
 end

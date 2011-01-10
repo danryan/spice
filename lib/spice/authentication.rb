@@ -29,7 +29,7 @@ module Spice
     
     def load_signing_key
       begin
-        @raw_key = IO.read(key_file, :mode => "r").strip
+        @raw_key = File.read(key_file).strip
       rescue SystemCallError, IOError => e
         raise IOError, "Unable to read #{key_file}"
       end
