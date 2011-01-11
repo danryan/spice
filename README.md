@@ -1,8 +1,8 @@
-= spice
+# spice
 
 Spice is a zesty Chef API wrapper. It's primary purpose is to let you integrate your apps with a (Chef)[http://opscode.com/chef] server easily and succinctly.  Spice provides support for the (entire released Chef API)[http://wiki.opscode.com/display/chef/Server+API]
 
-== Installation
+## Installation
 
 Install this beast via Rubygems (note that for now, you'll need the --pre flag until I deem it to be perfectly stable):
 
@@ -10,7 +10,7 @@ Install this beast via Rubygems (note that for now, you'll need the --pre flag u
     
 Of course, You can always grab the source from http://github.com/danryan/spice.
 
-== Configuration
+## Configuration
 
 Spice has five configuration variables: 
 
@@ -52,9 +52,9 @@ If you want to reset your config to their default state:
 
     Spice.reset!
 
-== Usage
+## Usage
 
-=== Low-level use
+##= Low-level use
 
 Setting up spice and running `Spice.connect!` creates a connection object that can then be used to send requests to your Chef server, accessed via `Spice.connection`.  
 
@@ -66,7 +66,7 @@ Get a specific node by the name "slappypants":
 
     Spice.connection.get("/nodes/slappypants")
 
-== Contributing to spice
+## Contributing to spice
  
 * Check out the latest master to make sure the feature hasn't been implemented or the bug hasn't been fixed yet
 * Check out the issue tracker to make sure someone already hasn't requested it and/or contributed it
@@ -76,7 +76,7 @@ Get a specific node by the name "slappypants":
 * Make sure to add tests for it. This is important so I don't break it in a future version unintentionally.
 * Please try not to mess with the Rakefile, version, or history. If you want to have your own version, or is otherwise necessary, that is fine, but please isolate to its own commit so I can cherry-pick around it.
 
-== Copyright
+## Copyright
 
 Copyright (c) 2010 Dan Ryan. See LICENSE.txt for
 further details.
