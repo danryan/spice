@@ -10,7 +10,7 @@ Gem::Specification.new do |s|
   s.email       = ["hi@iamdanryan.com"]
   s.homepage    = "http://github.com/danryan/spice"
   s.summary     = %q{Chef API wrapper}
-  s.description = %q{A zesty Chef API wrapper}
+  s.description = %q{Spice is a zesty Chef API wrapper. It's primary purpose is to let you easily integrate your apps with a (Chef)[http://opscode.com/chef] server easily.  Spice provides support for the [entire released Chef API](http://wiki.opscode.com/display/chef/Server+API)}
 
   s.rubyforge_project = "spice"
   

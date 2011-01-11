@@ -1,6 +1,6 @@
 # spice
 
-Spice is a zesty Chef API wrapper. It's primary purpose is to let you integrate your apps with a (Chef)[http://opscode.com/chef] server easily and succinctly.  Spice provides support for the [entire released Chef API](http://wiki.opscode.com/display/chef/Server+API)
+Spice is a zesty Chef API wrapper. It's primary purpose is to let you easily integrate your apps with a (Chef)[http://opscode.com/chef] server easily.  Spice provides support for the [entire released Chef API](http://wiki.opscode.com/display/chef/Server+API)
 
 ## Installation
 
