@@ -4,9 +4,9 @@ Spice is a zesty Chef API wrapper. It's primary purpose is to let you easily int
 
 ## Installation
 
-Install this beast via Rubygems (note that for now, you'll need the --pre flag until I deem it to be perfectly stable):
+Install this beast via Rubygems:
 
-    gem install spice --pre
+    gem install spice
     
 Of course, You can always grab the source from http://github.com/danryan/spice.
 
