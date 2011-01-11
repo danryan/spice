@@ -45,12 +45,11 @@ module Spice
       JSON.parse(response)
     end
     
-    def delete(path, payload, headers={})
+    def delete(path, headers={})
       response = RestClient::Request.execute(
         :method => :DELETE,
         :url => "#{@url}#{path}",
-        :headers => build_headers(:DELETE, path, headers, JSON.generate(payload)),
-        :payload => JSON.generate(payload)
+        :headers => build_headers(:DELETE, path, headers)
       )
       JSON.parse(response)
     end  

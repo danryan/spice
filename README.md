@@ -48,23 +48,38 @@ After you have configured Spice, we need to create the connection object you'll 
 
     Spice.connect!
     
-If you want to reset your config to their default state:
+If you want to reset your config to their default values:
 
     Spice.reset!
 
 ## Usage
 
-##= Low-level use
+### Low-level use
 
 Setting up spice and running `Spice.connect!` creates a connection object that can then be used to send requests to your Chef server, accessed via `Spice.connection`.  
 
-Return a list of all clients:
+Get a list of all clients:
 
     Spice.connection.get("/clients")
 
 Get a specific node by the name "slappypants":
 
     Spice.connection.get("/nodes/slappypants")
+    
+Create a new role called "awesome":
+
+    Spice.connection.post("/roles", :name => "awesome")
+
+Make the client "sweet" an admin:
+    
+    Spice.connection.put("/clients/sweet", :admin => true)
+    
+Scope out (the official Chef API docs)[http://wiki.opscode.com/display/chef/Server+API] for a full list of wicked awesome things you can do.
+
+## High-level use
+
+TODO
+
 
 ## Contributing to spice
  
