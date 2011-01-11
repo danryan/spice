@@ -1,7 +1,7 @@
 module Spice
   class Cookbook < Spice::Chef
-    def self.list(options={})
-      connection.get("/cookbooks").map { |c| c[0] }
+    def self.all(options={})
+      connection.get("/cookbooks")
     end
     
     def self.[](name)

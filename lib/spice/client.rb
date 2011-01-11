@@ -1,6 +1,6 @@
 module Spice
   class Client < Spice::Chef    
-    def self.list(options={})
+    def self.all(options={})
       if options[:complete]
         results = []
         connection.get("/clients").map { |c| c[0] }.each do |client|

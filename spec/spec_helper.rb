@@ -15,11 +15,10 @@ require 'chef'
 Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each {|f| require f}
 
 RSpec.configure do |config|
-  config.extend VCR::RSpec::Macros
   config.before do
-    # Timecop.freeze
+    Timecop.freeze
   end
   config.after do
-    # Timecop.return
+    Timecop.return
   end
 end

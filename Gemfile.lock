@@ -58,6 +58,7 @@ GEM
       mixlib-config
       mixlib-log
       systemu
+    rcov (0.9.9)
     rest-client (1.6.1)
       mime-types (>= 1.16)
     rspec (2.4.0)
@@ -87,6 +88,7 @@ DEPENDENCIES
   cucumber (~> 0.10.0)
   forgery (~> 0.3.6)
   mixlib-authentication
+  rcov
   rest-client
   rspec (~> 2.4.0)
   spice!

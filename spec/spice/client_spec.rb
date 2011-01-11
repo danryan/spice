@@ -2,7 +2,7 @@ require 'spec_helper'
 
 module Spice
   describe Client do
-    context ".list" do
+    describe ".list" do
       # setup_authentication
       let(:chef) { setup_chef_client }
       it "returns a list of clients" do
@@ -12,7 +12,7 @@ module Spice
       end
     end
     
-    context ".show" do
+    describe ".show" do
       # VCR.use_cassette 'client/show', :record => :new_episodes do
       #   Client.show(:name => "testclient")
       # end
@@ -29,7 +29,7 @@ module Spice
       end
     end
     
-    context ".create" do
+    describe ".create" do
       let(:chef) { setup_chef_client }      
       it "creates a valid non-admin client" do
         VCR.use_cassette 'client/create_nonadmin', :record => :new_episodes do
@@ -45,7 +45,7 @@ module Spice
       it "does not create a client that already exists"
     end
     #     
-    #     context ".update" do
+    #     describe ".update" do
     #       setup_authentication
     #       
     #       let(:name) { Forgery::Name.first_name.downcase.to_s }
@@ -55,7 +55,7 @@ module Spice
     #       end
     #     end
     #     
-    #     context ".delete" do
+    #     describe ".delete" do
     #       setup_authentication
     #       
     #       let(:name) { Forgery::Name.first_name.downcase.to_s }

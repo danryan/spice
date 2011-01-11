@@ -78,6 +78,11 @@ module Spice
       @key_file = nil
       @client_name = nil
       @connection = nil
+      puts "Spice is reset"
+    end
+    
+    def setup
+      yield self
     end
     
     private

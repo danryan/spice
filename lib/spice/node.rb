@@ -1,6 +1,6 @@
 module Spice
   class Node < Spice::Chef
-    def self.list(options={})
+    def self.all(options={})
       connection.get("/nodes")
     end
     

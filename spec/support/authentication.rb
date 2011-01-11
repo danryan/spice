@@ -2,7 +2,7 @@ require 'spec_helper'
 
 def setup_chef_client
   setup_authentication
-  Spice.host = 'chef.example.com'
+  Spice.host = 'localhost'
   Spice.client_name = "testclient"
   Spice.key_file = "/tmp/keyfile.pem"
   Spice.connect!

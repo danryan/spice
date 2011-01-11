@@ -1,7 +1,7 @@
 require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
 
 describe "Spice" do
-  context ".default_host" do
+  describe ".default_host" do
     it "should default to 'localhost'" do
       Spice.default_host.should == "localhost"
     end
@@ -11,7 +11,7 @@ describe "Spice" do
     # @default_host || "localhost"
   end
   
-  context ".default_port" do
+  describe ".default_port" do
     it "should default to '4000'" do
       Spice.default_port.should == "4000"
     end
@@ -20,7 +20,7 @@ describe "Spice" do
     end
   end
   
-  context ".default_scheme" do
+  describe ".default_scheme" do
     it "should default to 'http'" do
       Spice.default_scheme.should == "http"
     end
@@ -29,7 +29,7 @@ describe "Spice" do
     end
   end
   
-  context ".host" do
+  describe ".host" do
     it "should default to 'localhost' if not set" do
       Spice.host.should == "localhost"
     end
@@ -39,7 +39,7 @@ describe "Spice" do
     end
   end
   
-  context ".port" do
+  describe ".port" do
     it "should default to '4000' if not set" do
       Spice.port.should == "4000"
     end
@@ -49,7 +49,7 @@ describe "Spice" do
     end
   end
   
-  context ".scheme" do
+  describe ".scheme" do
     it "should default to 'http' if not set" do
       Spice.scheme.should == "http"
     end
@@ -59,7 +59,7 @@ describe "Spice" do
     end
   end
   
-  context ".client_name" do
+  describe ".client_name" do
     it "should not have a default" do
       Spice.client_name.should be_nil
     end
@@ -69,7 +69,7 @@ describe "Spice" do
     end
   end
   
-  context ".key_file" do
+  describe ".key_file" do
     it "should not have a default" do
       Spice.key_file.should be_nil
     end
@@ -82,13 +82,13 @@ describe "Spice" do
     end
   end
   
-  context ".connection" do
+  describe ".connection" do
     it "should not have a default" do
       Spice.connection.should be_nil
     end
   end
   
-  context ".reset!" do
+  describe ".reset!" do
     before do 
       Spice.host = "chef.example.com"
       Spice.port = "9000"
@@ -117,7 +117,7 @@ describe "Spice" do
       Spice.connection.should be_nil
     end
   end
-  context ".connect!" do
+  describe ".connect!" do
     it "should create a connection object" do
       Spice.connect!
       Spice.connection.should be_a_kind_of(Spice::Connection)

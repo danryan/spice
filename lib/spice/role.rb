@@ -1,6 +1,6 @@
 module Spice
   class Role < Spice::Chef
-    def self.list(options={})
+    def self.all(options={})
       connection.get("/roles")
     end
     

@@ -26,6 +26,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency "timecop", "~> 0.3.5"
   s.add_development_dependency "forgery", "~> 0.3.6"
   s.add_development_dependency "chef", "0.9.12"
+  s.add_development_dependency "rcov"
   
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")

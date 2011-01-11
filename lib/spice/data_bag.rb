@@ -1,6 +1,6 @@
 module Spice
   class DataBag < Spice::Chef
-    def self.list(options={})
+    def self.all(options={})
       connection.get("/data")
     end
     
