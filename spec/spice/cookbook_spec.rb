@@ -2,7 +2,7 @@ require 'spec_helper'
 
 module Spice
   describe Cookbook do
-    describe ".list" do
+    describe ".all" do
       VCR.use_cassette 'cookbook/list', :record => :new_episodes do
         Cookbook.list
       end

@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    spice (0.0.1.beta1)
+    spice (0.0.2.beta)
       mixlib-authentication
       rest-client
       yajl-ruby
@@ -9,24 +9,8 @@ PATH
 GEM
   remote: http://rubygems.org/
   specs:
-    abstract (1.0.0)
     addressable (2.2.2)
     builder (3.0.0)
-    bunny (0.6.0)
-    chef (0.9.12)
-      bunny (>= 0.6.0)
-      erubis
-      extlib
-      highline
-      json (>= 1.4.4, <= 1.4.6)
-      mixlib-authentication (>= 1.1.0)
-      mixlib-cli (>= 1.1.0)
-      mixlib-config (>= 1.1.2)
-      mixlib-log (>= 1.2.0)
-      moneta
-      ohai (>= 0.5.7)
-      rest-client (>= 1.0.4, < 1.7.0)
-      uuidtools
     crack (0.1.8)
     cucumber (0.10.0)
       builder (>= 2.1.2)
@@ -35,29 +19,14 @@ GEM
       json (~> 1.4.6)
       term-ansicolor (~> 1.0.5)
     diff-lcs (1.1.2)
-    erubis (2.6.6)
-      abstract (>= 1.0.0)
-    extlib (0.9.15)
-    forgery (0.3.6)
     gherkin (2.3.2)
       json (~> 1.4.6)
       term-ansicolor (~> 1.0.5)
-    highline (1.6.1)
     json (1.4.6)
     mime-types (1.16)
     mixlib-authentication (1.1.4)
       mixlib-log
-    mixlib-cli (1.2.0)
-    mixlib-config (1.1.2)
     mixlib-log (1.2.0)
-    moneta (0.6.0)
-    ohai (0.5.8)
-      extlib
-      json (>= 1.4.4, <= 1.4.6)
-      mixlib-cli
-      mixlib-config
-      mixlib-log
-      systemu
     rcov (0.9.9)
     rest-client (1.6.1)
       mime-types (>= 1.16)
@@ -69,11 +38,8 @@ GEM
     rspec-expectations (2.4.0)
       diff-lcs (~> 1.1.2)
     rspec-mocks (2.4.0)
-    systemu (1.2.0)
     term-ansicolor (1.0.5)
     timecop (0.3.5)
-    uuidtools (2.1.1)
-    vcr (1.4.0)
     webmock (1.6.1)
       addressable (>= 2.2.2)
       crack (>= 0.1.7)
@@ -84,16 +50,13 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  chef (= 0.9.12)
   cucumber (~> 0.10.0)
-  forgery (~> 0.3.6)
   mixlib-authentication
   rcov
   rest-client
   rspec (~> 2.4.0)
   spice!
   timecop (~> 0.3.5)
-  vcr (~> 1.4.0)
   webmock (~> 1.6.1)
   yajl-ruby
   yard (~> 0.6.4)

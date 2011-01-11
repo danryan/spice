@@ -2,7 +2,7 @@ require 'spec_helper'
 
 module Spice
   describe Node do
-    describe ".list" do
+    describe ".all" do
       VCR.use_cassette 'node/list', :record => :new_episodes do
         Node.list
       end

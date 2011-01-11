@@ -2,34 +2,24 @@ require 'spec_helper'
 
 module Spice
   describe DataBag do
-    describe ".list" do
-      VCR.use_cassette 'data/list', :record => :new_episodes do
-        DataBag.list
-      end
+    describe ".all" do
+      DataBag.list
     end
-    
+
     describe ".show" do
-      VCR.use_cassette 'data/show', :record => :new_episodes do
-        DataBag.show(:name => "testdata")
-      end
+      DataBag.show(:name => "testdata")
     end
-    
+
     describe ".create" do
-      VCR.use_cassette 'data/create', :record => :new_episodes do
-        DataBag.create(:name => "testdata")
-      end
+      DataBag.create(:name => "testdata")
     end
-    
+
     describe ".update" do
-      VCR.use_cassette 'data/update', :record => :new_episodes do
-        DataBag.update(:name => "testdata")
-      end
+      DataBag.update(:name => "testdata")
     end
-    
+
     describe ".delete" do
-      VCR.use_cassette 'data/delete', :record => :new_episodes do
-        DataBag.delete(:name => "testdata")
-      end
+      DataBag.delete(:name => "testdata")
     end
   end
 end
