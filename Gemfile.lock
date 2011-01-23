@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    spice (0.0.2.beta)
+    spice (0.2.0)
       mixlib-authentication
       rest-client
       yajl-ruby
@@ -43,7 +43,7 @@ GEM
     webmock (1.6.1)
       addressable (>= 2.2.2)
       crack (>= 0.1.7)
-    yajl-ruby (0.7.8)
+    yajl-ruby (0.7.9)
     yard (0.6.4)
 
 PLATFORMS
@@ -51,12 +51,9 @@ PLATFORMS
 
 DEPENDENCIES
   cucumber (~> 0.10.0)
-  mixlib-authentication
   rcov
-  rest-client
   rspec (~> 2.4.0)
   spice!
   timecop (~> 0.3.5)
   webmock (~> 1.6.1)
-  yajl-ruby
   yard (~> 0.6.4)

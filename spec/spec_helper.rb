@@ -6,6 +6,7 @@ Bundler.require
 require 'rspec'
 require 'webmock/rspec'
 require 'timecop'
+require 'rest-client'
 require 'spice'
 
 # Requires supporting files with custom matchers and macros, etc,
