@@ -18,44 +18,48 @@ module Spice
     
     def get(path, headers={})
       begin
-        response = RestClient::Request.execute(
-          :method => :GET,
-          :url => "#{@url}#{path}",
-          :headers => build_headers(:GET, path, headers)
+        RestClient.get(
+          "#{@url}#{path}", 
+          build_headers(:GET, path, headers)
         )
-        response
-      rescue RestClient::ResourceNotFound => e
+      rescue => e
         e.response
       end
     end
     
     def post(path, payload, headers={})
-      response = RestClient::Request.execute(
-        :method => :POST,
-        :url => "#{@url}#{path}",
-        :headers => build_headers(:POST, path, headers, JSON.generate(payload)),
-        :payload => JSON.generate(payload)
-      )
-      JSON.parse(response)
+      begin
+        RestClient.post(
+          "#{@url}#{path}",
+          JSON.generate(payload),
+          build_headers(:POST, path, headers, JSON.generate(payload))
+        )
+      rescue => e
+        e.response
+      end
     end
     
     def put(path, payload, headers={})
-      response = RestClient::Request.execute(
-        :method => :PUT,
-        :url => "#{@url}#{path}",
-        :headers => build_headers(:PUT, path, headers, JSON.generate(payload)),
-        :payload => JSON.generate(payload)
-      )
-      JSON.parse(response)
+      begin
+        RestClient.put(
+          "#{@url}#{path}",
+          JSON.generate(payload),
+          build_headers(:PUT, path, headers, JSON.generate(payload))
+        )
+      rescue => e
+        e.response
+      end
     end
     
     def delete(path, headers={})
-      response = RestClient::Request.execute(
-        :method => :DELETE,
-        :url => "#{@url}#{path}",
-        :headers => build_headers(:DELETE, path, headers)
-      )
-      JSON.parse(response)
+      begin
+        RestClient.delete(
+          "#{@url}#{path}",
+          build_headers(:DELETE, path, headers)
+        )
+      rescue => e
+        e.response
+      end
     end  
     
     def sign_requests?
