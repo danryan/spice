@@ -3,12 +3,16 @@ require 'spec_helper'
 module Spice
   describe DataBag do
     describe ".all" do
-      before { setup_chef_client }
+      before do
+        setup_chef_client
+        stub_data_bag_list
+      end
 
       it "returns a list of data_bags" do
-        stub_data_bag_list
         DataBag.all.should == data_bag_list_response
       end
+      
+      it { should respond_with(200) }
     end
 
     describe ".show" do
@@ -30,8 +34,7 @@ module Spice
           stub_data_bag_show(404)
         end
         it "returns a 404 error" do
-          puts response.response
-          response.status.should == 404
+          response.code.should == 404
         end
       end
           

@@ -1,6 +1,7 @@
 require 'bundler'
 Bundler.require
 
+require 'rest-client'
 require 'spice/authentication'
 require 'spice/chef'
 require 'spice/role'

@@ -2,7 +2,7 @@ def stub_data_bag_list
   stub_request(:get, "http://localhost:4000/data").
   to_return(
     :status => 200,
-    :body => data_bag_list_response.to_json)
+    :body => data_bag_list_response)
 end
 
 def stub_data_bag_show(status=200)
@@ -11,14 +11,12 @@ def stub_data_bag_show(status=200)
     stub_request(:get, "http://localhost:4000/data/users").
       to_return(
         :status => status,
-        :body => data_bag_show_response.to_json)
+        :body => data_bag_show_response)
   when 404
     stub_request(:get, "http://localhost:4000/data/users").
       to_return(
         :status => status,
-        :body => %Q{
-          {"error":["Cannot load data bag users"]}
-        })
+        :body => %Q{{"errors":["Cannot load data bag users"]}})
   end
 end
 
@@ -115,25 +113,17 @@ def data_bag_list_response
 end
 
 def data_bag_show_response
-  {
-    "adam" => "http://localhost:4000/data/users/adam"
-  }
+  { "adam" => "http://localhost:4000/data/users/adam" }
 end
 
-data_bag_create_payload = %Q{
-  {
-   "name": "users"
-  }
-}
+def data_bag_create_payload
+  { "name" => "users" }
+end
 
-data_bag_create_response = %Q{
-  {
-    "uri": "http://localhost:4000/data/users"
-  }
-}
-data_bag_item_create_payload = %Q{
-  {
-    "id": "adam",
-    "real_name": "Adam Jacob"
-  }
-}
+def data_bag_create_response
+  { "uri" => "http://localhost:4000/data/users" }
+end
+
+def data_bag_item_create_payload
+  { "id" => "adam", "real_name" => "Adam Jacob" }
+end

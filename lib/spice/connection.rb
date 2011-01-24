@@ -17,12 +17,16 @@ module Spice
     end
     
     def get(path, headers={})
-      response = RestClient::Request.execute(
-        :method => :GET,
-        :url => "#{@url}#{path}",
-        :headers => build_headers(:GET, path, headers)
-      )
-      JSON.parse(response)
+      begin
+        response = RestClient::Request.execute(
+          :method => :GET,
+          :url => "#{@url}#{path}",
+          :headers => build_headers(:GET, path, headers)
+        )
+        response
+      rescue RestClient::ResourceNotFound => e
+        e.response
+      end
     end
     
     def post(path, payload, headers={})
