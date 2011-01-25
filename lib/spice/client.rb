@@ -24,19 +24,19 @@ module Spice
     
     def self.create(options={})
       raise ArgumentError, "Option :name must be present" unless options[:name]
-      connection.post("/clients", options)
+      connection.post("/clients", payload, options)
     end
     
     def self.update(options={})
       raise ArgumentError, "Option :name must be present" unless options[:name]
       name = options.delete(:name)
-      connection.put("/clients/#{name}", options)
+      connection.put("/clients/#{name}", payload, options)
     end
     
     def self.delete(options={})
       raise ArgumentError, "Option :name must be present" unless options[:name]
       name = options.delete(:name)
-      connection.delete("/clients/#{name}", options)
+      connection.delete("/clients/#{name}", payload, options)
     end
   end
 end

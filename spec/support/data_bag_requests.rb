@@ -44,32 +44,6 @@ def stub_data_bag_create(status=201)
   end
 end
 
-def stub_data_bag_item_create
-  case status
-  when 201
-    stub_request(:post, "http://localhost:4000/data/users").
-      with(
-        :body => data_bag_item_create_payload ).
-      to_return(
-        :status => status, 
-        :body => data_bag_item_create_response)      
-  when 404
-    stub_request(:post, "http://localhost:4000/data/users").
-      with(
-        :body => data_bag_item_create_payload).
-      to_return(
-        :status => status, 
-        :body => %Q{"error":["Cannot find data bag users]})
-  when 409
-    stub_request(:post, "http://localhost:4000/data").
-      with(
-        :body => data_bag_item_create_payload).
-      to_return(
-        :status => status, 
-        :body => %Q{"error":["Cannot create data bag item adam"]})
-  end
-end
-
 def stub_data_bag_delete(status=200)
   case status
   when 200
@@ -88,7 +62,6 @@ def stub_data_bag_delete(status=200)
       )
   end
 end
-
 
 # payloads and responses
 
@@ -119,8 +92,4 @@ end
 
 def data_bag_create_response
   { "uri" => "http://localhost:4000/data/users" }
-end
-
-def data_bag_item_create_payload
-  { "id" => "adam", "real_name" => "Adam Jacob" }
 end
