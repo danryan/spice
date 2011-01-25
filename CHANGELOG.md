@@ -1,4 +1,4 @@
-# Release Notes - Spice - Version 0.3.1
+# Release Notes - Spice - Version 0.3.0
 
 ## Bug
 
