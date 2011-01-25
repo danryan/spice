@@ -16,6 +16,7 @@ Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each {|f| require f}
 RSpec.configure do |config|
   config.before do
     Timecop.freeze
+    Spice.mock
   end
   config.after do
     Timecop.return

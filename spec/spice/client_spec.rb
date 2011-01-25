@@ -3,7 +3,7 @@ require 'spec_helper'
 module Spice
   describe Client do
     describe ".all" do
-      before { setup_chef_client }
+      before {  }
 
       it "returns a list of clients" do
         stub_client_list
@@ -38,7 +38,7 @@ module Spice
     end
 
     describe ".create" do
-      before { setup_chef_client }
+      before {  }
 
       context "valid" do
         it "creates a valid non-admin client" do
@@ -70,7 +70,7 @@ module Spice
     end
 
     describe ".update" do
-      before { setup_chef_client }
+      before {  }
 
       context "valid" do
         it "makes a client an admin" do
@@ -86,7 +86,7 @@ module Spice
     end
 
     describe ".delete" do
-      before { setup_chef_client }
+      before {  }
 
       context "valid" do
         it "deletes a client" do

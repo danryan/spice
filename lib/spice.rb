@@ -12,7 +12,10 @@ require 'spice/data_bag'
 require 'spice/node'
 require 'spice/connection'
 
+require 'spice/mock'
+
 module Spice
+  
   class << self
     attr_writer :host, :port, :scheme, :client_name, :connection, :key_file, :raw_key
     
@@ -84,6 +87,10 @@ module Spice
     
     def setup
       yield self
+    end
+    
+    def mock
+      Spice::Mock.setup_mock_client
     end
     
     private
