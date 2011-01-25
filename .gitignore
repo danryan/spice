@@ -1,2 +1,6 @@
 pkg/*
 examples/*
+doc/*
+doc/**/*
+.yardoc/**/*
+.yardoc/*
