@@ -29,6 +29,15 @@ describe "Spice" do
     end
   end
   
+  describe ".default_url_path" do
+    it "should default to ''" do
+      Spice.default_url_path.should == ""
+    end
+    it "should not be settable" do
+      lambda { Spice.default_url_path = "/woohah" }.should raise_error
+    end
+  end
+  
   describe ".host" do
     it "should default to 'localhost' if not set" do
       Spice.host.should == "localhost"
@@ -56,6 +65,16 @@ describe "Spice" do
     it "should be settable" do
       Spice.scheme = 'https'
       Spice.scheme.should == 'https'
+    end
+  end
+  
+  describe ".url_path" do
+    it "should default to '' if not set" do
+      Spice.url_path.should == ""
+    end
+    it "should be settable" do
+      Spice.url_path = "/woohah"
+      Spice.url_path.should == "/woohah"
     end
   end
   

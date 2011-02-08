@@ -10,21 +10,20 @@ module Spice
       @host             = endpoint.host
       @scheme           = endpoint.scheme
       @port             = endpoint.port
-      @path             = endpoint.path
-      @path = URI.parse(@url).path
+      @url_path         = endpoint.path
       @auth_credentials = Authentication.new(options[:client_name], options[:key_file])
       @sign_on_redirect, @sign_request = true, true
     end
     
     def get(path, headers={})
-      begin
+      # begin
         RestClient.get(
           "#{@url}#{path}", 
-          build_headers(:GET, path, headers)
+          build_headers(:GET, "#{@url_path}#{path}", headers)
         )
-      rescue => e
-        e.response
-      end
+      # rescue => e
+      #   e.response
+      # end
     end
     
     def post(path, payload, headers={})
@@ -32,7 +31,7 @@ module Spice
         RestClient.post(
           "#{@url}#{path}",
           JSON.generate(payload),
-          build_headers(:POST, path, headers, JSON.generate(payload))
+          build_headers(:POST, "#{@url_path}#{path}", headers, JSON.generate(payload))
         )
       rescue => e
         e.response
@@ -44,7 +43,7 @@ module Spice
         RestClient.put(
           "#{@url}#{path}",
           JSON.generate(payload),
-          build_headers(:PUT, path, headers, JSON.generate(payload))
+          build_headers(:PUT, "#{@url_path}#{path}", headers, JSON.generate(payload))
         )
       rescue => e
         e.response
@@ -55,7 +54,7 @@ module Spice
       begin
         RestClient.delete(
           "#{@url}#{path}",
-          build_headers(:DELETE, path, headers)
+          build_headers(:DELETE, "#{@url_path}#{path}", headers)
         )
       rescue => e
         e.response
@@ -73,7 +72,7 @@ module Spice
         :http_method => method, 
         :path => path,
         :body => json_body, 
-        :host => "#{@scheme}://#{@host}:#{@port}#{@path}"
+        :host => "#{@host}:#{@port}"
       }
       request_params[:body] ||= ""
       auth_credentials.signature_headers(request_params)

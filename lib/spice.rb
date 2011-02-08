@@ -17,7 +17,7 @@ require 'spice/mock'
 module Spice
   
   class << self
-    attr_writer :host, :port, :scheme, :client_name, :connection, :key_file, :raw_key
+    attr_writer :host, :port, :scheme, :url_path, :client_name, :connection, :key_file, :raw_key
     
     def default_host
       @default_host || "localhost"
@@ -31,6 +31,10 @@ module Spice
       @default_scheme || "http"
     end
     
+    def default_url_path
+      @default_url_path || ""
+    end
+    
     def host
       @host || default_host
     end
@@ -41,6 +45,10 @@ module Spice
     
     def scheme
       @scheme || default_scheme
+    end
+    
+    def url_path
+      @url_path || default_url_path
     end
     
     def client_name
@@ -65,20 +73,20 @@ module Spice
     def connection
       @connection
     end
-
+    
     def connect!
       @connection = Connection.new(
-        :url => "#{scheme}://#{host}:#{port}", 
+        :url => "#{scheme}://#{host}:#{port}#{url_path}", 
         :client_name => client_name, 
         :key_file => key_file
       )
     end
     
-    
     def reset!
       @host = default_host
       @port = default_port
       @scheme = default_scheme
+      @url_path = default_url_path
       @key_file = nil
       @client_name = nil
       @connection = nil

@@ -23,6 +23,8 @@ module Spice
       sign_obj = Mixlib::Authentication::SignedHeaderAuth.signing_object(request_params)
       signed = sign_obj.sign(key).merge({:host => host})
       signed.inject({}){|memo, kv| memo["#{kv[0].to_s.upcase}"] = kv[1];memo}
+      version = {"X-Chef-Version" => "0.9.12"} # Platform requires X-Chef-Version header
+      signed.merge!(version)
     end
     
     private
