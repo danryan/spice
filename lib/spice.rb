@@ -1,7 +1,7 @@
-require 'bundler'
-Bundler.require
-
 require 'rest-client'
+require 'mixlib-authentication'
+require 'yajl-ruby'
+
 require 'spice/authentication'
 require 'spice/chef'
 require 'spice/role'
