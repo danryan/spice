@@ -28,7 +28,16 @@ describe "Spice" do
       lambda { Spice.default_scheme = "ftp" }.should raise_error
     end
   end
-  
+
+  describe ".default_url_path" do
+    it "should default to ''" do
+      Spice.default_url_path.should == ""
+    end
+    it "should not be settable" do
+      lambda { Spice.default_url_path = "/woohah" }.should raise_error
+    end
+  end
+    
   describe ".host" do
     it "should default to 'localhost' if not set" do
       Spice.host.should == "localhost"
@@ -59,7 +68,18 @@ describe "Spice" do
     end
   end
   
+  describe ".url_path" do
+    it "should default to '' if not set" do
+      Spice.url_path.should == ""
+    end
+    it "should be settable" do
+      Spice.url_path = "/woohah"
+      Spice.url_path.should == "/woohah"
+    end
+  end
+  
   describe ".client_name" do
+    before { Spice.reset! }
     it "should not have a default" do
       Spice.client_name.should be_nil
     end
@@ -70,12 +90,14 @@ describe "Spice" do
   end
   
   describe ".key_file" do
+    before { Spice.reset! }
+    
     it "should not have a default" do
       Spice.key_file.should be_nil
     end
     it "should be settable" do
       Spice.key_file = "/tmp/keyfile.pem"
-      Spice.key_file.should == File.read("/tmp/keyfile.pem")
+      Spice.key_file.should == "/tmp/keyfile.pem"
     end
     it "should raise exception if it does not exist" do
       lambda { Spice.key_file = "/tmp/badkey.pem" }.should raise_error(Errno::ENOENT)
@@ -83,6 +105,8 @@ describe "Spice" do
   end
   
   describe ".connection" do
+    before { Spice.reset! }
+    
     it "should not have a default" do
       Spice.connection.should be_nil
     end

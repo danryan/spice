@@ -12,12 +12,13 @@ require 'spice/data_bag'
 require 'spice/node'
 require 'spice/connection'
 
+require 'spice/version'
 require 'spice/mock'
 
 module Spice
   
   class << self
-    attr_writer :host, :port, :scheme, :client_name, :connection, :key_file, :raw_key
+    attr_writer :host, :port, :scheme, :url_path, :client_name, :connection, :key_file, :raw_key
     
     def default_host
       @default_host || "localhost"
@@ -29,6 +30,10 @@ module Spice
     
     def default_scheme
       @default_scheme || "http"
+    end
+    
+    def default_url_path
+      @default_url_path || ""
     end
     
     def host
@@ -62,6 +67,11 @@ module Spice
       @raw_key = raw_key
     end
     
+    
+    def url_path
+      @url_path || default_url_path
+    end
+    
     def connection
       @connection
     end
@@ -82,7 +92,6 @@ module Spice
       @key_file = nil
       @client_name = nil
       @connection = nil
-      puts "Spice is reset"
     end
     
     def setup

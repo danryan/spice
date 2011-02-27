@@ -21,10 +21,10 @@ module Spice
             :headers => {})
       end
       it "should return a list of all clients" do
-        clients.length.should == 2
+        JSON.parse(clients).length.should == 2
       end
       it "should provide valid client" do
-        clients["testclient"].should == "http://localhost:4000/clients/testclient"
+        clients["testclient"].should == "testclient"
       end
     end
     
@@ -40,11 +40,11 @@ module Spice
           )
       end
       it "should return a list of all nodes" do
-        nodes.length.should == 1
+        JSON.parse(nodes).length.should == 1
         # nodes.first["testnode"].should == "http://localhost:4000/nodes/testnode"
       end
       it "should provide valid node" do
-        nodes["testnode"].should == "http://localhost:4000/nodes/testnode"
+        nodes["testnode"].should == "testnode"
       end
     end
     
@@ -59,10 +59,10 @@ module Spice
           )
       end
       it "should return a list of all data bags" do
-        data_bags.length.should == 1
+        JSON.parse(data_bags).length.should == 1
       end
       it "should provide valid data" do
-        data_bags["testdata"].should == "http://localhost:4000/data/testdata"
+        data_bags["testdata"].should == "testdata"
       end
     end
     
@@ -72,15 +72,15 @@ module Spice
         stub_request(:get, "http://localhost:4000/roles").
           to_return(
             :status => 200,
-            :body => '{"testrole":"http://localhost:4000/roles/testrole"}',
+            :body => '{"testrole":"testrole"}',
             :headers => {}
           )
       end
       it "should return a list of all roles" do
-        roles.length.should == 1
+        JSON.parse(roles).length.should == 1
       end
       it "should provide valid role" do
-        roles["testrole"].should == "http://localhost:4000/roles/testrole"
+        roles["testrole"].should == "testrole"
       end
     end
     
@@ -95,10 +95,10 @@ module Spice
           )
       end
       it "should return a list of all cookbooks" do
-        cookbooks.length.should == 1
+        JSON.parse(cookbooks).length.should == 1
       end
       it "should provide valid cookbook" do
-        cookbooks["testcookbook"].should == "http://localhost:4000/cookbooks/testcookbook"
+        cookbooks["testcookbook"].should == "testcookbook"
       end
     end
   end

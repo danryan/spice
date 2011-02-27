@@ -1,5 +1,6 @@
 require 'openssl'
 require 'mixlib/authentication/signedheaderauth'
+require 'chef/version'
 
 module Spice
   class Authentication
@@ -23,6 +24,9 @@ module Spice
       sign_obj = Mixlib::Authentication::SignedHeaderAuth.signing_object(request_params)
       signed = sign_obj.sign(key).merge({:host => host})
       signed.inject({}){|memo, kv| memo["#{kv[0].to_s.upcase}"] = kv[1];memo}
+      # Platform requires X-Chef-Version header
+      version = { "X-Chef-Version" => ::Chef::VERSION }
+      signed.merge!(version)      
     end
     
     private
