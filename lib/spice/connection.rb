@@ -70,7 +70,7 @@ module Spice
     def authentication_headers(method, path, json_body=nil)
       request_params = {
         :http_method => method, 
-        :path => path,
+        :path => path.gsub(/\?.*$/, ''),
         :body => json_body, 
         :host => "#{@host}:#{@port}"
       }
