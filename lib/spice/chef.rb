@@ -8,23 +8,23 @@ module Spice
     
     class << self
       def clients
-        Client.all
+        @clients ||= Client.all
       end
     
       def nodes
-        Node.all
+        @nodes ||= Node.all
       end
     
       def data_bags
-        DataBag.all
+        @data_bags ||= DataBag.all
       end
       
       def roles
-        Role.all
+        @roles ||= Role.all
       end
       
       def cookbooks
-        Cookbook.all
+        @cookbooks ||= Cookbook.all
       end
     end
   end
