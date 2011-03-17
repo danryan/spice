@@ -3,7 +3,6 @@ require 'spec_helper'
 module Spice
   describe Cookbook do
     describe ".all" do
-      before { setup_chef_cookbook }
 
       it "returns a list of cookbooks" do
         stub_cookbook_list
@@ -12,7 +11,6 @@ module Spice
     end
 
     describe ".show" do
-      before { setup_chef_cookbook }
       
       context "valid" do
         it "returns a valid cookbook" do
@@ -38,7 +36,6 @@ module Spice
     end
 
     describe ".create" do
-      before { setup_chef_cookbook }
 
       context "valid" do
         it "creates a valid non-admin cookbook" do
@@ -70,7 +67,6 @@ module Spice
     end
 
     describe ".update" do
-      before { setup_chef_cookbook }
 
       context "valid" do
         it "makes a cookbook an admin" do
@@ -86,7 +82,6 @@ module Spice
     end
 
     describe ".delete" do
-      before { setup_chef_cookbook }
 
       context "valid" do
         it "deletes a cookbook" do
