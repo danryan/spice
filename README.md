@@ -83,7 +83,8 @@ TODO
 
 ### Contributors
 
-* Ian Meyer (https://github.com/imeyer), added Opscode Platform support
+* [Ian Meyer](https://github.com/imeyer), added Opscode Platform support
+* [Holger Just](https://github.com/meineerde), added Search functionality
 
 ## Contributing to spice
  
