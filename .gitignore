@@ -4,3 +4,4 @@ doc/*
 doc/**/*
 .yardoc/**/*
 .yardoc/*
+Gemfile.lock
