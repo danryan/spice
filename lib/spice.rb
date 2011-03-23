@@ -79,13 +79,12 @@ module Spice
 
     def connect!
       @connection = Connection.new(
-        :url => "#{scheme}://#{host}:#{port}", 
+        :url => "#{scheme}://#{host}:#{port}:#{url_path}", 
         :client_name => client_name, 
         :key_file => key_file
       )
     end
-    
-    
+
     def reset!
       @host = default_host
       @port = default_port
