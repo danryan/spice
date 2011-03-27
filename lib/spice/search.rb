@@ -5,9 +5,7 @@ module Spice
     INDEXES.each do |index|
       define_method index do |options|
         options ||= {}
-        options.symbolize_keys!
         
-        type = index
         query = options[:q] || '*:*'
         sort = options[:sort] || "X_CHEF_id_CHEF_X asc"
         start = options[:start] || 0
