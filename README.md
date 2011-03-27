@@ -85,6 +85,7 @@ TODO
 
 * [Ian Meyer](https://github.com/imeyer) - Opscode Platform support
 * [Holger Just](https://github.com/meineerde) - Search functionality
+* [Sean Porter](https://github.com/portertech) - Platform bug fixes
 
 ## Contributing to spice
  

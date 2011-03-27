@@ -12,7 +12,6 @@ module Spice
     end
 
     describe ".show" do
-      before { setup_chef_client }
       
       context "valid" do
         it "returns a valid client" do
