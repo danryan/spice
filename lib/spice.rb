@@ -1,6 +1,7 @@
 require 'rest-client'
 require 'mixlib/authentication'
 require 'yajl'
+require 'cgi'
 
 require 'spice/authentication'
 require 'spice/chef'
