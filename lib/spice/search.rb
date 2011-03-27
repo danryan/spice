@@ -10,7 +10,7 @@ module Spice
           start = options[:start] || 0
           rows = options[:rows] || 1000
  
-          connection.get("/search/#{CGI::escape(index)}?q=#{query}&sort=#{sort}&start=#{start}&rows=#{rows}")
+          connection.get("/search/#{index}?q=#{CGI::escape(query)}&sort=#{sort}&start=#{start}&rows=#{rows}")
         end
       end
     end
