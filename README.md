@@ -17,6 +17,7 @@ Spice has five configuration variables:
     Spice.host          # default: localhost
     Spice.port          # default: 4000
     Spice.scheme        # default: http
+	Spice.chef_version	# default: 0.9.14. Should be set to the version you have
     Spice.client_name   # default: nil. Must be set to a valid admin Chef client
     Spice.key_file      # default: nil. Must be set to a file path
 
@@ -28,7 +29,7 @@ To connect to a Chef server at https://chef.example.com:5000 with the "admin" AP
     Spice.client_name = "admin"
     Spice.key_file = "/path/to/keyfile.pem"
 
-Say you had a Chef server (or Chef solo) running locally on port 4000 over HTTP, you only need to set your `client_name` and `key_file` path:
+Say you had a Chef server v0.9.14 (or Chef solo) running locally on port 4000 over HTTP, you only need to set your `client_name` and `key_file` path:
 
     Spice.client_name = "admin"
     Spice.key_file = "/path/to/keyfile.pem"

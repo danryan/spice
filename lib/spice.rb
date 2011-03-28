@@ -71,7 +71,14 @@ module Spice
       @raw_key = raw_key
     end
 
-
+    def chef_version
+      @chef_version || "0.9.14"
+    end
+    
+    def chef_version=(version)
+      @chef_version = version
+    end
+    
     def url_path
       @url_path || default_url_path
     end
