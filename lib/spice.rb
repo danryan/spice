@@ -6,6 +6,8 @@ require 'cgi'
 require 'spice/authentication'
 require 'spice/chef'
 
+require 'spice/core_ext/hash'
+
 require 'spice/role'
 require 'spice/client'
 require 'spice/cookbook'
