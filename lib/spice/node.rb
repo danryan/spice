@@ -15,6 +15,13 @@ module Spice
     end
     
     def self.create(options={})
+      raise ArgumentError, "Option :name must be present" unless options[:name]
+      options[:chef_type] ||= "node"
+      options[:json_class] ||= "Chef::Node"
+      options[:attributes] ||= {}
+      options[:overrides] ||= {}
+      options[:defaults] ||={}
+      options[:run_list] ||= []
       connection.post("/nodes", options)
     end
     

@@ -3,7 +3,7 @@ module Spice
     def self.all(options={})
       if options[:complete]
         results = []
-        connection.get("/clients").map { |c| c[0] }.each do |client|
+        connection.get("clients").map { |c| c[0] }.each do |client|
           results << connection.get("/clients/#{client}")
         end
         results
@@ -24,19 +24,19 @@ module Spice
     
     def self.create(options={})
       raise ArgumentError, "Option :name must be present" unless options[:name]
-      connection.post("/clients", payload, options)
+      connection.post("/clients", options)
     end
     
     def self.update(options={})
       raise ArgumentError, "Option :name must be present" unless options[:name]
       name = options.delete(:name)
-      connection.put("/clients/#{name}", payload, options)
+      connection.put("/clients/#{name}", options)
     end
     
     def self.delete(options={})
       raise ArgumentError, "Option :name must be present" unless options[:name]
       name = options.delete(:name)
-      connection.delete("/clients/#{name}", payload, options)
+      connection.delete("/clients/#{name}", options)
     end
   end
 end

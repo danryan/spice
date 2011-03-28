@@ -1,97 +1,95 @@
-def stub_client_list(name="testclient")
+def stub_client_list
   stub_request(:get, "http://localhost:4000/clients").
   to_return(
     :status => 200,
-    :body => "{\"#{name}\":\"http://localhost:4000/clients/#{name}\"}",
-    :headers => {})
+    :body => client_list_response
+  )
 end
 
-def stub_client_show(name, status=200)
+def stub_client_show(status=200)
   case status
   when 200
-    stub_request(:get, "http://localhost:4000/clients/#{name}").
+    stub_request(:get, "http://localhost:4000/clients/testclient").
       to_return(
         :status => status,
-        :body => %Q{{"name": "#{name}",
-          "chef_type": "client",
-          "json_class": "Chef::ApiClient",
-          "public_key": "RSA PUBLIC KEY",
-          "_rev": "1-68532bf2122a54464db6ad65a24e2225",
-          "admin": true}
-        }
+        :body => client_show_response
       )
   when 404
-    stub_request(:get, "http://localhost:4000/clients/#{name}").
-    to_return(
-      :status => status,
-      :body => "{\"error\":[\"Cannot load client #{name}\"]}")
+    stub_request(:get, "http://localhost:4000/clients/testclient").
+      to_return(
+        :status => status,
+        :body => client_not_found
+      )
   end
 end
 
-def stub_client_create(name, admin=false, status=201)
+def stub_client_create(status=201)
   case status
   when 201
     stub_request(:post, "http://localhost:4000/clients").
       with(
-        :body => "{\"name\":\"#{name}\",\"admin\":#{admin}}").
+        :body => client_create_payload ).
       to_return(
         :status => status, 
-        :body => %Q{
-          {
-          "private_key":"RSA PRIVATE KEY",
-          "uri":"http://http://localhost:4000/clients/#{name}"}
-        }, 
-        :headers => {}
+        :body => client_create_response
       )
   when 409
     stub_request(:post, "http://localhost:4000/clients").
       with(
-        :body => "{\"name\":\"#{name}\",\"admin\":#{admin}}").
+        :body => client_create_payload ).
       to_return(
         :status => status, 
-        :body => %Q{
-          {
-          "private_key":"RSA PRIVATE KEY",
-          "uri":"http://http://localhost:4000/clients/#{name}"}
-        }, 
-        :headers => {}
+        :body => client_conflict
       )
   end
 end
 
-def stub_client_update(name, admin=false, private_key=false, status=200)
+def stub_client_delete(status=200)
   case status
   when 200
-    stub_request(:put, "http://localhost:4000/clients/#{name}").
-      with(:body => "{\"admin\":#{admin},\"private_key\":#{private_key}}").
-      to_return(
-        :status => status,
-        :body => %Q{{#{"\"private_key\":\"RSA PRIVATE KEY\"," if private_key}\"admin\": true}
-        }
-      )
-  # when 404
-  #     stub_request(:get, "http://localhost:4000/clients/#{name}").
-  #     to_return(
-  #       :status => status,
-  #       :body => "{\"error\":[\"Cannot load client #{name}\"]}")
-  end
-end
-
-def stub_client_delete(name, status=200)
-  case status
-  when 200
-    stub_request(:delete, "http://localhost:4000/clients/#{name}").
+    stub_request(:delete, "http://localhost:4000/clients/testclient").
       with(:body => "").
       to_return(
         :status => status,
-        :body => ""
+        :body => client_delete_response
       )
   when 404
-    stub_request(:delete, "http://localhost:4000/clients/#{name}").
+    stub_request(:delete, "http://localhost:4000/clients/testclient").
       with(:body => "").
       to_return(
         :status => status,
-        :body => "{\"error\":[\"Cannot load client sasdasdf\"]}"
+        :body => client_not_found
       )
   end
+end
+
+# payloads and responses
+
+def client_list_response
+  { "testclient" => "http://localhost:4000/clients/testclient" }
+end
+
+def client_show_response
+  { "adam" => "http://localhost:4000/clients/testclient" }
+end
+
+def client_delete_response
+  { "name" => "users", "json_class" => "Chef::Client", "chef_type" => "client" }
+end
+
+def client_not_found
+  { "error" => [ "Could not load client testclient" ] }
+end
+
+def client_conflict
+ { "error" => [ "Client already exists" ] }
+end
+
+def client_create_payload
+  { "name" => "testclient" }
+end
+
+def client_create_response
+  { "private_key"=>"-----BEGIN RSA PRIVATE KEY-----",
+    "uri"=>"http://localhost:4000/clients/testclient" } 
 end

@@ -3,109 +3,66 @@ require 'spec_helper'
 module Spice
   describe Client do
     describe ".all" do
-      before {  }
+      before { stub_client_list }
+      subject { Client.all }
 
-      it "returns a list of clients" do
-        stub_client_list
-        Client.all.length.should == 1
-      end
+      it { should have_body(client_list_response) }
+      it { should respond_with(200) }
     end
-
+    
     describe ".show" do
-      
-      context "valid" do
-        it "returns a valid client" do
-          stub_client_show("monkeypants")
-          client = Client.show(:name => "monkeypants")
-          client["name"].should == "monkeypants"
-          client["admin"].should == true
-        end
+      context "if the client is found" do
+        before { stub_client_show }
+        subject { Client.show(:name => "testclient") }
+    
+        it { should have_body(client_show_response) }
+        it { should respond_with(200) } 
       end
       
-      context "errors" do
-        it "return a 404 when a client is not found" do
-          stub_client_show("applesauce", 404)
-          lambda { Client.show(:name => "applesauce") }.
-            should raise_error(RestClient::ResourceNotFound)
-        end
+      context "if the client is not found" do
+        before { stub_client_show(404) }
+        subject { Client.show(:name => "testclient") }
         
-        it "raises ArgumentError if option :name not present" do
-          stub_client_show("pizza")
-          lambda {Client.show() }.should raise_error ArgumentError
-        end
+        it { should_not have_body(client_show_response) }
+        it { should respond_with(404) }
       end
     end
-
+    
     describe ".create" do
-      before {  }
-
-      context "valid" do
-        it "creates a valid non-admin client" do
-          stub_client_create("spork")
-          client = Client.create(:name => "spork", :admin => false)
-          client["private_key"].should == "RSA PRIVATE KEY"
-          client["uri"].should == "http://http://localhost:4000/clients/spork"
-        end
+      context "if the client can be created" do
+        before { stub_client_create }
+        subject { Client.create(:name => "testclient") }
         
-        it "creates a valid admin client" do
-          stub_client_create("pants", true)
-          response = Client.create(:name => "pants", :admin => true)
-          response["private_key"].should == "RSA PRIVATE KEY"
-          response["uri"].should == "http://http://localhost:4000/clients/pants"
-
-          stub_client_show("pants")
-          client = Client.show(:name => "pants")
-          client["admin"].should == true
-        end
+        it { should have_body(client_create_response) }
+        it { should respond_with(201) }
       end
       
-      context "errors" do
-        it "does not create a client that already exists" do
-          stub_client_create("pants", false, 409)
-          lambda { Client.create(:name => "pants", :admin => false) }.
-            should raise_error(RestClient::Conflict)
-        end
-      end
-    end
-
-    describe ".update" do
-      before {  }
-
-      context "valid" do
-        it "makes a client an admin" do
-          stub_client_update("awesome", true, false, 200)
-          Client.update(:name => "awesome", :admin => true, :private_key => false)
-        end
+      context "if the client already exists" do
+        before { stub_client_create(409) }
+        subject { Client.create(:name => "testclient") }
         
-        it "regenerates the client private key" do
-          stub_client_update("awesome", false, true, 200)
-          Client.update(:name => "awesome", :admin => false, :private_key => true)
-        end
-      end
+        it { should have_body(client_conflict) }
+        it { should respond_with(409) }
+      end      
     end
-
+    
     describe ".delete" do
-      before {  }
-
-      context "valid" do
-        it "deletes a client" do
-          stub_client_delete("spork")
-          Client.delete(:name => "spork")
-        end
-      end
-      
-      context "errors" do
-        it "raises ArgumentError if option :name not present" do
-          stub_client_delete("pizza")
-          lambda {Client.delete }.should raise_error ArgumentError
-        end
+      context "if the client can be deleted" do
+        before { stub_client_delete }
+        subject { Client.delete(:name => "testclient") }
         
-        it "does not delete a non-existent client" do
-          stub_client_delete("spork", 404)
-          lambda { Client.delete(:name => "spork") }.
-            should raise_error(RestClient::ResourceNotFound)
-        end
+        it { should have_body(client_delete_response) }
+        it { should respond_with(200) }
+      end
+    
+      context "if the client cannot be deleted" do
+        before { stub_client_delete(404) }
+        subject { Client.delete(:name => "testclient") }
+        
+        it { should have_body(client_not_found) }
+        it { should respond_with(404) }
       end
     end
+     
   end
 end

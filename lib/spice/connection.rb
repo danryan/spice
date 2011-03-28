@@ -17,10 +17,12 @@ module Spice
     
     def get(path, headers={})
       begin
-        RestClient.get(
+        response = RestClient.get(
           "#{@url}#{path}", 
           build_headers(:GET, "#{@url_path}#{path}", headers)
         )
+        # response
+        response
       rescue => e
         e.response
       end
@@ -28,11 +30,12 @@ module Spice
     
     def post(path, payload, headers={})
       begin
-        RestClient.post(
+        response = RestClient.post(
           "#{@url}#{path}",
           JSON.generate(payload),
           build_headers(:POST, "#{@url_path}#{path}", headers, JSON.generate(payload))
         )
+        response
       rescue => e
         e.response
       end
@@ -40,11 +43,12 @@ module Spice
     
     def put(path, payload, headers={})
       begin
-        RestClient.put(
+        response = RestClient.put(
           "#{@url}#{path}",
           JSON.generate(payload),
           build_headers(:PUT, "#{@url_path}#{path}", headers, JSON.generate(payload))
         )
+        response
       rescue => e
         e.response
       end
@@ -52,10 +56,11 @@ module Spice
     
     def delete(path, headers={})
       begin
-        RestClient.delete(
+        response = RestClient.delete(
           "#{@url}#{path}",
           build_headers(:DELETE, "#{@url_path}#{path}", headers)
         )
+        response
       rescue => e
         e.response
       end
