@@ -21,8 +21,8 @@ module Spice
           "#{@url}#{path}", 
           build_headers(:GET, "#{@url_path}#{path}", headers)
         )
-        # response
         response
+       
       rescue => e
         e.response
       end
@@ -34,8 +34,7 @@ module Spice
           "#{@url}#{path}",
           JSON.generate(payload),
           build_headers(:POST, "#{@url_path}#{path}", headers, JSON.generate(payload))
-        )
-        response
+        )        
       rescue => e
         e.response
       end

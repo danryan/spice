@@ -3,7 +3,6 @@ require 'spec_helper'
 module Spice
   describe Chef do
     describe '.connection' do
-      before {  }
       it "returns an instance of Spice::Connection" do
         Spice::Chef.connection.should be_an_instance_of(Spice::Connection)
       end
