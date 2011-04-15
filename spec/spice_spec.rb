@@ -140,6 +140,10 @@ describe "Spice" do
       Spice.reset!
       Spice.connection.should be_nil
     end
+    it "should unset Spice.url_path" do
+      Spice.reset!
+      Spice.url_path.should == ""
+    end
   end
   describe ".connect!" do
     it "should create a connection object" do
