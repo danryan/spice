@@ -22,7 +22,7 @@ require 'spice/mock'
 module Spice
 
   class << self
-    attr_writer :host, :port, :scheme, :url_path, :client_name, :connection, :key_file, :raw_key
+    attr_writer :host, :port, :scheme, :url_path, :client_name, :connection, :key_file, :raw_key, :chef_version
 
     def default_host
       @default_host || "localhost"
@@ -71,12 +71,12 @@ module Spice
       @raw_key = raw_key
     end
 
-    def chef_version
-      @chef_version || "0.9.14"
+    def default_chef_version
+      @default_chef_version || "0.9.14"
     end
     
-    def chef_version=(version)
-      @chef_version = version
+    def chef_version
+      @chef_version || default_chef_version
     end
     
     def url_path
@@ -100,6 +100,7 @@ module Spice
       @port = default_port
       @scheme = default_scheme
       @url_path = default_url_path
+      @chef_version = default_chef_version
       @key_file = nil
       @client_name = nil
       @connection = nil

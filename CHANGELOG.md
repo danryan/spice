@@ -1,3 +1,16 @@
+# Release Notes - Spice - Version 0.5.0
+
+## Bug
+
+* url_path was not being reset
+* added `chef_version` config variable to fix some people's issues with require `chef/version`
+
+## Improvement
+
+* Node support!
+
+
+
 # Release Notes - Spice - Version 0.3.0
 
 ## Bug

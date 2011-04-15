@@ -6,6 +6,7 @@ module Spice
         Spice.host = 'localhost'
         Spice.client_name = "testclient"
         Spice.key_file = "/tmp/keyfile.pem"
+        Spice.chef_version = "0.9.14"
         Spice.connect!
       end
 

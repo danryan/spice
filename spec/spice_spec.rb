@@ -37,6 +37,15 @@ describe "Spice" do
       lambda { Spice.default_url_path = "/woohah" }.should raise_error
     end
   end
+  
+  describe ".default_chef_version" do
+    it "should default to '0.9.14'" do
+      Spice.default_chef_version.should == "0.9.14"
+    end
+    it "should not be settable" do
+      lambda { Spice.default_chef_version = "0.9.12" }.should raise_error
+    end
+  end
     
   describe ".host" do
     it "should default to 'localhost' if not set" do
@@ -75,6 +84,16 @@ describe "Spice" do
     it "should be settable" do
       Spice.url_path = "/woohah"
       Spice.url_path.should == "/woohah"
+    end
+  end
+  
+  describe ".chef_version" do
+    it "should default to '0.9.14' if not set" do
+      Spice.chef_version.should == "0.9.14"
+    end
+    it "should be settable" do
+      Spice.chef_version = "0.9.12"
+      Spice.chef_version.should == "0.9.12"
     end
   end
   
@@ -131,6 +150,10 @@ describe "Spice" do
     it "should reset Spice.scheme" do
       Spice.reset!
       Spice.scheme.should == "http"
+    end
+    it "should reset Spice.chef_version" do
+      Spice.reset!
+      Spice.chef_version.should == "0.9.14"
     end
     it "should reset Spice.url_path" do
       Spice.reset!
