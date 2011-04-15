@@ -20,7 +20,6 @@ Gem::Specification.new do |s|
   
   s.add_development_dependency "yard", "~> 0.6.4"
   s.add_development_dependency "rspec", "~> 2.5.0"
-  s.add_development_dependency "cucumber", "~> 0.10.0"
   s.add_development_dependency "webmock", "~> 1.6.2"
   s.add_development_dependency "timecop", "~> 0.3.5"
   s.add_development_dependency "webmock", "~> 1.6.2"
