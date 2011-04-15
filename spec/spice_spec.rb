@@ -132,6 +132,10 @@ describe "Spice" do
       Spice.reset!
       Spice.scheme.should == "http"
     end
+    it "should reset Spice.url_path" do
+      Spice.reset!
+      Spice.url_path.should == ""
+    end
     it "should unset Spice.key_file" do
       Spice.reset!
       Spice.key_file.should be_nil
@@ -140,11 +144,8 @@ describe "Spice" do
       Spice.reset!
       Spice.connection.should be_nil
     end
-    it "should unset Spice.url_path" do
-      Spice.reset!
-      Spice.url_path.should == ""
-    end
   end
+  
   describe ".connect!" do
     it "should create a connection object" do
       Spice.connect!
