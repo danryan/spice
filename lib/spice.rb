@@ -99,6 +99,7 @@ module Spice
       @host = default_host
       @port = default_port
       @scheme = default_scheme
+      @url_path = default_url_path
       @key_file = nil
       @client_name = nil
       @connection = nil
