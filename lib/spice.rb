@@ -13,6 +13,7 @@ require 'spice/client'
 require 'spice/cookbook'
 require 'spice/data_bag'
 require 'spice/node'
+require 'spice/environment'
 require 'spice/search'
 require 'spice/connection'
 
