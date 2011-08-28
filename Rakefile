@@ -1,26 +1,26 @@
-require 'bundler'
-Bundler::GemHelper.install_tasks
+require 'bundler/gem_tasks'
 
-require 'rspec/core'
 require 'rspec/core/rake_task'
-RSpec::Core::RakeTask.new(:spec) do |spec|
-  spec.pattern = FileList['spec/**/*_spec.rb']
-end
-
-RSpec::Core::RakeTask.new(:rcov) do |spec|
-  spec.pattern = 'spec/**/*_spec.rb'
-  spec.rcov = true
-end
-
-require 'cucumber/rake/task'
-Cucumber::Rake::Task.new(:cucumber)
 
 task :default => :spec
+desc "Run specs"
+RSpec::Core::RakeTask.new do |task|
+  task.pattern = "spec/**/*_spec.rb"
+end
+  
+desc "Run guard"
+task :guard do
+  sh %{bundle exec guard start}
+end
 
-require 'yard'
-YARD::Rake::YardocTask.new
+desc "Run spork"
+task :spork do
+  sh %{bundle exec spork}
+end
 
-desc "Run watchr"
-task :watchr do
-  sh %{bundle exec watchr .watchr}
+
+Bundler.require(:doc)
+desc "Generate documentation"
+YARD::Rake::YardocTask.new do |t|
+  t.files = [ 'lib/**/*.rb' ]
 end

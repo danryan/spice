@@ -3,7 +3,6 @@ source "http://rubygems.org"
 gemspec
 
 group :development, :test do
-  gem "yard", "~> 0.6.4"
   gem 'rspec', '>= 2.6.0'
   gem "webmock", ">= 1.6.2"
   gem "timecop", ">= 0.3.5"
@@ -13,4 +12,8 @@ group :development, :test do
   gem 'spork', '>= 0.9.0.rc8'
   gem 'rb-fsevent', '>= 0.4.3.1'
   gem 'growl', '>= 1.0.3'
+end
+
+group :doc do
+  gem 'yard'
 end
