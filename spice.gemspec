@@ -14,15 +14,21 @@ Gem::Specification.new do |s|
 
   s.rubyforge_project = "spice"
   
-  s.add_dependency "rest-client"
-  s.add_dependency "mixlib-authentication"
-  s.add_dependency "yajl-ruby"
+  s.add_dependency "rake", ">= 0.9.2"
+  s.add_dependency "rest-client", '>= 1.6.6'
+  s.add_dependency "mixlib-authentication", '>= 1.1.4'
+  s.add_dependency "yajl-ruby", '>= 0.8.3'
   
-  s.add_development_dependency "yard", "~> 0.6.4"
-  s.add_development_dependency "rspec", "~> 2.5.0"
-  s.add_development_dependency "webmock", "~> 1.6.2"
-  s.add_development_dependency "timecop", "~> 0.3.5"
-  s.add_development_dependency "webmock", "~> 1.6.2"
+  s.add_development_dependency 'yard', '>= 0.6.4'
+  s.add_development_dependency 'rspec', '>= 2.6.0'
+  s.add_development_dependency "webmock", ">= 1.6.2"
+  s.add_development_dependency "timecop", ">= 0.3.5"
+  s.add_development_dependency 'guard', '>= 0.6.2'
+  s.add_development_dependency 'guard-rspec', '>= 0.4.2'
+  s.add_development_dependency 'guard-spork', '>= 0.2.1'
+  s.add_development_dependency 'spork', '>= 0.9.0.rc8'
+  s.add_development_dependency 'rb-fsevent', '>= 0.4.3.1'
+  s.add_development_dependency 'growl', '>= 1.0.3'
   
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- spec/*`.split("\n")

@@ -1,8 +1,6 @@
 source "http://rubygems.org"
 
-gem 'rest-client'
-gem 'mixlib-authentication'
-gem 'yajl-ruby'
+gemspec
 
 group :development, :test do
   gem "yard", "~> 0.6.4"
