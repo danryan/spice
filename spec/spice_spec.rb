@@ -178,4 +178,13 @@ describe "Spice" do
       Spice.connection.host.should == "localhost"
     end
   end
+  
+  describe ".autoconfigure!" do
+    it "should locate /etc/chef/client.rb and create a connection object" do
+    end
+    
+    it "should locate ~/.chef/client.rb and create a connection object" do
+    end
+    
+  end
 end
