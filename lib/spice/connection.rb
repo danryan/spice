@@ -1,15 +1,14 @@
-require 'yajl/json_gem'
+require 'yajl'
 
 module Spice
   class Connection
-    attr_accessor :client_name, :key_file, :auth_credentials, :url, :path, :port, :scheme, :host
+    attr_accessor :client_name, :key_file, :auth_credentials, :server_url, :url_path
     
     def initialize(options={})
-      endpoint          = URI.parse(options[:url])
-      @url              = options[:url]
-      @host             = endpoint.host
-      @scheme           = endpoint.scheme
+      endpoint          = URI.parse(options[:server_url])
+      @server_url       = options[:server_url]
       @port             = endpoint.port
+      @scheme           = endpoint.scheme
       @url_path         = endpoint.path
       @auth_credentials = Authentication.new(options[:client_name], options[:key_file])
       @sign_on_redirect, @sign_request = true, true
@@ -18,10 +17,11 @@ module Spice
     def get(path, headers={})
       begin
         response = RestClient.get(
-          "#{@url}#{path}", 
+          "#{@server_url}#{path}", 
           build_headers(:GET, "#{@url_path}#{path}", headers)
         )
-        response
+        puts "#{@server_url}#{path}"
+        return Yajl.load(response.body)
        
       rescue => e
         e.response
@@ -31,10 +31,12 @@ module Spice
     def post(path, payload, headers={})
       begin
         response = RestClient.post(
-          "#{@url}#{path}",
-          JSON.generate(payload),
-          build_headers(:POST, "#{@url_path}#{path}", headers, JSON.generate(payload))
-        )        
+          "#{@server_url}#{path}",
+          Yajl.dump(payload),
+          build_headers(:POST, "#{@url_path}#{path}", headers, Yajl.dump(payload))
+        )      
+        return Yajl.load(response.body)
+          
       rescue => e
         e.response
       end
@@ -43,11 +45,12 @@ module Spice
     def put(path, payload, headers={})
       begin
         response = RestClient.put(
-          "#{@url}#{path}",
-          JSON.generate(payload),
-          build_headers(:PUT, "#{@url_path}#{path}", headers, JSON.generate(payload))
+        "#{@server_url}#{path}",
+          Yajl.dump(payload),
+          build_headers(:PUT, "#{@url_path}#{path}", headers, Yajl.dump(payload))
         )
-        response
+        return Yajl.load(response.body)
+        
       rescue => e
         e.response
       end
@@ -56,10 +59,11 @@ module Spice
     def delete(path, headers={})
       begin
         response = RestClient.delete(
-          "#{@url}#{path}",
+        "#{@server_url}#{path}",
           build_headers(:DELETE, "#{@url_path}#{path}", headers)
         )
-        response
+        return Yajl.load(response.body)
+        
       rescue => e
         e.response
       end
