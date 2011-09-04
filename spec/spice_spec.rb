@@ -1,95 +1,37 @@
 require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
 
 describe "Spice" do
-  describe ".default_host" do
-    it "should default to 'localhost'" do
-      Spice.default_host.should == "localhost"
+  describe ".default_server_url" do
+    it "should default to 'http://localhost:4000'" do
+      Spice.default_server_url.should == "http://localhost:4000"
     end
     it "should not be settable" do
-      lambda { Spice.default_host = "chef.example.com" }.should raise_error
-    end
-    # @default_host || "localhost"
-  end
-  
-  describe ".default_port" do
-    it "should default to '4000'" do
-      Spice.default_port.should == "4000"
-    end
-    it "should not be settable" do
-      lambda { Spice.default_port = "9000" }.should raise_error
-    end
-  end
-  
-  describe ".default_scheme" do
-    it "should default to 'http'" do
-      Spice.default_scheme.should == "http"
-    end
-    it "should not be settable" do
-      lambda { Spice.default_scheme = "ftp" }.should raise_error
-    end
-  end
-
-  describe ".default_url_path" do
-    it "should default to ''" do
-      Spice.default_url_path.should == ""
-    end
-    it "should not be settable" do
-      lambda { Spice.default_url_path = "/woohah" }.should raise_error
+      lambda { Spice.default_server_url = "chef.example.com" }.should raise_error
     end
   end
   
   describe ".default_chef_version" do
-    it "should default to '0.9.14'" do
-      Spice.default_chef_version.should == "0.9.14"
+    it "should default to '0.10.4'" do
+      Spice.default_chef_version.should == "0.10.4"
     end
     it "should not be settable" do
       lambda { Spice.default_chef_version = "0.9.12" }.should raise_error
     end
   end
     
-  describe ".host" do
+  describe ".server_url" do
     it "should default to 'localhost' if not set" do
-      Spice.host.should == "localhost"
+      Spice.server_url.should == "http://localhost:4000"
     end
     it "should be settable" do
-      Spice.host = "chef.example.com"
-      Spice.host.should == "chef.example.com"
-    end
-  end
-  
-  describe ".port" do
-    it "should default to '4000' if not set" do
-      Spice.port.should == "4000"
-    end
-    it "should be settable" do
-      Spice.port = "9000"
-      Spice.port.should == "9000"
-    end
-  end
-  
-  describe ".scheme" do
-    it "should default to 'http' if not set" do
-      Spice.scheme.should == "http"
-    end
-    it "should be settable" do
-      Spice.scheme = 'https'
-      Spice.scheme.should == 'https'
-    end
-  end
-  
-  describe ".url_path" do
-    it "should default to '' if not set" do
-      Spice.url_path.should == ""
-    end
-    it "should be settable" do
-      Spice.url_path = "/woohah"
-      Spice.url_path.should == "/woohah"
+      Spice.server_url = "https://chef.example.com:4000"
+      Spice.server_url.should == "https://chef.example.com:4000"
     end
   end
   
   describe ".chef_version" do
-    it "should default to '0.9.14' if not set" do
-      Spice.chef_version.should == "0.9.14"
+    it "should default to '0.10.4' if not set" do
+      Spice.chef_version.should == "0.10.4"
     end
     it "should be settable" do
       Spice.chef_version = "0.9.12"
@@ -131,33 +73,20 @@ describe "Spice" do
     end
   end
   
+  
   describe ".reset!" do
     before do 
-      Spice.host = "chef.example.com"
-      Spice.port = "9000"
-      Spice.scheme = "https"
+      Spice.server_url = "chef.example.com"
       Spice.key_file = "/tmp/keyfile.pem"
       Spice.client_name = "testduder"
     end
-    it "should reset Spice.host" do
+    it "should reset Spice.server_url" do
       Spice.reset!
-      Spice.host.should == "localhost"
-    end
-    it "should reset Spice.port" do
-      Spice.reset!
-      Spice.port.should == "4000"
-    end
-    it "should reset Spice.scheme" do
-      Spice.reset!
-      Spice.scheme.should == "http"
+      Spice.server_url.should == "http://localhost:4000"
     end
     it "should reset Spice.chef_version" do
       Spice.reset!
-      Spice.chef_version.should == "0.9.14"
-    end
-    it "should reset Spice.url_path" do
-      Spice.reset!
-      Spice.url_path.should == ""
+      Spice.chef_version.should == "0.10.4"
     end
     it "should unset Spice.key_file" do
       Spice.reset!
@@ -174,8 +103,8 @@ describe "Spice" do
       Spice.connect!
       Spice.connection.should be_a_kind_of(Spice::Connection)
     end
-    it "connection should contain a host" do
-      Spice.connection.host.should == "localhost"
+    it "connection should contain a server_url" do
+      Spice.connection.server_url.should == "http://localhost:4000"
     end
   end
   
