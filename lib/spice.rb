@@ -115,6 +115,29 @@ module Spice
       Spice::Mock.setup_mock_client
     end
 
+    # def autoconfigure!(path=nil)
+    #   path ||= "~/.chef/"
+    #   knife = File.exist?("~/.chef/knife.rb") && File.expand_path(path + "~/.chef/knife.rb")
+    #   client = File.exist?("/etc/chef/client.rb") && File.expand_path("/etc/chef/client.rb")
+    #   
+    #   if knife
+    #     raw_config = IO.read(knife)
+    #   elsif
+    #     raw_config = IO.read(client)
+    #   end
+    #   
+    #   @values = {}
+    #   raw_config.each_line do |line|
+    #     if line =~ /^chef_server_url.*/
+    #       @values[:chef_server_url] = parse_line(line)
+    #     elsif line =~ /^node_name.*/
+    #       @values[:node_name] = parse_line(line)
+    #     elsif line =~ /^client_key.*/
+    #       @values[:client_key] = parse_line(line)
+    #     end
+    #   end
+    # end
+    
     private
 
     def assert_valid_key_format!(raw_key)
@@ -124,6 +147,10 @@ module Spice
         msg << "The key file should begin with '-----BEGIN RSA PRIVATE KEY-----' and end with '-----END RSA PRIVATE KEY-----'"
         raise ArgumentError, msg
       end
+    end
+    
+    def parse_line(line)
+      line.strip.split.last.gsub("'", "")
     end
   end
 end

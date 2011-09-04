@@ -186,5 +186,7 @@ describe "Spice" do
     it "should locate ~/.chef/client.rb and create a connection object" do
     end
     
+    it "should locate ~/.chef/knife.rb and create a connection object" do
+    end
   end
 end

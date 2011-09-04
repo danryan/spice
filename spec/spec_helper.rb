@@ -11,19 +11,25 @@ Spork.prefork do
   require 'webmock/rspec'
   require 'timecop'
   require 'rest-client'
-
+  require 'fakefs'
+  require 'fileutils'
+  
   require 'spice'
+  
   # Requires supporting files with custom matchers and macros, etc,
   # in ./support/ and its subdirectories.
-  Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each {|f| require f}
 
   RSpec.configure do |config|
     config.before do
+      Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each {|f| require f}
+      
       Timecop.freeze
       Spice.mock
+      FakeFS.activate!
     end
     config.after do
       Timecop.return
+      FakeFS.deactivate!
     end
   end
 end
