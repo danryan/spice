@@ -3,10 +3,10 @@ module Spice
     class << self
       def setup_mock_client
         self.setup_authentication
-        Spice.host = 'localhost'
+        Spice.server_url = 'http://localhost:4000'
         Spice.client_name = "testclient"
         Spice.key_file = "/tmp/keyfile.pem"
-        Spice.chef_version = "0.9.14"
+        Spice.chef_version = "0.10.4"
         Spice.connect!
       end
 
