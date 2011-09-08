@@ -7,6 +7,7 @@ module Spice
     def initialize(options={})
       endpoint          = URI.parse(options[:server_url])
       @server_url       = options[:server_url]
+      @host             = endpoint.host
       @port             = endpoint.port
       @scheme           = endpoint.scheme
       @url_path         = endpoint.path
