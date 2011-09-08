@@ -14,7 +14,7 @@ Of course, You can always grab the source from http://github.com/danryan/spice.
 
 Spice has four configuration variables: 
 
-    Spice.server_url          # default: http://localhost:4000
+    Spice.server_url    # default: http://localhost:4000
 	  Spice.chef_version	# default: 0.10.4. Should be set to the version you have
     Spice.client_name   # default: nil. Must be set to a valid admin Chef client
     Spice.key_file      # default: nil. Must be set to a file path
@@ -25,7 +25,7 @@ To connect to a Chef server at https://chef.example.com:5000 with the "admin" AP
     Spice.client_name = "admin"
     Spice.key_file = "/path/to/keyfile.pem"
 
-Say you had a Chef server v0.10.4 (or Chef solo) running locally on port 4000 over HTTP, you only need to set your `client_name` and `key_file` path:
+Say you had a Chef server v0.10.4 running locally on port 4000 over HTTP, you only need to set your `client_name` and `key_file` path:
 
     Spice.client_name = "admin"
     Spice.key_file = "/path/to/keyfile.pem"
@@ -49,7 +49,7 @@ If you want to reset your config to their default values:
     
 ### Deprecation notice
 
-Explicitly setting a `host`, `port`, and `scheme` value has been deprecated in favor of setting a single variable, `server_url`, which matches the format of Chef's client config parameter, chef_server_url. The old way of defining `host`, `port`, and `scheme` are still currently available but will be removed from future versions.
+Explicitly setting a `host`, `port`, and `scheme` value has been deprecated in favor of setting a single variable, `server_url`, which matches the format of Chef's client config parameter, `chef_server_url`. The old way of defining `host`, `port`, and `scheme` are still currently available but will be removed from future versions.
 
 ## Usage
 
@@ -72,12 +72,8 @@ Create a new role called "awesome":
 Make the client "sweet" an admin:
     
     Spice.connection.put("/clients/sweet", :admin => true)
-    
-Scope out [the official Chef API docs](http://wiki.opscode.com/display/chef/Server+API) for a full list of wicked awesome things you can do.
 
-### High-level use
-
-TODO
+Read the wiki for more examples.
 
 
 ### Contributors
