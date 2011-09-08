@@ -23,21 +23,49 @@ require 'spice/mock'
 module Spice
 
   class << self
-    attr_writer :server_url, :client_name, :connection, 
-                :key_file, :raw_key, :chef_version
+    attr_writer :server_url, :client_name, :connection, :host, :port, :scheme,
+                :key_file, :raw_key, :chef_version, :url_path
 
     def default_server_url
-      @default_server_url || "http://localhost:4000"
+      @default_server_url ||= "http://localhost:4000"
     end
 
     def default_url_path
-      @default_url_path || ""
+      @default_url_path ||= ""
     end
 
+    def default_host
+      @default_host ||= "localhost"
+    end
+    
+    def default_port
+      @default_port ||= "4000"
+    end
+    
+    def default_scheme
+      @default_scheme ||= "http"
+    end
+    
     def server_url
       @server_url || default_server_url
     end
-
+    
+    def url_path
+      @url_path || default_url_path
+    end
+    
+    def host
+      @host || default_host
+    end
+    
+    def port
+      @port || default_port
+    end
+    
+    def scheme
+      @scheme || default_scheme
+    end
+    
     def client_name
       @client_name
     end
@@ -58,7 +86,7 @@ module Spice
     end
 
     def default_chef_version
-      @default_chef_version || "0.10.4"
+      @default_chef_version ||= "0.10.4"
     end
     
     def chef_version
@@ -70,8 +98,14 @@ module Spice
     end
 
     def connect!
+      # allow old-style connection setup
+      if host != default_host || port != default_port || scheme != default_scheme || url_path != default_url_path
+        url = "#{scheme}://#{host}:#{port}#{url_path}"
+      else
+        url = server_url
+      end
       @connection = Connection.new(
-        :server_url => server_url,
+        :server_url => url,
         :client_name => client_name,
         :key_file => key_file
       )
@@ -79,6 +113,9 @@ module Spice
 
     def reset!
       @server_url = default_server_url
+      @host = default_host
+      @port = default_port
+      @scheme = default_scheme
       @chef_version = default_chef_version
       @key_file = nil
       @client_name = nil
