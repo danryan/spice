@@ -21,7 +21,6 @@ module Spice
           "#{@server_url}#{path}", 
           build_headers(:GET, "#{@url_path}#{path}", headers)
         )
-        puts "#{@server_url}#{path}"
         return Yajl.load(response.body)
        
       rescue => e
