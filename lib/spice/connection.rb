@@ -73,6 +73,10 @@ module Spice
       auth_credentials.sign_requests? && @sign_request
     end
     
+    def search(index, options={})
+      Spice::Search.search(index, options)
+    end
+    
     private
     
     def authentication_headers(method, path, json_body=nil)
