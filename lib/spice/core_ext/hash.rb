@@ -17,5 +17,5 @@ module Spice
 end
 
 class Hash
-  extend Spice::CoreExt::Hash
+  include Spice::CoreExt::Hash
 end
