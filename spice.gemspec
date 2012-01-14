@@ -17,7 +17,7 @@ Gem::Specification.new do |s|
   s.add_dependency "rake", ">= 0.9.2"
   s.add_dependency "rest-client", '>= 1.6.6'
   s.add_dependency "mixlib-authentication", '>= 1.1.4'
-  s.add_dependency "yajl-ruby", '>= 0.8.3'
+  s.add_dependency "yajl-ruby", '>= 1.1.0'
   
   s.add_development_dependency 'rspec', '>= 2.6.0'
   s.add_development_dependency "webmock", ">= 1.6.2"
