@@ -1,5 +1,10 @@
 module Adapter
   module RestClient
+    
+    def exists?()
+      client.get
+    end
+    
     def read(key)
       
     end

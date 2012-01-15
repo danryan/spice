@@ -83,6 +83,10 @@ module Spice
     def connection
       @connection
     end
+    
+    def connection=(conn)
+      @connection = conn
+    end
 
     def connect!
       @connection = Connection.new(

@@ -10,11 +10,24 @@ module Spice
     attribute :json_class, String, :default => "Chef::ApiClient"
     attribute :admin, Boolean, :default => false
     attribute :chef_type, String, :default => "client"
-    
-    validates_presence_of :name, :json_class, :admin, :chef_type
+
+    validates_presence_of :name, :json_class, :chef_type
+
+    def connection
+      if Spice.connection
+        @connection = Spice.connection
+      else
+        @connection = Connection.new(
+          :server_url => Spice.server_url,
+          :client_name => Spice.client_name,
+          :key_file => Spice.key_file
+        )
+      end
+      @connection
+    end
     
     def create
-      response = post("/clients", attributes.except('id'))
+      response = connection.post("/clients", attributes.except('id'))
       update_attributes(response)
     end
     

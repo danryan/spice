@@ -11,7 +11,7 @@ module Spice
     attribute :default, Hash, :default => {}
     attribute :automatic, Hash, :default => {}
     attribute :run_list, Array, :default => []
-    
+        
     validates_presence_of :name
     
     def self.all(options={})
