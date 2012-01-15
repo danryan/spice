@@ -1,5 +1,13 @@
 module Spice
-  class DataBag < Spice::Chef
+  class DataBag
+    include Toy::Store
+    store :memory, {}
+    
+    attribute :name, String
+    attribute :items, Array, :default => []
+    
+    validates_presence_of :name
+    
     # Get a list of all data bags in the following syntax
     #     Spice::DataBag.all
     #    

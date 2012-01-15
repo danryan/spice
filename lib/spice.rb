@@ -1,8 +1,11 @@
+require 'toystore'
+require 'adapter/memory'
 require 'rest-client'
 require 'mixlib/authentication'
 require 'yajl'
 require 'cgi'
 
+require 'spice/adapter'
 require 'spice/authentication'
 require 'spice/chef'
 
@@ -12,16 +15,16 @@ require 'spice/role'
 require 'spice/client'
 require 'spice/cookbook'
 require 'spice/data_bag'
+require 'spice/data_bag_item'
 require 'spice/node'
 require 'spice/environment'
-require 'spice/search'
+# require 'spice/search'
 require 'spice/connection'
 
 require 'spice/version'
 require 'spice/mock'
 
-module Spice
-
+module Spice  
   class << self
     attr_writer :server_url, :client_name, :connection, :host, :port, :scheme,
                 :key_file, :raw_key, :chef_version, :url_path
@@ -48,22 +51,6 @@ module Spice
     
     def server_url
       @server_url || default_server_url
-    end
-    
-    def url_path
-      @url_path || default_url_path
-    end
-    
-    def host
-      @host || default_host
-    end
-    
-    def port
-      @port || default_port
-    end
-    
-    def scheme
-      @scheme || default_scheme
     end
     
     def client_name
@@ -98,14 +85,8 @@ module Spice
     end
 
     def connect!
-      # allow old-style connection setup
-      if host != default_host || port != default_port || scheme != default_scheme || url_path != default_url_path
-        url = "#{scheme}://#{host}:#{port}#{url_path}"
-      else
-        url = server_url
-      end
       @connection = Connection.new(
-        :server_url => url,
+        :server_url => server_url,
         :client_name => client_name,
         :key_file => key_file
       )
@@ -113,9 +94,6 @@ module Spice
 
     def reset!
       @server_url = default_server_url
-      @host = default_host
-      @port = default_port
-      @scheme = default_scheme
       @chef_version = default_chef_version
       @key_file = nil
       @client_name = nil

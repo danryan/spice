@@ -1,5 +1,19 @@
 module Spice
-  class Node < Spice::Chef
+  class Node
+    include Toy::Store
+    store :memory, {}
+    
+    attribute :name, String
+    attribute :chef_type, String, :default => "node"
+    attribute :json_class, String, :default => "Chef::Node"
+    attribute :normal, Hash, :default => {}
+    attribute :override, Hash, :default => {}
+    attribute :default, Hash, :default => {}
+    attribute :automatic, Hash, :default => {}
+    attribute :run_list, Array, :default => []
+    
+    validates_presence_of :name
+    
     def self.all(options={})
       connection.get("/nodes")
     end

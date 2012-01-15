@@ -12,6 +12,18 @@ module Spice
         dup.symbolize_keys!
       end
       
+      def deep_merge(hash)
+        target = self.dup
+        hash.keys.each do |key|
+          if hash[key].is_a?(Hash) && self[key].is_a?(Hash)
+            target[key] = target[key].deep_merge(hash[key])
+            next
+          end
+          target[key] = hash[key]
+        end
+        target
+      end
+      
     end
   end
 end

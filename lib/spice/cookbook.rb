@@ -1,5 +1,8 @@
 module Spice
-  class Cookbook < Spice::Chef
+  class Cookbook
+    include Toy::Store
+    store :memory, {}
+    
     def self.all(options={})
       connection.get("/cookbooks")
     end

@@ -1,3 +1,9 @@
+# Release Notes - Spice - Version 1.0.0
+
+## Removed
+
+* Old-style connections are no longer supported. Please use the connection string like Chef uses (ex. http://chef.example.com:4000)
+
 # Release Notes - Spice - Version 0.5.0
 
 ## Bug

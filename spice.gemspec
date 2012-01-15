@@ -14,6 +14,8 @@ Gem::Specification.new do |s|
 
   s.rubyforge_project = "spice"
   
+  s.add_dependency "toystore", ">= 0.8.2"
+  s.add_dependency "adapter", ">= 0.5.2"
   s.add_dependency "rest-client", '>= 1.6.6'
   s.add_dependency "mixlib-authentication", '>= 1.1.4'
   s.add_dependency "yajl-ruby", '>= 1.1.0'

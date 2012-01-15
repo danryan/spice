@@ -1,19 +1,21 @@
 module Spice
-  class Client < Spice::Chef    
-    def self.all(options={})
-      if options[:complete]
-        results = []
-        connection.get("clients").map { |c| c[0] }.each do |client|
-          results << connection.get("/clients/#{client}")
-        end
-        results
-      else
-        connection.get("/clients")
-      end
-    end
+  class Client
+    include Toy::Store
+    store :memory, {}
     
-    def self.[](name)
-      connection.get("/clients/#{name}")
+    attribute :name, String
+    attribute :public_key, String
+    attribute :private_key, String
+    attribute :_rev, String
+    attribute :json_class, String, :default => "Chef::ApiClient"
+    attribute :admin, Boolean, :default => false
+    attribute :chef_type, String, :default => "client"
+    
+    validates_presence_of :name, :json_class, :admin, :chef_type
+    
+    def create
+      response = post("/clients", attributes.except('id'))
+      update_attributes(response)
     end
     
     def self.show(options={})
@@ -23,8 +25,8 @@ module Spice
     end
     
     def self.create(options={})
-      raise ArgumentError, "Option :name must be present" unless options[:name]
-      connection.post("/clients", options)
+      client = new(options)
+      client.create
     end
     
     def self.update(options={})

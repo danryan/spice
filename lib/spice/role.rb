@@ -1,5 +1,18 @@
 module Spice
-  class Role < Spice::Chef
+  class Role
+    include Toy::Store
+    store :memory, {}
+    
+    attribute :name, String
+    attribute :description, String
+    attribute :run_list, Array, :default => []
+    attribute :default_attributes, Hash, :default => {}
+    attribute :override_attributes, Hash, :default => {}
+    attribute :json_class, String, :default => "Chef::Role"
+    attribute :chef_type, String, :default => "role"
+
+    validates_presence_of :name, :description
+    
     def self.all(options={})
       connection.get("/roles")
     end
