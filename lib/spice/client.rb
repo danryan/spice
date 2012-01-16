@@ -6,7 +6,7 @@ module Spice
     include Spice::Persistence
     extend Spice::Persistence
     store :memory, {}
-    endpoint "roles"
+    endpoint "clients"
     
     attribute :name, String
     attribute :public_key, String
@@ -18,5 +18,12 @@ module Spice
     
     validates_presence_of :name, :json_class, :chef_type
 
+
+    def do_post
+      response = connection.post("/clients", :name => name)
+      update_attributes(response.body)
+      response = connection.get("/clients/#{name}")
+      update_attributes(response.body)
+    end
   end
 end

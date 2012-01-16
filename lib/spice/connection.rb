@@ -4,12 +4,26 @@ require 'uri'
 require 'spice/request'
 require 'spice/connection/authentication'
 require 'spice/connection/search'
+require 'spice/connection/clients'
+require 'spice/connection/cookbooks'
+require 'spice/connection/data_bags'
+require 'spice/connection/environments'
+require 'spice/connection/nodes'
+require 'spice/connection/roles'
+require 'spice/connection/search'
 
 module Spice
   class Connection
     include Toy::Store
     store :memory, {}
     
+    include Spice::Connection::Clients
+    include Spice::Connection::Cookbooks
+    include Spice::Connection::DataBags
+    include Spice::Connection::Environments
+    include Spice::Connection::Nodes
+    include Spice::Connection::Roles
+    include Spice::Connection::Search
     include Spice::Connection::Authentication
     include Spice::Connection::Search
     include Spice::Request
@@ -23,6 +37,10 @@ module Spice
     attribute :endpoint, String
     
     validates_presence_of :client_name, :key_file, :server_url
+    
+    def connection
+      self
+    end
     
     def parsed_url
       URI.parse(server_url)

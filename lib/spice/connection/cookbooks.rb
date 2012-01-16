@@ -18,8 +18,18 @@ module Spice
       end
 
       def cookbook(name)
-        attributes = connection.get("/cookbooks/#{name}").body
-        Spice::Cookbook.new(attributes)
+        if Gem::Version.new(Spice.chef_version) >= Gem::Version.new("0.10.0")
+          cookbook = connection.get("/cookbooks/#{name}").body
+          puts cookbook[name]
+          versions = cookbook[name]['versions'].map{ |v| v['version'] }
+
+          Spice::Cookbook.new(:name => name, :versions => versions)
+        else
+          connection.get("/cookbooks").body.keys.map do |cookbook|
+            attributes = connection.get("/cookbooks/#{cookbook}").body.to_a[0]
+            Spice::Cookbook.new(:name => attributes[0], :versions => attributes[1])
+          end
+        end
       end
       
       def cookbook_version(name, version)
