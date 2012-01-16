@@ -2,11 +2,11 @@ module Spice
   class Connection
     module Roles
       def roles(options={})
-        search('role', options)
+        connection.search('role', options)
       end
 
       def role(name)
-        attributes = get("/roles/#{name}").body
+        attributes = connection.get("/roles/#{name}").body
         Spice::Role.new(attributes)
       end
 

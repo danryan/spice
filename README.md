@@ -45,36 +45,13 @@ Next, we need to create the connection object you'll use to sign your requests a
     
 If you want to reset your config to their default values:
 
-    Spice.reset!
+    Spice.reset
     
 ### Deprecation notice
 
-Explicitly setting a `host`, `port`, and `scheme` value has been deprecated in favor of setting a single variable, `server_url`, which matches the format of Chef's client config parameter, `chef_server_url`. The old way of defining `host`, `port`, and `scheme` are still currently available but will be removed from future versions.
+Explicitly setting a `host`, `port`, and `scheme` value has been deprecated in favor of setting a single variable, `server_url`, which matches the format of Chef's client config parameter, `chef_server_url`. The old way of defining `host`, `port`, and `scheme` has been removed.
 
 ## Usage
-
-### Low-level use
-
-Setting up spice and running `Spice.connect!` creates a connection object that can then be used to send requests to your Chef server, accessed via `Spice.connection`.  
-
-Get a list of all clients:
-
-    Spice.connection.get("/clients")
-
-Get a specific node by the name "slappypants":
-
-    Spice.connection.get("/nodes/slappypants")
-    
-Create a new role called "awesome":
-
-    Spice.connection.post("/roles", :name => "awesome")
-
-Make the client "sweet" an admin:
-    
-    Spice.connection.put("/clients/sweet", :admin => true)
-
-Read the wiki for more examples.
-
 
 ### Contributors
 

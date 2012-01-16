@@ -4,7 +4,6 @@ require 'mixlib/authentication'
 
 require 'spice/config'
 require 'spice/error'
-require 'spice/adapter'
 require 'spice/authentication'
 require 'spice/chef'
 
@@ -18,12 +17,28 @@ require 'spice/node'
 require 'spice/environment'
 require 'spice/connection'
 
+require 'spice/connection/clients'
+require 'spice/connection/cookbooks'
+require 'spice/connection/data_bags'
+require 'spice/connection/environments'
+require 'spice/connection/nodes'
+require 'spice/connection/roles'
+require 'spice/connection/search'
+
 require 'spice/version'
 require 'spice/mock'
 
 module Spice
   extend Config
   extend self
+  
+  extend Spice::Connection::Clients
+  extend Spice::Connection::Cookbooks
+  extend Spice::Connection::DataBags
+  extend Spice::Connection::Environments
+  extend Spice::Connection::Nodes
+  extend Spice::Connection::Roles
+  extend Spice::Connection::Search
     
   def connection
     @connection ||= Connection.new(

@@ -2,7 +2,7 @@ module Spice
   class Connection
     module DataBags
       def data_bags
-        get("/data").body.keys.map do |data_bag|
+        connection.get("/data").body.keys.map do |data_bag|
           items = get_data_bag_items(data_bag)
           Spice::DataBag.new(:name => data_bag, :items => items)
         end
@@ -11,8 +11,8 @@ module Spice
       alias :data :data_bags
       
       def data_bag(name)
-        items = get("/data/#{name}").body.keys.map do |id|
-          data = get("/data/#{name}/#{id}").body
+        items = connection.get("/data/#{name}").body.keys.map do |id|
+          data = connection.get("/data/#{name}/#{id}").body
           data.delete('id')
           Spice::DataBagItem.new(:_id => id, :data => data, :name => name)
         end
@@ -20,7 +20,7 @@ module Spice
       end
 
       def data_bag_item(name, id)
-        data = get("/data/#{name}/#{id}")
+        data = connection.get("/data/#{name}/#{id}")
         data.delete('id')
         Spice::DataBagItem.new(:_id => id, :data => data, :name => name)
       end
@@ -28,8 +28,8 @@ module Spice
       private
 
       def get_data_bag_items(name)
-        get("/data/#{name}").body.keys.map do |id|
-          data = get("/data/#{name}/#{id}").body
+        connection.get("/data/#{name}").body.keys.map do |id|
+          data = connection.get("/data/#{name}/#{id}").body
           Spice::DataBagItem.new(:_id => id, :data => data, :name => name)
         end
       end

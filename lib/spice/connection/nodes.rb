@@ -2,11 +2,11 @@ module Spice
   class Connection
     module Nodes
       def nodes(options={})
-        search('node', options)
+        connection.search('node', options)
       end
 
       def node(name)
-        node_attributes = get("/nodes/#{name}").body
+        node_attributes = connection.get("/nodes/#{name}").body
         Spice::Node.new(node_attributes)
       end
 
