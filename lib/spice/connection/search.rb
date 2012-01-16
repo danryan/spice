@@ -18,28 +18,28 @@ module Spice
         params = options.collect{ |k, v| "#{k}=#{CGI::escape(v.to_s)}"}.join("&")
         case index
         when 'node'
-          get("/search/#{CGI::escape(index.to_s)}?#{params}").body['rows'].map do |node|
+          connection.get("/search/#{CGI::escape(index.to_s)}?#{params}").body['rows'].map do |node|
             Spice::Node.new(node)
           end
         when 'role'
-          get("/search/#{CGI::escape(index.to_s)}?#{params}").body['rows'].map do |role|
+          connection.get("/search/#{CGI::escape(index.to_s)}?#{params}").body['rows'].map do |role|
             Spice::Role.new(role)
           end
         when 'client'
-          get("/search/#{CGI::escape(index.to_s)}?#{params}").body['rows'].map do |client|
+          connection.get("/search/#{CGI::escape(index.to_s)}?#{params}").body['rows'].map do |client|
             Spice::Client.new(client)
           end
         when 'environment'
-          get("/search/#{CGI::escape(index.to_s)}?#{params}").body['rows'].map do |env|
+          connection.get("/search/#{CGI::escape(index.to_s)}?#{params}").body['rows'].map do |env|
             env['attrs'] = env.delete('attributes')
             Spice::Environment.new(env)
           end
         else
           # assume it's a data bag
-          get("/search/#{CGI::escape(index.to_s)}?#{params}").body['rows'].map do |db|
+          connection.get("/search/#{CGI::escape(index.to_s)}?#{params}").body['rows'].map do |db|
             data = db['raw_data']
             id = data.delete('id')
-            Spice::DataBagItem.new(:_id => id, :data => data)
+            Spice::DataBagItem.new(:_id => id, :data => data, :name => index)
           end
         end
       end # def search
