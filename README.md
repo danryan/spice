@@ -1,5 +1,7 @@
 # Spice - Chef API Wrapper [![Dependency Status](https://gemnasium.com/danryan/spice.png)][gemnasium]
 
+[gemnasium]: https://gemnasium.com/danryan/spice
+
 Spice is a zesty Chef API wrapper. Its primary purpose is to let you easily integrate your apps with a [Chef](http://opscode.com/chef) server. Spice provides support for the [Chef API](http://wiki.opscode.com/display/chef/Server+API)
 
 ## Installation
