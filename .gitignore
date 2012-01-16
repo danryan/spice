@@ -6,3 +6,4 @@ doc/**/*
 .yardoc/**/*
 .yardoc/*
 Gemfile.lock
+fixture.rb

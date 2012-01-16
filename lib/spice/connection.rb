@@ -1,4 +1,8 @@
 require 'yajl'
+require 'uri'
+
+require 'spice/request'
+require 'spice/connection/authentication'
 require 'spice/connection/clients'
 require 'spice/connection/cookbooks'
 require 'spice/connection/data_bags'
@@ -19,82 +23,66 @@ module Spice
     include Spice::Connection::Nodes
     include Spice::Connection::Roles
     include Spice::Connection::Search
-    
-    attr_accessor :auth_credentials
-    
+    include Spice::Connection::Authentication
+    include Spice::Request
+        
     attribute :client_name, String
     attribute :key_file, String
-    attribute :server_url, String, :default => lambda { Spice.default_server_url }
+    attribute :key, String
+    attribute :server_url, String
     attribute :sign_on_redirect, Boolean, :default => true
     attribute :sign_request, Boolean, :default => true
-
-    validates_presence_of :client_name, :key_file, :server_url
+    attribute :endpoint, String
     
-    def auth_credentials
-      Spice::Authentication.new(client_name, key_file)
-    end
+    validates_presence_of :client_name, :key_file, :server_url
     
     def parsed_url
       URI.parse(server_url)
     end
+
+    def get(path)
+      response = request(:headers => build_headers(
+        :GET, 
+        "#{parsed_url.path}#{path}")
+      ).get(
+        "#{server_url}#{path}"
+      )
+      return response
+    end # def get
     
-    def get(path, headers={})
-      begin
-        response = RestClient.get(
-          "#{server_url}#{path}", 
-          build_headers(:GET, "#{parsed_url.path}#{path}", headers)
-        )
-        return Yajl.load(response.body)
-       
-      rescue => e
-        e.response
-      end
-    end
-    
-    def post(path, payload, headers={})
-      begin
-        response = RestClient.post(
-          "#{server_url}#{path}",
-          Yajl.dump(payload),
-          build_headers(:POST, "#{parsed_url.path}#{path}", headers, Yajl.dump(payload))
-        )      
-        return Yajl.load(response.body)
-          
-      rescue => e
-        e.response
-      end
-    end
+    def post(path, payload)
+      response = request(:headers => build_headers(
+        :POST, 
+        "#{parsed_url.path}#{path}", 
+        Yajl.dump(payload))
+      ).post(
+        "#{server_url}#{path}", 
+        Yajl.dump(payload)
+      )
+      return response
+    end # def post
     
     def put(path, payload, headers={})
-      begin
-        response = RestClient.put(
-        "#{server_url}#{path}",
-          Yajl.dump(payload),
-          build_headers(:PUT, "#{parsed_url.path}#{path}", headers, Yajl.dump(payload))
-        )
-        return Yajl.load(response.body)
-        
-      rescue => e
-        e.response
-      end
-    end
+      response = request(:headers => build_headers(
+        :PUT, 
+        "#{parsed_url.path}#{path}", 
+        Yajl.dump(payload))
+      ).put(
+        "#{server_url}#{path}", 
+        Yajl.dump(payload)
+      )
+      return response
+    end # def put
     
     def delete(path, headers={})
-      begin
-        response = RestClient.delete(
-        "#{server_url}#{path}",
-          build_headers(:DELETE, "#{parsed_url.path}#{path}", headers)
-        )
-        return Yajl.load(response.body)
-        
-      rescue => e
-        e.response
-      end
-    end  
-    
-    def sign_requests?
-      sign_request
-    end
+      response = request(:headers => build_headers(
+        :DELETE, 
+        "#{parsed_url.path}#{path}")
+      ).delete(
+        "#{server_url}#{path}"
+      )
+      return response
+    end # def delete
     
     private
     
@@ -106,15 +94,17 @@ module Spice
         :host => "#{parsed_url.host}:#{parsed_url.port}"
       }
       request_params[:body] ||= ""
-      auth_credentials.signature_headers(request_params)
-    end
+      signature_headers(request_params)
+    end # def authentication_headers
     
-    def build_headers(method, path, headers={}, json_body=false)
-      headers['Accept']       = "application/json"
-      headers["Content-Type"] = 'application/json' if json_body
+    def build_headers(method, path, json_body=nil)
+      headers={}
+      # headers['Accept']       = "application/json"
+      # headers["Content-Type"] = 'application/json' if json_body
       headers['Content-Length'] = json_body.bytesize.to_s if json_body
       headers.merge!(authentication_headers(method, path, json_body)) if sign_requests?
       headers
-    end
-  end
-end
+    end # def build_headers
+
+  end # class Connection
+end # module Spice

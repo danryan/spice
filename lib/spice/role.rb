@@ -1,7 +1,13 @@
+require 'spice/persistence'
+
 module Spice
   class Role
     include Toy::Store
+    include Spice::Persistence
+    extend Spice::Persistence
+    
     store :memory, {}
+    endpoint "roles"
     
     attribute :name, String
     attribute :description, String
@@ -12,32 +18,6 @@ module Spice
     attribute :chef_type, String, :default => "role"
 
     validates_presence_of :name, :description
-    
-    def self.all(options={})
-      connection.get("/roles")
-    end
-    
-    def self.[](name)
-      connection.get("/roles/#{name}")
-    end
-    
-    def self.show(options={})
-      name = options.delete(:name)
-      connection.get("/roles/#{name}")
-    end
-    
-    def self.create(options={})
-      connection.post("/roles", options)
-    end
-    
-    def self.update(options={})
-      name = options.delete(:name)
-      connection.put("/roles/#{name}", options)
-    end
-    
-    def self.delete(options={})
-      name = options.delete(:name)
-      connection.delete("/roles/#{name}", options)
-    end
+
   end
 end

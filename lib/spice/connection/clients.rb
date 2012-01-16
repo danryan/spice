@@ -6,7 +6,7 @@ module Spice
       end
 
       def client(name)
-        attributes = get("/clients/#{name}")
+        attributes = get("/clients/#{name}").body
         Spice::Client.new(attributes)
       end
 

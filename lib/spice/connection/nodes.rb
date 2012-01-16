@@ -6,7 +6,7 @@ module Spice
       end
 
       def node(name)
-        node_attributes = get("/nodes/#{name}")
+        node_attributes = get("/nodes/#{name}").body
         Spice::Node.new(node_attributes)
       end
 

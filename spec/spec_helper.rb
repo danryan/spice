@@ -10,7 +10,6 @@ Spork.prefork do
   require 'rspec'
   require 'webmock/rspec'
   require 'timecop'
-  require 'rest-client'
   require 'fakefs'
   require 'fileutils'
   

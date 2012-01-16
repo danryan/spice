@@ -6,7 +6,7 @@ module Spice
       end
 
       def role(name)
-        attributes = get("/roles/#{name}")
+        attributes = get("/roles/#{name}").body
         Spice::Role.new(attributes)
       end
 
