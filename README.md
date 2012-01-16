@@ -51,13 +51,15 @@ If you want to reset your config to their default values:
 
 Explicitly setting a `host`, `port`, and `scheme` value has been deprecated in favor of setting a single variable, `server_url`, which matches the format of Chef's client config parameter, `chef_server_url`. The old way of defining `host`, `port`, and `scheme` has been removed.
 
-## Usage
-
 ### Contributors
 
 * [Ian Meyer](https://github.com/imeyer) - Opscode Platform support
 * [Holger Just](https://github.com/meineerde) - Search functionality
 * [Sean Porter](https://github.com/portertech) - Platform bug fixes
+
+### Hat tip
+
+Spice is very heavily inspired by the [Twitter gem](http://github.com/jnunemaker/twitter). Mad props to those folks.
 
 ## Contributing to spice
  
