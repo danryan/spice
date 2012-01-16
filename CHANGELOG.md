@@ -1,9 +1,14 @@
 # Release Notes - Spice - Version 1.0.0
 
+* Note: this version of Spice is a major version bump, which means it is *not* backwards-compatible with previous versions.
+
 ## Removed
 
 * Old-style connections are no longer supported. Please use the connection string like Chef uses (ex. http://chef.example.com:4000)
 
+## Improvement
+
+* Complete rewrite! Returned results are now full interactive objects and not just hashes. Create, update, and destroy resources with an ORM-like interface.
 # Release Notes - Spice - Version 0.5.0
 
 ## Bug
@@ -14,8 +19,6 @@
 ## Improvement
 
 * Node support!
-
-
 
 # Release Notes - Spice - Version 0.3.0
 
