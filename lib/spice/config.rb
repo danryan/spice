@@ -4,7 +4,7 @@ module Spice
   module Config
     DEFAULT_SERVER_URL = "http://localhost:4000"
     
-    DEFAULT_CHEF_VERSION = "0.10.4"
+    DEFAULT_CHEF_VERSION = "0.10.8"
         
     DEFAULT_USER_AGENT = "Spice #{Spice::VERSION}"
     
