@@ -19,5 +19,13 @@ module Spice
         
     validates_presence_of :name
 
+    def new_record?
+      begin
+        connection.get("/nodes/#{name}")
+        return false
+      rescue Spice::NotFound
+        return true
+      end
+    end
   end
 end

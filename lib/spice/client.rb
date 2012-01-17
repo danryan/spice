@@ -25,5 +25,18 @@ module Spice
       response = connection.get("/clients/#{name}")
       update_attributes(response.body)
     end
+    
+    def do_put
+      response = connection.put("/clients/#{name}", attributes)
+    end
+    
+    def new_record?
+      begin
+        connection.get("/clients/#{name}")
+        return false
+      rescue Spice::NotFound
+        return true
+      end
+    end
   end
 end

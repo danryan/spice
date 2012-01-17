@@ -19,5 +19,14 @@ module Spice
 
     validates_presence_of :name, :description
 
+
+    def new_record?
+      begin
+        connection.get("/roles/#{name}")
+        return false
+      rescue Spice::NotFound
+        return true
+      end
+    end
   end
 end

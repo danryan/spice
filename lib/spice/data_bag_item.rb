@@ -31,5 +31,14 @@ module Spice
     def do_delete
       connection.delete("/data/#{name}/#{_id}")
     end
+    
+    def new_record?
+      begin
+        connection.get("/data/#{name}/#{_id}")
+        return false
+      rescue Spice::NotFound
+        return true
+      end
+    end
   end
 end

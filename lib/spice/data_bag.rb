@@ -24,5 +24,14 @@ module Spice
     def do_post
       response = connection.post("/data", attributes)
     end
+    
+    def new_record?
+      begin
+        connection.get("/data/#{name}")
+        return false
+      rescue Spice::NotFound
+        return true
+      end
+    end
   end
 end

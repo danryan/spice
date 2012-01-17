@@ -12,5 +12,14 @@ module Spice
     attribute :versions, Array, :default => []
 
     validates_presence_of :name
+    
+    def new_record?
+      begin
+        connection.get("/cookbooks/#{name}")
+        return false
+      rescue Spice::NotFound
+        return true
+      end
+    end
   end
 end
