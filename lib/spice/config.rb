@@ -16,7 +16,6 @@ module Spice
       :key_file,
       :raw_key,
       :chef_version,
-      :adapter,
       :user_agent,
       :connection_options
     ]
