@@ -19,6 +19,10 @@ module Spice
         
     validates_presence_of :name
 
+    def self.get(name)
+      connection.node(name)
+    end
+    
     def new_record?
       begin
         connection.get("/nodes/#{name}")

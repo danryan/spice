@@ -18,8 +18,11 @@ module Spice
     attribute :chef_type, String, :default => "role"
 
     validates_presence_of :name, :description
-
-
+    
+    def self.get(name)
+      connection.role(name)
+    end
+    
     def new_record?
       begin
         connection.get("/roles/#{name}")

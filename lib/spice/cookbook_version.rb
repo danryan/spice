@@ -39,5 +39,9 @@ module Spice
     def do_delete
       connection.delete("/cookbooks/#{cookbook_name}/#{version}")
     end
+    
+    def self.get(name, version)
+      connection.cookbook_version(name, version)
+    end
   end
 end

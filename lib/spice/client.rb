@@ -29,6 +29,10 @@ module Spice
     def do_put
       response = connection.put("/clients/#{name}", attributes)
     end
+
+    def self.get(name)
+      connection.client(name)
+    end
     
     def new_record?
       begin

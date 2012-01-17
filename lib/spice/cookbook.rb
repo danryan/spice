@@ -13,6 +13,10 @@ module Spice
 
     validates_presence_of :name
     
+    def self.get(name)
+      connection.cookbook(name)
+    end
+    
     def new_record?
       begin
         connection.get("/cookbooks/#{name}")
