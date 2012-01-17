@@ -24,3 +24,8 @@ desc "Generate documentation"
 YARD::Rake::YardocTask.new do |t|
   t.files = [ 'lib/**/*.rb' ]
 end
+
+desc "Generate docs"
+task :doc do
+  sh %{bundle exec rake yard}
+end

@@ -8,6 +8,9 @@ module Spice
     store :memory, {}
     endpoint "environments"
     
+    # @macro [attach] attribute
+    # @attribute [rw]
+    # @return [$2] the $1 attribute
     attribute :name, String
     attribute :description, String
     attribute :attrs, Hash, :default => {}

@@ -3,6 +3,7 @@ source "http://rubygems.org"
 gemspec
 
 group :development, :test do
+  gem 'rake'
   gem 'rspec', '>= 2.8.0'
   gem "webmock", ">= 1.7.10"
   gem "timecop", ">= 0.3.5"

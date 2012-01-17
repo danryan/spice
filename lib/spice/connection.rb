@@ -12,6 +12,8 @@ require 'spice/connection/nodes'
 require 'spice/connection/roles'
 require 'spice/connection/search'
 
+
+
 module Spice
   class Connection
     include Toy::Store
@@ -28,6 +30,9 @@ module Spice
     include Spice::Connection::Search
     include Spice::Request
         
+    # @macro [attach] attribute
+    # @attribute [rw]
+    # @return [$2] the $1 attribute
     attribute :client_name, String
     attribute :key_file, String
     attribute :key, String
@@ -46,6 +51,11 @@ module Spice
       URI.parse(server_url)
     end
 
+    # Perform an HTTP GET request
+    # @param [String] path The relative path
+    # @return [Faraday::Response]
+    # @example Get a list of all nodes
+    #   Spice.connection.get("/nodes")
     def get(path)
       response = request(:headers => build_headers(
         :GET, 
@@ -56,6 +66,12 @@ module Spice
       return response
     end # def get
     
+    # Perform an HTTP POST request
+    # @param [String] path The relative path
+    # @param [Hash] payload The payload to send with the POST request
+    # @return [Faraday::Response]
+    # @example Create a new client named "foo"
+    #   Spice.connection.post("/clients", :name => "foo")
     def post(path, payload)
       response = request(:headers => build_headers(
         :POST, 
@@ -68,7 +84,13 @@ module Spice
       return response
     end # def post
     
-    def put(path, payload, headers={})
+    # Perform an HTTP PUT request
+    # @param [String] path The relative path
+    # @param [Hash] payload The payload to send with the PUT request
+    # @return [Faraday::Response]
+    # @example Make an existing client "foo" an admin
+    #   Spice.connection.put("/clients/foo", :admin => true)
+    def put(path, payload)
       response = request(:headers => build_headers(
         :PUT, 
         "#{parsed_url.path}#{path}", 
@@ -80,7 +102,12 @@ module Spice
       return response
     end # def put
     
-    def delete(path, headers={})
+    # Perform an HTTP DELETE request
+    # @param [String] path The relative path
+    # @return [Faraday::Response]
+    # @example Delete the client "foo"
+    #   Spice.connection.delete("/clients/foo")
+    def delete(path)
       response = request(:headers => build_headers(
         :DELETE, 
         "#{parsed_url.path}#{path}")

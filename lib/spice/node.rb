@@ -8,6 +8,9 @@ module Spice
     store :memory, {}
     endpoint "nodes"
     
+    # @macro [attach] attribute
+    # @attribute [rw]
+    # @return [$2] the $1 attribute
     attribute :name, String
     attribute :chef_type, String, :default => "node"
     attribute :json_class, String, :default => "Chef::Node"

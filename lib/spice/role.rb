@@ -9,6 +9,9 @@ module Spice
     store :memory, {}
     endpoint "roles"
     
+    # @macro [attach] attribute
+    # @attribute [rw]
+    # @return [$2] the $1 attribute
     attribute :name, String
     attribute :description, String
     attribute :run_list, Array, :default => []

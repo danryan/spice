@@ -3,6 +3,10 @@ require 'cgi'
 module Spice
   class Connection
     module Search
+      # @option options [String] :q The Solr search query string
+      # @option options [String] :sort Order by which to sort the results
+      # @option options [Numeric] :start The number by which to offset the results
+      # @option options [Numeric] :rows The maximum number of rows to return
       def search(index, options={})
         options = {:q => options} if options.is_a? String
         options.symbolize_keys!

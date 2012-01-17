@@ -6,6 +6,9 @@ module Spice
     store :memory, {}
     endpoint "data"
     
+    # @macro [attach] attribute
+    # @attribute [rw]
+    # @return [$2] the $1 attribute
     attribute :_id, String
     attribute :data, Hash, :default => {}    
     attribute :name, String
