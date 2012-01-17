@@ -22,7 +22,11 @@ module Spice
       end
       
       def error(body)
-        body["error"].join(',')
+        if body["error"].kind_of?(Array)
+          body["error"].join(',')
+        else
+          body["error"]
+        end
       end
       
     end
