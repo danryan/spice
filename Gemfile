@@ -17,4 +17,5 @@ end
 
 group :doc do
   gem 'yard'
+  gem 'redcarpet'
 end
