@@ -21,7 +21,6 @@ module Spice
     
     validates_presence_of :name, :json_class, :chef_type
 
-
     def do_post
       response = connection.post("/clients", :name => name)
       update_attributes(response.body)
