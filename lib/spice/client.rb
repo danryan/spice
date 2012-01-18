@@ -8,6 +8,9 @@ module Spice
     store :memory, {}
     endpoint "clients"
     
+    # @macro [attach] attribute
+    # @attribute [rw]
+    # @return [$2] the $1 attribute
     attribute :name, String
     attribute :public_key, String
     attribute :private_key, String
@@ -34,6 +37,7 @@ module Spice
       connection.client(name)
     end
     
+    # Check if the client exists on the Chef server
     def new_record?
       begin
         connection.get("/clients/#{name}")

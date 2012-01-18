@@ -26,6 +26,7 @@ module Spice
       connection.role(name)
     end
     
+    # Check if the role exists on the Chef server
     def new_record?
       begin
         connection.get("/roles/#{name}")

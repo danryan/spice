@@ -46,5 +46,15 @@ module Spice
     def self.get(name, version)
       connection.cookbook_version(name, version)
     end
+    
+    # Check if the cookbook version exists on the Chef server
+    def new_record?
+      begin
+        connection.get("/cookbooks/#{name}/#{version}")
+        return false
+      rescue Spice::NotFound
+        return true
+      end
+    end
   end
 end

@@ -38,5 +38,8 @@ module Spice
       connection.delete("/#{self.class.endpoint}/#{name}")
     end
 
+    def new_record?
+      raise NotImplementedError, "Override this method in the class that includes this module."
+    end
   end
 end

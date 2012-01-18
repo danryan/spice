@@ -28,6 +28,7 @@ module Spice
       response = connection.post("/data", attributes)
     end
     
+    # Check if the data bag exists on the Chef server
     def new_record?
       begin
         connection.get("/data/#{name}")

@@ -26,6 +26,7 @@ module Spice
       connection.node(name)
     end
     
+    # Check if the node exists on the Chef server
     def new_record?
       begin
         connection.get("/nodes/#{name}")

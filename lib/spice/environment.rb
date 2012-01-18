@@ -20,5 +20,12 @@ module Spice
     
     validates_presence_of :name, :description
 
+    # Check if the environment exists on the Chef server
+    def new_record?
+      connection.get("/environments/#{name}")
+      return false
+    rescue Spice::NotFound
+      return true
+    end
   end
 end

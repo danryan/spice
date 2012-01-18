@@ -20,6 +20,7 @@ module Spice
       connection.cookbook(name)
     end
     
+    # Check if the cookbook exists on the Chef server
     def new_record?
       begin
         connection.get("/cookbooks/#{name}")

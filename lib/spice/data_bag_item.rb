@@ -6,10 +6,14 @@ module Spice
     store :memory, {}
     endpoint "data"
     
+    # The _id attribute is used as the "id" field in the data bag item. 
+    # "id" is an attribute reserved by ToyStore, the attribute system used by Spice.
+    # @attribute [rw]
+    # @return [String] the _attribute
+    attribute :_id, String
     # @macro [attach] attribute
     # @attribute [rw]
     # @return [$2] the $1 attribute
-    attribute :_id, String
     attribute :data, Hash, :default => {}    
     attribute :name, String
     
@@ -35,6 +39,7 @@ module Spice
       connection.delete("/data/#{name}/#{_id}")
     end
     
+    # Check if the data bag item exists on the Chef server
     def new_record?
       begin
         connection.get("/data/#{name}/#{_id}")
