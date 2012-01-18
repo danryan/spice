@@ -14,7 +14,7 @@ module Spice
       # Retrieve a single client
       # @param [String] name The client name
       # @return [Spice::Client]
-      # @raise [Spice::NotFound] raised when client does not exist
+      # @raise [Spice::Error::NotFound] raised when client does not exist
       # @example Retrieve the client named "admin"
       #   Spice.client("name")
       def client(name)

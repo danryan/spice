@@ -9,22 +9,22 @@ module Spice
     
   end
   
-  class BadRequest < Error
+  class Error::BadRequest < Error
   end
   
-  class Unauthorized < Error
+  class Error::Unauthorized < Error
   end
   
-  class Forbidden < Error
+  class Error::Forbidden < Error
   end
   
-  class NotFound < Error
+  class Error::NotFound < Error
   end
   
-  class NotAcceptable < Error
+  class Error::NotAcceptable < Error
   end
   
-  class Conflict < Error
+  class Error::Conflict < Error
   end
   
 end

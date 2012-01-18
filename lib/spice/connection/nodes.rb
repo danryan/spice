@@ -16,7 +16,7 @@ module Spice
       # Retrieve a  single client
       # @param [String] name The node name
       # @return [Spice::Node]
-      # @raise [Spice::NotFound] raised when node does not exist
+      # @raise [Spice::Error::NotFound] raised when node does not exist
       # @example Retrieve the node named "app.example.com"
       #   Spice.node("app.example.com")
       def node(name)

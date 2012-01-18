@@ -14,7 +14,7 @@ module Spice
       # Retrieve a single environment
       # @param [String] name The environment name
       # @return [Spice::Environment]
-      # @raise [Spice::NotFound] raised when environment does not exist
+      # @raise [Spice::Error::NotFound] raised when environment does not exist
       # @example Retrieve the environment named "production"
       #   Spice.environment("production")
       def environment(name)

@@ -44,7 +44,7 @@ module Spice
       begin
         connection.get("/data/#{name}/#{_id}")
         return false
-      rescue Spice::NotFound
+      rescue Spice::Error::NotFound
         return true
       end
     end

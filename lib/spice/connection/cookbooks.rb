@@ -24,7 +24,7 @@ module Spice
       # Retrieve a single cookbook
       # @param [String] name The name of the cookbook
       # @return [Spice::Cookbook]
-      # @raise [Spice::NotFound] raised when cookbook does not exist
+      # @raise [Spice::Error::NotFound] raised when cookbook does not exist
       def cookbook(name)
         if Gem::Version.new(Spice.chef_version) >= Gem::Version.new("0.10.0")
           cookbook = connection.get("/cookbooks/#{name}").body
@@ -44,7 +44,7 @@ module Spice
       # @param [String] name The cookbook name
       # @param [String] version The cookbook version
       # @return [Spice::CookbookVersion]
-      # @raise [Spice::NotFound] raised when cookbook version does not exist
+      # @raise [Spice::Error::NotFound] raised when cookbook version does not exist
       def cookbook_version(name, version)
         attributes = connection.get("/cookbooks/#{name}/#{version}").body
         Spice::CookbookVersion.new(attributes)

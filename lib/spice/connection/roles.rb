@@ -14,7 +14,7 @@ module Spice
       # Retrieve a single role
       # @param [String] name The role name
       # @return [Spice::Role]
-      # @raise [Spice::NotFound] raised when role does not exist
+      # @raise [Spice::Error::NotFound] raised when role does not exist
       # @example Retrieve the role "app_server"
       #   Spice.role("app_server")
       def role(name)

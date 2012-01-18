@@ -41,7 +41,7 @@ module Spice
       begin
         connection.get("/clients/#{name}")
         return false
-      rescue Spice::NotFound
+      rescue Spice::Error::NotFound
         return true
       end
     end

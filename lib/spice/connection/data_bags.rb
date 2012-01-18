@@ -17,7 +17,7 @@ module Spice
       # Retrieve a single data bag and its items
       # @param [String] name The data bag name
       # @return [Spice::DataBag]
-      # @raise [Spice::NotFound] raised when data bag does not exist
+      # @raise [Spice::Error::NotFound] raised when data bag does not exist
       def data_bag(name)
         items = connection.search(name)
         Spice::DataBag.new(:name => name, :items => items)
@@ -27,7 +27,7 @@ module Spice
       # @param [String] name The data bag name
       # @param [String] id The data bag item id
       # @return [Spice::DataBagItem]
-      # @raise [Spice::NotFound] raised when data bag item does not exist
+      # @raise [Spice::Error::NotFound] raised when data bag item does not exist
       def data_bag_item(name, id)
         data = connection.get("/data/#{name}/#{id}")
         data.delete('id')

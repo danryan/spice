@@ -7,17 +7,17 @@ module Spice
       def on_complete(env)
         case env[:status].to_i
         when 400
-          raise Spice::BadRequest.new(error(env[:body]), env[:request_headers])
+          raise Spice::Error::BadRequest.new(error(env[:body]), env[:request_headers])
         when 401
-          raise Spice::Unauthorized.new(error(env[:body]), env[:request_headers])
+          raise Spice::Error::Unauthorized.new(error(env[:body]), env[:request_headers])
         when 403
-          raise Spice::Forbidden.new(error(env[:body]), env[:request_headers])
+          raise Spice::Error::Forbidden.new(error(env[:body]), env[:request_headers])
         when 404
-          raise Spice::NotFound.new(error(env[:body]), env[:request_headers])
+          raise Spice::Error::NotFound.new(error(env[:body]), env[:request_headers])
         when 406
-          raise Spice::NotAcceptable.new(error(env[:body]), env[:request_headers])
+          raise Spice::Error::NotAcceptable.new(error(env[:body]), env[:request_headers])
         when 409
-          raise Spice::Conflict.new(error(env[:body]), env[:request_headers])
+          raise Spice::Error::Conflict.new(error(env[:body]), env[:request_headers])
         end
       end
       

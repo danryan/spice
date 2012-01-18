@@ -52,7 +52,7 @@ module Spice
       begin
         connection.get("/cookbooks/#{name}/#{version}")
         return false
-      rescue Spice::NotFound
+      rescue Spice::Error::NotFound
         return true
       end
     end
