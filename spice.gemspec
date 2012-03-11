@@ -16,7 +16,7 @@ Gem::Specification.new do |s|
   
   s.add_dependency "virtus", ">= 0.3.0"
   s.add_dependency "aequitas", ">= 0.0.2"
-  s.add_dependency "activemodel", ">= 3.2.2"
+  s.add_dependency "activemodel"
   s.add_dependency "faraday"
   s.add_dependency "mixlib-authentication", '>= 1.1.4'
   s.add_dependency "yajl-ruby", '>= 1.1.0'
