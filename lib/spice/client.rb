@@ -2,10 +2,11 @@ require 'spice/persistence'
 
 module Spice
   class Client
-    include Toy::Store
+    include Virtus
+    include Aequitas
     include Spice::Persistence
     extend Spice::Persistence
-    store :memory, {}
+    
     endpoint "clients"
     
     # @macro [attach] attribute
@@ -21,6 +22,11 @@ module Spice
     
     validates_presence_of :name, :json_class, :chef_type
 
+    after_create :wat
+    def wat
+      puts "WAT"
+    end
+    
     def do_post
       response = connection.post("/clients", :name => name)
       update_attributes(response.body)

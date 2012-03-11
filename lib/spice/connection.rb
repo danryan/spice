@@ -16,8 +16,8 @@ require 'spice/connection/search'
 
 module Spice
   class Connection
-    include Toy::Store
-    store :memory, {}
+    include Virtus
+    include Aequitas
     
     include Spice::Connection::Clients
     include Spice::Connection::Cookbooks

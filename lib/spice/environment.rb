@@ -2,10 +2,11 @@ require 'spice/persistence'
 
 module Spice
   class Environment
-    include Toy::Store
+    include Virtus
+    include Aequitas
     include Spice::Persistence
     extend Spice::Persistence
-    store :memory, {}
+
     endpoint "environments"
     
     # @macro [attach] attribute

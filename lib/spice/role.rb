@@ -2,11 +2,11 @@ require 'spice/persistence'
 
 module Spice
   class Role
-    include Toy::Store
+    include Virtus
+    include Aequitas
     include Spice::Persistence
     extend Spice::Persistence
     
-    store :memory, {}
     endpoint "roles"
     
     # @macro [attach] attribute

@@ -2,10 +2,11 @@ require 'spice/persistence'
 
 module Spice
   class Cookbook
-    include Toy::Store
+    include Virtus
+    include Aequitas
     include Spice::Persistence
     extend Spice::Persistence
-    store :memory, {}
+
     endpoint "cookbooks"
 
     # @macro [attach] attribute

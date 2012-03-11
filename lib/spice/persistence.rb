@@ -1,9 +1,26 @@
 module Spice
   module Persistence
     def self.included(base)
-      base.after_create :do_post
-      base.after_update :do_put
-      base.after_destroy :do_delete
+      base.extend ActiveModel::Callbacks
+      base.send(:define_model_callbacks, :create, :update, :destroy)
+      base.send(:after_create, :do_post)
+      base.send(:after_update, :do_put)
+      base.send(:after_destroy, :do_delete)
+    end
+    
+    def create
+      run_callbacks :create do
+      end
+    end
+    
+    def update
+      run_callbacks :update do
+      end
+    end
+    
+    def destroy
+      run_callbacks :destroy do
+      end
     end
 
     def endpoint(ep=nil)

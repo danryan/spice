@@ -1,5 +1,8 @@
-require 'toystore'
-require 'adapter/memory'
+require 'virtus'
+require 'aequitas'
+require 'active_model'
+require 'active_support/core_ext/hash/deep_merge'
+require 'active_support/core_ext/hash/keys'
 require 'mixlib/authentication'
 
 require 'spice/config'

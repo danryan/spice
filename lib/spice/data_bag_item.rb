@@ -1,9 +1,10 @@
 module Spice
   class DataBagItem
-    include Toy::Store
+    include Virtus
+    include Aequitas
     include Spice::Persistence
     extend Spice::Persistence
-    store :memory, {}
+
     endpoint "data"
     
     # The _id attribute is used as the "id" field in the data bag item. 

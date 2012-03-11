@@ -2,10 +2,11 @@ require 'spice/persistence'
 
 module Spice
   class DataBag
-    include Toy::Store
+    include Virtus
+    include Aequitas
     include Spice::Persistence
     extend Spice::Persistence
-    store :memory, {}
+
     endpoint "data"
     
     # @macro [attach] attribute

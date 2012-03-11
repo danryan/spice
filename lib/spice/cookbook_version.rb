@@ -2,10 +2,11 @@ require 'spice/persistence'
 
 module Spice
   class CookbookVersion
-    include Toy::Store
+    include Virtus
+    include Aequitas
     include Spice::Persistence
     extend Spice::Persistence
-    store :memory, {}
+
     endpoint "cookbooks"
 
     # @macro [attach] attribute
@@ -14,14 +15,13 @@ module Spice
     attribute :name, String
     attribute :version, String
     attribute :definitions, Array, :default => []
-    attribute :attributes, Array, :default => []
     attribute :files, Array, :default => []
     attribute :providers, Array, :default => []
     attribute :metadata, Hash, :default => {}
     attribute :libraries, Array, :default => []
     attribute :templates, Array, :default => []
     attribute :resources, Array, :default => []
-    attribute :attributes, Array, :default => []
+    attribute :_attributes, Array, :default => []
     attribute :json_class, String, :default => "Chef::CookbookVersion"
     attribute :cookbook_name, String
     attribute :version, String
@@ -32,11 +32,15 @@ module Spice
     validates_presence_of :name
     
     def do_post
-      connection.put("/cookbooks/#{cookbook_name}/#{version}", attributes)
+      duped_attributes = attributes.dup
+      duped_attributes['attributes'] = attributes['_attributes']
+      connection.put("/cookbooks/#{cookbook_name}/#{version}", duped_attributes)
     end
     
     def do_put
-      connection.put("/cookbooks/#{cookbook_name}/#{version}", attributes)
+      duped_attributes = attributes.dup
+      duped_attributes['attributes'] = attributes['_attributes']
+      connection.put("/cookbooks/#{cookbook_name}/#{version}", duped_attributes)
     end
     
     def do_delete

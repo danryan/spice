@@ -47,6 +47,8 @@ module Spice
       # @raise [Spice::Error::NotFound] raised when cookbook version does not exist
       def cookbook_version(name, version)
         attributes = connection.get("/cookbooks/#{name}/#{version}").body
+        duped_attributes = attributes.dup
+        duped_attributes['_attributes'] = attributes['attributes']
         Spice::CookbookVersion.new(attributes)
       end
       
