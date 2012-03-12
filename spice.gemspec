@@ -17,18 +17,18 @@ Gem::Specification.new do |s|
   s.add_dependency "virtus", ">= 0.3.0"
   s.add_dependency "aequitas", ">= 0.0.2"
   s.add_dependency "activemodel"
-  s.add_dependency "faraday"
+  s.add_dependency "faraday", ">= 0.7.6"
   s.add_dependency "mixlib-authentication", '>= 1.1.4'
   s.add_dependency "yajl-ruby", '>= 1.1.0'
   
-  s.add_development_dependency 'rspec', '>= 2.6.0'
-  s.add_development_dependency "webmock", ">= 1.6.2"
+  s.add_development_dependency 'rspec', '>= 2.8.0'
+  s.add_development_dependency "webmock", ">= 1.8.2"
   s.add_development_dependency "timecop", ">= 0.3.5"
-  s.add_development_dependency 'guard', '>= 0.6.2'
-  s.add_development_dependency 'guard-rspec', '>= 0.4.2'
-  s.add_development_dependency 'guard-spork', '>= 0.2.1'
-  s.add_development_dependency 'spork', '>= 0.9.0.rc8'
-  s.add_development_dependency 'rb-fsevent', '>= 0.4.3.1'
+  s.add_development_dependency 'guard', '>= 1.0.1'
+  s.add_development_dependency 'guard-rspec', '>= 0.6.0'
+  s.add_development_dependency 'guard-spork', '>= 0.5.2'
+  s.add_development_dependency 'spork', '>= 1.0.0.rc2'
+  s.add_development_dependency 'rb-fsevent', '>= 0.9.0'
   s.add_development_dependency 'growl', '>= 1.0.3'
   
   s.files         = `git ls-files`.split("\n")
