@@ -33,13 +33,17 @@ module Spice
     
     def do_post
       duped_attributes = attributes.dup
-      duped_attributes['attributes'] = attributes['_attributes']
+      duped_attributes[:attributes] = attributes[:_attributes]
+      duped_attributes.delete(:_attributes)
+      
       connection.put("/cookbooks/#{cookbook_name}/#{version}", duped_attributes)
     end
     
     def do_put
       duped_attributes = attributes.dup
-      duped_attributes['attributes'] = attributes['_attributes']
+      duped_attributes[:attributes] = attributes[:_attributes]
+      duped_attributes.delete(:_attributes)
+      
       connection.put("/cookbooks/#{cookbook_name}/#{version}", duped_attributes)
     end
     
