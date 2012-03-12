@@ -9,6 +9,7 @@
 ## Improvement
 
 * Complete rewrite! Returned results are now full interactive objects and not just hashes. Create, update, and destroy resources with an ORM-like interface.
+
 # Release Notes - Spice - Version 0.5.0
 
 ## Bug
