@@ -28,15 +28,12 @@ module Spice
       def cookbook(name)
         if Gem::Version.new(Spice.chef_version) >= Gem::Version.new("0.10.0")
           cookbook = connection.get("/cookbooks/#{name}").body
-          puts cookbook[name]
           versions = cookbook[name]['versions'].map{ |v| v['version'] }
 
           Spice::Cookbook.new(:name => name, :versions => versions)
         else
-          connection.get("/cookbooks").body.keys.map do |cookbook|
-            attributes = connection.get("/cookbooks/#{cookbook}").body.to_a[0]
-            Spice::Cookbook.new(:name => attributes[0], :versions => attributes[1])
-          end
+          cookbook = connection.get("/cookbooks/#{name}").body
+          Spice::Cookbook.new(:name => name, :versions => cookbook[name])
         end
       end
       
@@ -48,8 +45,8 @@ module Spice
       def cookbook_version(name, version)
         attributes = connection.get("/cookbooks/#{name}/#{version}").body
         duped_attributes = attributes.dup
-        duped_attributes['_attributes'] = attributes['attributes']
-        Spice::CookbookVersion.new(attributes)
+        duped_attributes[:_attributes] = attributes[:attributes]
+        Spice::CookbookVersion.new(duped_attributes)
       end
       
     end # module Cookbooks

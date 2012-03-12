@@ -26,13 +26,13 @@ module Spice
     
     def do_post
       attrs = data.dup
-      attrs['id'] = attributes['_id']
+      attrs[:id] = attributes[:_id]
       connection.post("/data/#{name}", attrs)
     end
     
     def do_put
       attrs = data.dup
-      attrs['id'] = attributes['_id']
+      attrs[:id] = attributes[:_id]
       connection.put("/data/#{name}/#{_id}", attrs)
     end
     
