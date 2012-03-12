@@ -45,7 +45,7 @@ module Spice
       def cookbook_version(name, version)
         attributes = connection.get("/cookbooks/#{name}/#{version}").body
         duped_attributes = attributes.dup
-        duped_attributes[:_attributes] = attributes[:attributes]
+        duped_attributes[:_attributes] = attributes['attributes']
         Spice::CookbookVersion.new(duped_attributes)
       end
       
