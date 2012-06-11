@@ -16,8 +16,7 @@ require 'spice/connection/search'
 
 module Spice
   class Connection
-    include Virtus
-    include Aequitas
+    include ActiveAttr::Model
     
     include Spice::Connection::Clients
     include Spice::Connection::Cookbooks
@@ -33,13 +32,13 @@ module Spice
     # @macro [attach] attribute
     # @attribute [rw]
     # @return [$2] the $1 attribute
-    attribute :client_name, String
-    attribute :key_file, String
-    attribute :key, String
-    attribute :server_url, String
-    attribute :sign_on_redirect, Boolean, :default => true
-    attribute :sign_request, Boolean, :default => true
-    attribute :endpoint, String
+    attribute :client_name, :type => String
+    attribute :key_file, :type => String
+    attribute :key, :type => String
+    attribute :server_url, :type => String
+    attribute :sign_on_redirect, :type => Boolean, :default => true
+    attribute :sign_request, :type => Boolean, :default => true
+    attribute :endpoint, :type => String
     
     validates_presence_of :client_name, :key_file, :server_url
     

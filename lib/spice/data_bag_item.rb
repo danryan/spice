@@ -1,7 +1,6 @@
 module Spice
   class DataBagItem
-    include Virtus
-    include Aequitas
+    include ActiveAttr::Model
     include Spice::Persistence
     extend Spice::Persistence
 
@@ -11,12 +10,12 @@ module Spice
     # "id" is an attribute reserved by ToyStore, the attribute system used by Spice.
     # @attribute [rw]
     # @return [String] the _attribute
-    attribute :_id, String
+    attribute :_id, :type => String
     # @macro [attach] attribute
     # @attribute [rw]
     # @return [$2] the $1 attribute
-    attribute :data, Hash, :default => {}    
-    attribute :name, String
+    attribute :data, :type => Hash, :default => {}    
+    attribute :name, :type => String
     
     validates_presence_of :_id, :name, :data
     

@@ -2,8 +2,7 @@ require 'spice/persistence'
 
 module Spice
   class Client
-    include Virtus
-    include Aequitas
+    include ActiveAttr::Model
     include Spice::Persistence
     extend Spice::Persistence
     
@@ -12,21 +11,16 @@ module Spice
     # @macro [attach] attribute
     # @attribute [rw]
     # @return [$2] the $1 attribute
-    attribute :name, String
-    attribute :public_key, String
-    attribute :private_key, String
-    attribute :_rev, String
-    attribute :json_class, String, :default => "Chef::ApiClient"
-    attribute :admin, Boolean, :default => false
-    attribute :chef_type, String, :default => "client"
+    attribute :name, :type => String
+    attribute :public_key, :type => String
+    attribute :private_key, :type => String
+    attribute :_rev, :type => String
+    attribute :json_class, :type => String, :default => "Chef::ApiClient"
+    attribute :admin, :type => Boolean, :default => false
+    attribute :chef_type, :type => String, :default => "client"
     
     validates_presence_of :name, :json_class, :chef_type
 
-    after_create :wat
-    def wat
-      puts "WAT"
-    end
-    
     def do_post
       response = connection.post("/clients", :name => name)
       update_attributes(response.body)

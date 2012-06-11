@@ -2,8 +2,7 @@ require 'spice/persistence'
 
 module Spice
   class Node
-    include Virtus
-    include Aequitas
+    include ActiveAttr::Model
     include Spice::Persistence
     extend Spice::Persistence
 
@@ -12,14 +11,14 @@ module Spice
     # @macro [attach] attribute
     # @attribute [rw]
     # @return [$2] the $1 attribute
-    attribute :name, String
-    attribute :chef_type, String, :default => "node"
-    attribute :json_class, String, :default => "Chef::Node"
-    attribute :normal, Hash, :default => {}
-    attribute :override, Hash, :default => {}
-    attribute :default, Hash, :default => {}
-    attribute :automatic, Hash, :default => {}
-    attribute :run_list, Array, :default => []
+    attribute :name, :type => String
+    attribute :chef_type, :type => String, :default => "node"
+    attribute :json_class, :type => String, :default => "Chef::Node"
+    attribute :normal, :type => Hash, :default => {}
+    attribute :override, :type => Hash, :default => {}
+    attribute :default, :type => Hash, :default => {}
+    attribute :automatic, :type => Hash, :default => {}
+    attribute :run_list, :type => Array, :default => []
         
     validates_presence_of :name
 

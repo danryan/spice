@@ -2,8 +2,8 @@ require 'spice/persistence'
 
 module Spice
   class CookbookVersion
-    include Virtus
-    include Aequitas
+    include ActiveAttr::Model
+
     include Spice::Persistence
     extend Spice::Persistence
 
@@ -12,22 +12,22 @@ module Spice
     # @macro [attach] attribute
     # @attribute [rw]
     # @return [$2] the $1 attribute
-    attribute :name, String
-    attribute :version, String
-    attribute :definitions, Array, :default => []
-    attribute :files, Array, :default => []
-    attribute :providers, Array, :default => []
-    attribute :metadata, Hash, :default => {}
-    attribute :libraries, Array, :default => []
-    attribute :templates, Array, :default => []
-    attribute :resources, Array, :default => []
-    attribute :_attributes, Array, :default => []
-    attribute :json_class, String, :default => "Chef::CookbookVersion"
-    attribute :cookbook_name, String
-    attribute :version, String
-    attribute :recipes, Array, :default => []
-    attribute :root_files, Array, :default => []
-    attribute :chef_type, String, :default => "cookbook_version"
+    attribute :name, :type => String
+    attribute :version, :type => String
+    attribute :definitions, :type => Array, :default => []
+    attribute :files, :type => Array, :default => []
+    attribute :providers, :type => Array, :default => []
+    attribute :metadata, :type => Hash, :default => {}
+    attribute :libraries, :type => Array, :default => []
+    attribute :templates, :type => Array, :default => []
+    attribute :resources, :type => Array, :default => []
+    attribute :_attributes, :type => Array, :default => []
+    attribute :json_class, :type => String, :default => "Chef::CookbookVersion"
+    attribute :cookbook_name, :type => String
+    attribute :version, :type => String
+    attribute :recipes, :type => Array, :default => []
+    attribute :root_files, :type => Array, :default => []
+    attribute :chef_type, :type => String, :default => "cookbook_version"
     
     validates_presence_of :name
     

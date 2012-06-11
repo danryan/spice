@@ -2,8 +2,8 @@ require 'spice/persistence'
 
 module Spice
   class Cookbook
-    include Virtus
-    include Aequitas
+    include ActiveAttr::Model
+
     include Spice::Persistence
     extend Spice::Persistence
 
@@ -12,8 +12,8 @@ module Spice
     # @macro [attach] attribute
     # @attribute [rw]
     # @return [$2] the $1 attribute
-    attribute :name, String
-    attribute :versions, Array, :default => []
+    attribute :name, :type => String
+    attribute :versions, :type => Array, :default => []
 
     validates_presence_of :name
     

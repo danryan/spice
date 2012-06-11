@@ -1,6 +1,5 @@
-require 'virtus'
-require 'aequitas'
-require 'active_model/callbacks'
+require 'active_attr'
+# require 'active_model/callbacks'
 require 'active_support/core_ext/hash/deep_merge'
 require 'active_support/core_ext/hash/keys'
 require 'mixlib/authentication'
@@ -43,7 +42,7 @@ module Spice
   extend Spice::Connection::Search
     
   def connection
-    @connection ||= Connection.new(
+    Connection.new(
       :server_url => server_url,
       :client_name => client_name,
       :key_file => key_file
@@ -53,29 +52,4 @@ module Spice
   def mock
     Spice::Mock.setup_mock_client
   end
-
-  # def autoconfigure!(path=nil)
-  #   path ||= "~/.chef/"
-  #   knife = File.exist?("~/.chef/knife.rb") && File.expand_path(path + "~/.chef/knife.rb")
-  #   client = File.exist?("/etc/chef/client.rb") && File.expand_path("/etc/chef/client.rb")
-  #   
-  #   if knife
-  #     raw_config = IO.read(knife)
-  #   elsif
-  #     raw_config = IO.read(client)
-  #   end
-  #   
-  #   @values = {}
-  #   raw_config.each_line do |line|
-  #     if line =~ /^chef_server_url.*/
-  #       @values[:chef_server_url] = parse_line(line)
-  #     elsif line =~ /^node_name.*/
-  #       @values[:node_name] = parse_line(line)
-  #     elsif line =~ /^client_key.*/
-  #       @values[:client_key] = parse_line(line)
-  #     end
-  #   end
-  # end
-    
-
 end

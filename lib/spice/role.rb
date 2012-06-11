@@ -2,8 +2,8 @@ require 'spice/persistence'
 
 module Spice
   class Role
-    include Virtus
-    include Aequitas
+    include ActiveAttr::Model
+
     include Spice::Persistence
     extend Spice::Persistence
     
@@ -12,13 +12,13 @@ module Spice
     # @macro [attach] attribute
     # @attribute [rw]
     # @return [$2] the $1 attribute
-    attribute :name, String
-    attribute :description, String
-    attribute :run_list, Array, :default => []
-    attribute :default_attributes, Hash, :default => {}
-    attribute :override_attributes, Hash, :default => {}
-    attribute :json_class, String, :default => "Chef::Role"
-    attribute :chef_type, String, :default => "role"
+    attribute :name, :type => String
+    attribute :description, :type => String
+    attribute :run_list, :type => Array, :default => []
+    attribute :default_attributes, :type => Hash, :default => {}
+    attribute :override_attributes, :type => Hash, :default => {}
+    attribute :json_class, :type => String, :default => "Chef::Role"
+    attribute :chef_type, :type => String, :default => "role"
 
     validates_presence_of :name, :description
     

@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 module Spice
-  describe Client do
+  describe DataBagItem do
     
   end
 end

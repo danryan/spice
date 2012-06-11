@@ -12,6 +12,7 @@ Spork.prefork do
   require 'timecop'
   require 'fakefs'
   require 'fileutils'
+  require 'vcr'
   
   require 'spice'
   
@@ -20,10 +21,15 @@ Spork.prefork do
 
   RSpec.configure do |config|
     config.before do
+      VCR.configure do |c|
+        c.cassette_library_dir = 'vcr_cassettes'
+        c.hook_into :webmock
+      end
+      
       Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each {|f| require f}
       
       Timecop.freeze
-      Spice.mock
+      # Spice.mock
       FakeFS.activate!
     end
     config.after do

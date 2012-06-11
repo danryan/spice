@@ -7,7 +7,6 @@ module Spice
         Spice.client_name = "testclient"
         Spice.key_file = "/tmp/keyfile.pem"
         Spice.chef_version = "0.10.4"
-        Spice.connect!
       end
 
       def setup_authentication

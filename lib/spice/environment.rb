@@ -2,8 +2,7 @@ require 'spice/persistence'
 
 module Spice
   class Environment
-    include Virtus
-    include Aequitas
+    include ActiveAttr::Model
     include Spice::Persistence
     extend Spice::Persistence
 
@@ -12,12 +11,12 @@ module Spice
     # @macro [attach] attribute
     # @attribute [rw]
     # @return [$2] the $1 attribute
-    attribute :name, String
-    attribute :description, String
-    attribute :attrs, Hash, :default => {}
-    attribute :json_class, String, :default => "Chef::Environment"
-    attribute :chef_type, String, :default => "environment"
-    attribute :cookbook_versions, Hash, :default => {}
+    attribute :name, :type => String
+    attribute :description, :type => String
+    attribute :attrs, :type => Hash, :default => {}
+    attribute :json_class, :type => String, :default => "Chef::Environment"
+    attribute :chef_type, :type => String, :default => "environment"
+    attribute :cookbook_versions, :type => Hash, :default => {}
     
     validates_presence_of :name, :description
 
