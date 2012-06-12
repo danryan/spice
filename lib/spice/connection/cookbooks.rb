@@ -8,18 +8,18 @@ module Spice
       def cookbooks
         if Gem::Version.new(Spice.chef_version) >= Gem::Version.new("0.10.0")
           cookbooks = []
-          connection.get("/cookbooks").body.each_pair do |key, value|
+          get("/cookbooks").each_pair do |key, value|
             versions = value['versions'].map{ |v| v['version'] }
-            cookbooks << Spice::Cookbook.new(:name => key, :versions => versions)
+            cookbooks << Spice::Cookbook.get_or_new(:name => key, :versions => versions)
           end
           cookbooks
         else
-          connection.get("/cookbooks").body.keys.map do |cookbook|
-            attributes = connection.get("/cookbooks/#{cookbook}").body.to_a[0]
-            Spice::Cookbook.new(:name => attributes[0], :versions => attributes[1])
+          get("/cookbooks").keys.map do |cookbook|
+            attributes = get("/cookbooks/#{cookbook}").to_a[0]
+            Spice::Cookbook.get_or_new(:name => attributes[0], :versions => attributes[1])
           end
         end
-      end
+      end # def cookbooks
 
       # Retrieve a single cookbook
       # @param [String] name The name of the cookbook
@@ -27,15 +27,15 @@ module Spice
       # @raise [Spice::Error::NotFound] raised when cookbook does not exist
       def cookbook(name)
         if Gem::Version.new(Spice.chef_version) >= Gem::Version.new("0.10.0")
-          cookbook = connection.get("/cookbooks/#{name}").body
+          cookbook = get("/cookbooks/#{name}")
           versions = cookbook[name]['versions'].map{ |v| v['version'] }
 
-          Spice::Cookbook.new(:name => name, :versions => versions)
+          Spice::Cookbook.get_or_new(:name => name, :versions => versions)
         else
-          cookbook = connection.get("/cookbooks/#{name}").body
-          Spice::Cookbook.new(:name => name, :versions => cookbook[name])
+          cookbook = get("/cookbooks/#{name}")
+          Spice::Cookbook.get_or_new(:name => name, :versions => cookbook[name])
         end
-      end
+      end # def cookbook
       
       # Retrieve a single cookbook version
       # @param [String] name The cookbook name
@@ -43,11 +43,16 @@ module Spice
       # @return [Spice::CookbookVersion]
       # @raise [Spice::Error::NotFound] raised when cookbook version does not exist
       def cookbook_version(name, version)
-        attributes = connection.get("/cookbooks/#{name}/#{version}").body
+        attributes = get("/cookbooks/#{name}/#{version}")
         duped_attributes = attributes.dup
         duped_attributes[:_attributes] = attributes['attributes']
-        Spice::CookbookVersion.new(duped_attributes)
-      end
+        Spice::CookbookVersion.get_or_new(duped_attributes)
+      end # def cookbook_version
+      
+      def delete_cookbook_version(name, version)
+        delete("/cookbooks/#{name}/#{version}")
+        nil
+      end # def delete_cookbook_version
       
     end # module Cookbooks
   end # class Connection

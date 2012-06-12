@@ -21,11 +21,6 @@ Spork.prefork do
 
   RSpec.configure do |config|
     config.before do
-      VCR.configure do |c|
-        c.cassette_library_dir = 'vcr_cassettes'
-        c.hook_into :webmock
-      end
-      
       Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each {|f| require f}
       
       Timecop.freeze

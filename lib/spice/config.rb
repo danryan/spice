@@ -1,12 +1,16 @@
+require 'faraday'
+require 'spice/response/parse_json'
+require 'spice/response/client_error'
 require 'spice/version'
 
 module Spice
   module Config
+
     # The default Chef server URL
     DEFAULT_SERVER_URL = "http://localhost:4000"
     
     # The default Chef version (changing this will enable disable certain features)
-    DEFAULT_CHEF_VERSION = "0.10.8"
+    DEFAULT_CHEF_VERSION = "0.10.10"
     
     # The default Spice User-Agent header
     DEFAULT_USER_AGENT = "Spice #{Spice::VERSION}"
@@ -14,16 +18,29 @@ module Spice
     # Default connection options
     DEFAULT_CONNECTION_OPTIONS = {}
     
+    # Default client name
+    DEFAULT_CLIENT_NAME = nil
+    
+    # Default key file
+    DEFAULT_KEY_FILE = nil
+    
     # An array of valid config options
     VALID_OPTIONS_KEYS = [
       :server_url,
       :client_name,
       :key_file,
-      :raw_key,
       :chef_version,
       :user_agent,
-      :connection_options
+      :connection_options,
+      :middleware
     ]
+    
+    # Default middleware stack
+    DEFAULT_MIDDLEWARE = Proc.new do |builder|
+      builder.use Spice::Response::ParseJSON
+      builder.use Spice::Response::ClientError
+      builder.adapter Faraday.default_adapter
+    end
     
     VALID_OPTIONS_KEYS.each do |key|
       attr_accessor key
@@ -32,7 +49,7 @@ module Spice
     # Reset all config options to default when the module is extended
     def self.extended(base)
       base.reset
-    end
+    end # def self.extended
     
     # Convenience method to configure Spice in a block
     # @example Configuring spice
@@ -47,25 +64,26 @@ module Spice
     def setup
       yield self
       self
-    end
+    end # def setup
     
     # Create an options hash from valid options keys
     def options
       options = {}
       VALID_OPTIONS_KEYS.each{|k| options[k] = send(k)}
       options
-    end
+    end # def options
     
     # Reset all config options to their defaults
     def reset
-      self.user_agent = DEFAULT_USER_AGENT
-      self.server_url = DEFAULT_SERVER_URL
-      self.chef_version = DEFAULT_CHEF_VERSION
-      self.client_name = nil
-      self.key_file = nil
-      self.raw_key = nil
+      self.user_agent         = DEFAULT_USER_AGENT
+      self.server_url         = DEFAULT_SERVER_URL
+      self.chef_version       = DEFAULT_CHEF_VERSION
+      self.client_name        = DEFAULT_CLIENT_NAME
+      self.key_file           = DEFAULT_KEY_FILE
       self.connection_options = DEFAULT_CONNECTION_OPTIONS
-    end
+      self.middleware         = DEFAULT_MIDDLEWARE
+      self
+    end # def reset
     
-  end
-end
+  end # module Config
+end # module Spice

@@ -7,9 +7,9 @@ module Spice
       # @see Search#search
       # @example Retrieve all roles that start with "app_"
       #   Spice.roles(:q => "name:app_*")
-      def roles(options={})
-        connection.search('role', options)
-      end
+      def roles(options=Mash.new)
+        search('role', options)
+      end # def roles
 
       # Retrieve a single role
       # @param [String] name The role name
@@ -18,9 +18,9 @@ module Spice
       # @example Retrieve the role "app_server"
       #   Spice.role("app_server")
       def role(name)
-        attributes = connection.get("/roles/#{name}").body
+        attributes = get("/roles/#{name}")
         Spice::Role.new(attributes)
-      end
+      end # def role
 
     end # module Roles
   end # class Connection

@@ -6,11 +6,11 @@ module Spice
       # @example Retrieve all data bags
       #   Spice.data_bags
       def data_bags
-        connection.get("/data").body.keys.map do |data_bag|
-          items = connection.search(data_bag)
-          Spice::DataBag.new(:name => data_bag, :items => items)
+        get("/data").keys.map do |data_bag|
+          items = search(data_bag)
+          Spice::DataBag.get_or_new(:name => data_bag, :items => items)
         end
-      end
+      end # def data_bags
 
       alias :data :data_bags
       
@@ -19,9 +19,9 @@ module Spice
       # @return [Spice::DataBag]
       # @raise [Spice::Error::NotFound] raised when data bag does not exist
       def data_bag(name)
-        items = connection.search(name)
-        Spice::DataBag.new(:name => name, :items => items)
-      end
+        items = search(name)
+        Spice::DataBag.get_or_new(:name => name, :items => items)
+      end # def data_bag
 
       # Retrieve a single data bag item
       # @param [String] name The data bag name
@@ -29,20 +29,32 @@ module Spice
       # @return [Spice::DataBagItem]
       # @raise [Spice::Error::NotFound] raised when data bag item does not exist
       def data_bag_item(name, id)
-        data = connection.get("/data/#{name}/#{id}")
+        data = get("/data/#{name}/#{id}")
         data.delete('id')
-        Spice::DataBagItem.new(:_id => id, :data => data, :name => name)
-      end
+        Spice::DataBagItem.get_or_new(:_id => id, :data => data, :name => name)
+      end # def data_bag_item
 
-      private
-
-      def get_data_bag_items(name)
-        connection.get("/data/#{name}").body.keys.map do |id|
-          data = connection.get("/data/#{name}/#{id}").body
-          Spice::DataBagItem.new(:_id => id, :data => data, :name => name)
-        end
-      end
-
+      def create_data_bag(name)
+        attributes = post("/data", :name => name)
+        Spice::DataBag.get_or_new(:name => name, :items => [])
+      end # def create_data_bag
+      
+      def create_data_bag_item(name, params=Mash.new)
+        attributes = post("/data/#{name}", params)
+        Spice::DataBagItem.get_or_new(attributes)
+      end # def create_data_bag_item
+      
+      def update_data_bag_item(name, id, params=Mash.new)
+        params.merge!(:id => id)
+        attributes = put("/data/#{name}/#{id}", params)
+        Spice::DataBagItem.get_or_new(attributes)
+      end # update_data_bag_item
+      
+      def delete_data_bag_item(name, id)
+        delete("/data/#{name}/#{id}")
+        nil
+      end # def delete_data_bag_item
+      
     end # module DataBags
   end # class Connection
 end # module Spice
