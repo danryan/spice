@@ -1,30 +1,42 @@
 module Spice
   class Error < StandardError
-    attr_reader :http_headers
+    attr_reader :http_headers, :wrapped_exception
     
-    def initialize(message, http_headers)
-      @http_headers = Hash[http_headers]
-      super(message)
+    def initialize(exception=$!, http_headers={})
+      @http_headers = http_headers
+      if exception.respond_to?(:backtrace)
+        super(exception.message)
+        @wrapped_exception = exception
+      else
+        super(exception.to_s)
+      end
+    end
+    
+    def backtrace
+      @wrapped_exception ? @wrapped_exception.backtrace : super
     end
     
   end
   
-  class Error::BadRequest < Error
+  class Error::BadRequest < Spice::Error
   end
   
-  class Error::Unauthorized < Error
+  class Error::Unauthorized < Spice::Error
   end
   
-  class Error::Forbidden < Error
+  class Error::Forbidden < Spice::Error
   end
   
-  class Error::NotFound < Error
+  class Error::NotFound < Spice::Error
   end
   
-  class Error::NotAcceptable < Error
+  class Error::NotAcceptable < Spice::Error
   end
   
-  class Error::Conflict < Error
+  class Error::Conflict < Spice::Error
+  end
+  
+  class Error::ClientError < Spice::Error
   end
   
 end

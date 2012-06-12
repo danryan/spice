@@ -41,18 +41,18 @@ module Spice
     end
 
     def do_post
-      response = connection.post("/#{self.class.endpoint}", attributes)
+      response = post("/#{self.class.endpoint}", attributes)
       update_attributes(response.body)
-      response = connection.get("/#{self.class.endpoint}/#{name}")
+      response = get("/#{self.class.endpoint}/#{name}")
       update_attributes(response.body)
     end
 
     def do_put
-      connection.put("/#{self.class.endpoint}/#{name}", attributes)
+      put("/#{self.class.endpoint}/#{name}", attributes)
     end
 
     def do_delete
-      connection.delete("/#{self.class.endpoint}/#{name}")
+      delete("/#{self.class.endpoint}/#{name}")
     end
 
     def new_record?

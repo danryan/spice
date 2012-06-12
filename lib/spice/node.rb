@@ -1,39 +1,19 @@
-require 'spice/persistence'
+require 'spice/base'
 
 module Spice
-  class Node
-    include ActiveAttr::Model
-    include Spice::Persistence
-    extend Spice::Persistence
+  class Node < Base
+    attr_reader :name, :normal, :override, :default, :automatic, :run_list,
+      :json_class, :_rev, :chef_type, :chef_environment, :attributes, 
+      :overrides, :defaults
 
-    endpoint "nodes"
-    
-    # @macro [attach] attribute
-    # @attribute [rw]
-    # @return [$2] the $1 attribute
-    attribute :name, :type => String
-    attribute :chef_type, :type => String, :default => "node"
-    attribute :json_class, :type => String, :default => "Chef::Node"
-    attribute :normal, :type => Hash, :default => {}
-    attribute :override, :type => Hash, :default => {}
-    attribute :default, :type => Hash, :default => {}
-    attribute :automatic, :type => Hash, :default => {}
-    attribute :run_list, :type => Array, :default => []
-        
-    validates_presence_of :name
+    def initialize(attrs=Mash.new)
+      super
+      @attrs['json_class'] ||= "Chef::Node"
+      @attrs['chef_type'] ||= 'node'
+      @attrs['attributes'] ||= Mash.new
+      @attrs['overrides'] ||= Mash.new
+      @attrs['run_list'] ||= []
+    end
 
-    def self.get(name)
-      connection.node(name)
-    end
-    
-    # Check if the node exists on the Chef server
-    def new_record?
-      begin
-        connection.get("/nodes/#{name}")
-        return false
-      rescue Spice::Error::NotFound
-        return true
-      end
-    end
   end
 end

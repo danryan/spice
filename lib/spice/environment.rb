@@ -1,31 +1,17 @@
-require 'spice/persistence'
+require 'spice/base'
 
 module Spice
-  class Environment
-    include ActiveAttr::Model
-    include Spice::Persistence
-    extend Spice::Persistence
-
-    endpoint "environments"
-    
-    # @macro [attach] attribute
-    # @attribute [rw]
-    # @return [$2] the $1 attribute
-    attribute :name, :type => String
-    attribute :description, :type => String
-    attribute :attrs, :type => Hash, :default => {}
-    attribute :json_class, :type => String, :default => "Chef::Environment"
-    attribute :chef_type, :type => String, :default => "environment"
-    attribute :cookbook_versions, :type => Hash, :default => {}
-    
-    validates_presence_of :name, :description
-
-    # Check if the environment exists on the Chef server
-    def new_record?
-      connection.get("/environments/#{name}")
-      return false
-    rescue Spice::Error::NotFound
-      return true
+  class Environment < Base
+    attr_reader :name, :description, :attributes, :cookbook_versions, 
+      :chef_type, :json_class
+      
+    def json_class
+      @json_class ||= "Chef::Environment"
     end
+
+    def chef_type
+      @chef_type ||= 'environment'
+    end 
+
   end
 end

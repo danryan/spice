@@ -6,19 +6,17 @@ Gem::Specification.new do |s|
   s.name        = "spice"
   s.version     = Spice::VERSION
   s.platform    = Gem::Platform::RUBY
-  s.authors     = ["Dan Ryan"]
-  s.email       = ["hi@iamdanryan.com"]
-  s.homepage    = "http://github.com/danryan/spice"
+  s.authors     = [ "Dan Ryan" ]
+  s.email       = [ "hi@iamdanryan.com" ]
+  s.homepage    = "https://github.com/danryan/spice"
   s.summary     = %q{Chef API wrapper}
   s.description = %q{Spice is a zesty Chef API wrapper. Its primary purpose is to let you easily integrate your apps with a Chef server easily.  Spice provides support for the entire released Chef API}
 
   s.rubyforge_project = "spice"
-  s.add_dependency "active_attr", ">= 0.5.1"
-  s.add_dependency "activesupport"
-  s.add_dependency "faraday", ">= 0.7.6"
+  s.add_dependency "faraday", "~> 0.8.0"
   s.add_dependency "mixlib-authentication", '>= 1.1.4'
   s.add_dependency "yajl-ruby", '>= 1.1.0'
-  
+
   s.add_development_dependency 'rspec', '>= 2.8.0'
   s.add_development_dependency "webmock", ">= 1.8.2"
   s.add_development_dependency "timecop", ">= 0.3.5"
