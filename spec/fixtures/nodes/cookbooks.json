@@ -1,0 +1,41 @@
+{
+  "unicorn": {
+    "definitions": [
+      {
+        "name": "unicorn_config.rb",
+        "uri": "http://localhost:4000/cookbooks/unicorn/definitions?id=unicorn_config.rb",
+        "checksum": "72074229598611d7a6cdcc8176ffb76748adb4127be3a9651c89bb0afab6498f"
+      }
+    ],
+    "files": [
+ 
+    ],
+    "providers": [
+ 
+    ],
+    "templates": [
+      {
+        "name": "unicorn.rb.erb",
+        "uri": "http://localhost:4000/cookbooks/unicorn/templates?id=unicorn.rb.erb",
+        "checksum": "c1df9c8ec2bda7b14ecadc1c5a56802442cd8d7503f2524d4fa3f73dba1a1250",
+        "specificity": "default"
+      }
+    ],
+    "libraries": [
+ 
+    ],
+    "resources": [
+ 
+    ],
+    "attributes": [
+ 
+    ],
+    "recipes": [
+      {
+        "name": "default.rb",
+        "uri": "http://localhost:4000/cookbooks/unicorn/recipes?id=default.rb",
+        "checksum": "87a3f720bf5bbd9227228ba22946436db6598a59f8aedff37515ebd4e1157644"
+      }
+    ]
+  }
+}

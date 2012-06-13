@@ -10,9 +10,8 @@ Spork.prefork do
   require 'rspec'
   require 'webmock/rspec'
   require 'timecop'
-  require 'fakefs'
+  # require 'fakefs'
   require 'fileutils'
-  require 'vcr'
   
   require 'spice'
   
@@ -25,16 +24,17 @@ Spork.prefork do
       
       Timecop.freeze
       # Spice.mock
-      FakeFS.activate!
+      # FakeFS.activate!
     end
     config.after do
       Timecop.return
-      FakeFS.deactivate!
+      # FakeFS.deactivate!
     end
   end
 end
 
 Spork.each_run do
   require 'spice'
+  require File.expand_path("../support/helpers.rb", __FILE__)
   # This code will be run each time you run your specs.
 end

@@ -1,0 +1,8 @@
+{
+  "name": "monkeypants",
+  "chef_type": "client",
+  "json_class": "Chef::ApiClient",
+  "public_key": "RSA PUBLIC KEY",
+  "_rev": "1-68532bf2122a54464db6ad65a24e2225",
+  "admin": true
+}

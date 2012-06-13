@@ -1,0 +1,8 @@
+{
+  "name": "dev",
+  "attributes": {},
+  "json_class": "Chef::Environment",
+  "description": "",
+  "cookbook_versions": {},
+  "chef_type": "environment"
+}

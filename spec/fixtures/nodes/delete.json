@@ -1,0 +1,17 @@
+{
+  "overrides": {
+ 
+  },
+  "name": "latte",
+  "chef_type": "node",
+  "json_class": "Chef::Node",
+  "attributes": {
+    "hardware_type": "laptop"
+  },
+  "run_list": [
+    "recipe[apache2]"
+  ],
+  "defaults": {
+ 
+  }
+}

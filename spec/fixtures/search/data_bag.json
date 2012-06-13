@@ -1,0 +1,1 @@
+{"total":1,"start":0,"rows":[{"chef_type":"data_bag_item","data_bag":"users","name":"data_bag_item_users_adam","json_class":"Chef::DataBagItem","raw_data":{"id":"adam","real_name":"Adam Jacob"},"_rev":"1-fd9bfe8b8b5367bc441cf07a06578126"}]}

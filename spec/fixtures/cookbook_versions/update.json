@@ -1,0 +1,62 @@
+{ "attributes" : [  ],
+  "chef_type" : "cookbook_version",
+  "cookbook_name" : "unicorn",
+  "definitions" : [ { "checksum" : "c92b659171552e896074caa58dada0c2",
+        "name" : "unicorn_config.rb",
+        "path" : "definitions/unicorn_config.rb",
+        "specificity" : "default"
+      } ],
+  "files" : [  ],
+  "json_class" : "Chef::CookbookVersion",
+  "libraries" : [  ],
+  "metadata" : { "attributes" : {  },
+      "conflicting" : {  },
+      "dependencies" : { "ruby" : [  ],
+          "rubygems" : [  ]
+        },
+      "description" : "Installs/Configures unicorn",
+      "groupings" : {  },
+      "license" : "Apache 2.0",
+      "long_description" : "= LICENSE AND AUTHOR:\n\nAuthor:: Adam Jacob <adam@opscode.com>\n\nCopyright 2009-2010, Opscode, Inc.\n\nLicensed under the Apache License, Version 2.0 (...)",
+      "maintainer" : "Opscode, Inc",
+      "maintainer_email" : "ops@opscode.com",
+      "name" : "unicorn",
+      "platforms" : {  },
+      "providing" : {  },
+      "recipes" : { "unicorn" : "Installs unicorn rubygem" },
+      "recommendations" : {  },
+      "replacing" : {  },
+      "suggestions" : {  },
+      "version" : "0.1.2"
+    },
+  "name" : "unicorn-0.1.2",
+  "providers" : [  ],
+  "recipes" : [ { "checksum" : "ba0dadcbca26710a521e0e3160cc5e20",
+        "name" : "default.rb",
+        "path" : "recipes/default.rb",
+        "specificity" : "default"
+      } ],
+  "resources" : [  ],
+  "root_files" : [ { "checksum" : "d18c630c8a68ffa4852d13214d0525a6",
+        "name" : "README.rdoc",
+        "path" : "README.rdoc",
+        "specificity" : "default"
+      },
+      { "checksum" : "967087a09f48f234028d3aa27a094882",
+        "name" : "metadata.rb",
+        "path" : "metadata.rb",
+        "specificity" : "default"
+      },
+      { "checksum" : "45b27c78955f6a738d2d42d88056c57c",
+        "name" : "metadata.json",
+        "path" : "metadata.json",
+        "specificity" : "default"
+      }
+    ],
+  "templates" : [ { "checksum" : "36a1cc1b225708db96d48026c3f624b2",
+        "name" : "unicorn.rb.erb",
+        "path" : "templates/default/unicorn.rb.erb",
+        "specificity" : "default"
+      } ],
+  "version" : "0.1.2"
+}
