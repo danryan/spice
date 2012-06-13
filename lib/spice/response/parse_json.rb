@@ -1,5 +1,5 @@
 require 'faraday'
-require 'yajl'
+require 'multi_json'
 
 module Spice
   module Response
@@ -14,7 +14,7 @@ module Spice
         when 'false'
           false
         else
-          Yajl.load(body)
+          MultiJson.load(body)
         end
       end # def parse
       

@@ -15,19 +15,11 @@ Gem::Specification.new do |s|
   s.rubyforge_project = "spice"
   s.add_dependency "faraday", "~> 0.8.0"
   s.add_dependency "mixlib-authentication", '>= 1.1.4'
-  s.add_dependency "yajl-ruby", '>= 1.1.0'
-  s.add_dependency "fakefs"
+  s.add_dependency "multi_json", '~> 1.3.6'
   
-  s.add_development_dependency 'simplecov'
   s.add_development_dependency 'rspec', '>= 2.8.0'
   s.add_development_dependency "webmock", ">= 1.8.2"
   s.add_development_dependency "timecop", ">= 0.3.5"
-  s.add_development_dependency 'guard', '>= 1.0.1'
-  s.add_development_dependency 'guard-rspec', '>= 0.6.0'
-  s.add_development_dependency 'guard-spork', '>= 0.5.2'
-  s.add_development_dependency 'spork', '>= 1.0.0.rc2'
-  s.add_development_dependency 'rb-fsevent', '>= 0.9.0'
-  s.add_development_dependency 'growl', '>= 1.0.3'
   
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- spec/*`.split("\n")

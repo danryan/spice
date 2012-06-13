@@ -43,7 +43,7 @@ module Spice
     end
 
     def request(method, path, params, options)
-      json_params = params ? Yajl.dump(params) : ""
+      json_params = params ? MultiJson.dump(params) : ""
       uri = server_url
       uri = URI(uri) unless uri.respond_to?(:host)
       uri += path
@@ -71,16 +71,10 @@ module Spice
       end
       
       if options[:json]
-        return Yajl.dump(response.body)
+        return MultiJson.dump(response.body)
       end
       
       return response.body
-      # options[:raw] ? response : response.body
-      
-      # File.open(File.expand_path("../../../spec/fixtures/#{path.gsub(/\?.*/, '')}.json", __FILE__), "w") do |f|
-      #   f.write Yajl.dump(response.body)
-      # end
-      # 
     rescue Faraday::Error::ClientError
       raise Spice::Error::ClientError
     end
