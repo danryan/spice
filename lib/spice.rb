@@ -44,7 +44,7 @@ module Spice
       end_rsa   = "-----END RSA PRIVATE KEY-----"
       
       unless (raw_key =~ /\A#{begin_rsa}$/) && (raw_key =~ /^#{end_rsa}\Z/)
-        msg = "The file #{key_file} is not a properly formatted private key.\n"
+        msg = "The file #{key_file_path} is not a properly formatted private key.\n"
         msg << "It must contain '#{begin_rsa}' and '#{end_rsa}'"
         raise ArgumentError, msg
       end
