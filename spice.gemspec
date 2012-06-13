@@ -16,7 +16,9 @@ Gem::Specification.new do |s|
   s.add_dependency "faraday", "~> 0.8.0"
   s.add_dependency "mixlib-authentication", '>= 1.1.4'
   s.add_dependency "yajl-ruby", '>= 1.1.0'
-
+  s.add_dependency "fakefs"
+  
+  s.add_development_dependency 'simplecov'
   s.add_development_dependency 'rspec', '>= 2.8.0'
   s.add_development_dependency "webmock", ">= 1.8.2"
   s.add_development_dependency "timecop", ">= 0.3.5"

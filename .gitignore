@@ -7,3 +7,5 @@ doc/**/*
 .yardoc/*
 Gemfile.lock
 fixture.rb
+coverage
+wiki

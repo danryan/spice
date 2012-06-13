@@ -8,15 +8,15 @@ module Spice
       def cookbooks
         if Gem::Version.new(Spice.chef_version) >= Gem::Version.new("0.10.0")
           cookbooks = []
-          get("/cookbooks").each_pair do |key, value|
+          get("/cookbooks?num_versions=all").each_pair do |key, value|
             versions = value['versions'].map{ |v| v['version'] }
             cookbooks << Spice::Cookbook.get_or_new(:name => key, :versions => versions)
           end
           cookbooks
         else
           get("/cookbooks").keys.map do |cookbook|
-            attributes = get("/cookbooks/#{cookbook}").to_a[0]
-            Spice::Cookbook.get_or_new(:name => attributes[0], :versions => attributes[1])
+            cb = get("/cookbooks/#{cookbook}")
+            Spice::Cookbook.get_or_new(:name => cookbook, :versions => cb[cookbook])
           end
         end
       end # def cookbooks

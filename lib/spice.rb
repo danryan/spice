@@ -3,8 +3,6 @@ require 'spice/core_ext/mash'
 require 'spice/config'
 require 'spice/connection'
 
-require 'spice/mock'
-
 module Spice
   extend Spice::Config
   
@@ -27,8 +25,32 @@ module Spice
     end # def respond_to?
     
     def mock
-      Spice::Mock.setup_mock_client
+      Spice.server_url = 'http://localhost:4000'
+      Spice.client_name = "testclient"
+      Spice.client_key = Spice.read_key_file(File.expand_path("../../spec/fixtures/client.pem", __FILE__))
+      Spice.chef_version = "0.10.10"
+      self
     end # def mock
-  end
-end
+    
+    def read_key_file(key_file_path)
+
+      begin
+        raw_key = File.read(key_file_path).strip
+      rescue SystemCallError, IOError => e
+        raise IOError, "Unable to read #{key_file_path}"
+      end
+      
+      begin_rsa = "-----BEGIN RSA PRIVATE KEY-----"
+      end_rsa   = "-----END RSA PRIVATE KEY-----"
+      
+      unless (raw_key =~ /\A#{begin_rsa}$/) && (raw_key =~ /^#{end_rsa}\Z/)
+        msg = "The file #{key_file} is not a properly formatted private key.\n"
+        msg << "It must contain '#{begin_rsa}' and '#{end_rsa}'"
+        raise ArgumentError, msg
+      end
+      return OpenSSL::PKey::RSA.new(raw_key)
+    end # def read_key_file
+    
+  end # class << self
+end # module Spice
 

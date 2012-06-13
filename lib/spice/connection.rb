@@ -33,8 +33,12 @@ module Spice
     include Spice::Connection::Search
     include Spice::Request
     include Spice::Authentication
-        
-    attr_accessor *Config::VALID_OPTIONS_KEYS
+      
+    # @private
+    
+    Config::VALID_OPTIONS_KEYS.each do |key|
+      attr_accessor key
+    end
     
     def initialize(attrs=Mash.new)
       attrs = Spice.options.merge(attrs)

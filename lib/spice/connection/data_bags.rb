@@ -29,9 +29,8 @@ module Spice
       # @return [Spice::DataBagItem]
       # @raise [Spice::Error::NotFound] raised when data bag item does not exist
       def data_bag_item(name, id)
-        data = get("/data/#{name}/#{id}")
-        data.delete('id')
-        Spice::DataBagItem.get_or_new(:_id => id, :data => data, :name => name)
+        data_bag_item = get("/data/#{name}/#{id}")
+        Spice::DataBagItem.get_or_new(data_bag_item)
       end # def data_bag_item
 
       def create_data_bag(name)

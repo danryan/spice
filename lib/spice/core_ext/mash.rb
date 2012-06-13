@@ -53,7 +53,7 @@ class Mash < Hash
   # @param constructor<Object>
   #   The default value for the mash. Defaults to an empty hash.
   #
-  # @details [Alternatives]
+  #  [Alternatives]
   #   If constructor is a Hash, a new mash will be created based on the keys of
   #   the hash and no default value will be set.
   def initialize(constructor = {})
@@ -81,7 +81,7 @@ class Mash < Hash
 
   # @param key<Object> The default value for the mash. Defaults to nil.
   #
-  # @details [Alternatives]
+  #  [Alternatives]
   #   If key is a Symbol and it is a key in the mash, then the default value will
   #   be set to the value matching the key.
   def default(key = nil)
@@ -130,14 +130,14 @@ class Mash < Hash
   alias_method :member?, :key?
 
   # @param key<Object> The key to fetch. This will be run through convert_key.
-  # @param *extras<Array> Default value.
+  # @param extras<Array> Default value.
   #
   # @return [Object] The value at key or the default value.
   def fetch(key, *extras)
     super(convert_key(key), *extras)
   end
 
-  # @param *indices<Array>
+  # @param indices<Array>
   #   The keys to retrieve values for. These will be run through +convert_key+.
   #
   # @return [Array] The values at each of the provided keys
@@ -158,8 +158,6 @@ class Mash < Hash
     super(convert_key(key))
   end
 
-  # @param *rejected<Array[(String, Symbol)] The mash keys to exclude.
-  #
   # @return [Mash] A new mash without the selected keys.
   #
   # @example
@@ -196,10 +194,6 @@ class Mash < Hash
 
   protected
   # @param key<Object> The key to convert.
-  #
-  # @param [Object]
-  #   The converted key. If the key was a symbol, it will be converted to a
-  #   string.
   #
   # @api private
   def convert_key(key)

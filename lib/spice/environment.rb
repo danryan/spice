@@ -5,13 +5,13 @@ module Spice
     attr_reader :name, :description, :attributes, :cookbook_versions, 
       :chef_type, :json_class
       
-    def json_class
-      @json_class ||= "Chef::Environment"
+    def initialize(attrs=Mash.new)
+      super
+      @attrs['json_class'] ||= "Chef::Environment"
+      @attrs['chef_type'] ||= "environment"
+      @attrs['attributes'] ||= Mash.new
+      @attrs['cookbook_version'] ||= Mash.new
     end
-
-    def chef_type
-      @chef_type ||= 'environment'
-    end 
 
   end
 end

@@ -23,6 +23,7 @@ Bundler.require(:doc)
 desc "Generate documentation"
 YARD::Rake::YardocTask.new do |t|
   t.files = [ 'lib/**/*.rb' ]
+  # t.options = [ "-M redcarpet" ]
 end
 
 desc "Generate docs"

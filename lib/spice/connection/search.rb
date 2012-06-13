@@ -8,6 +8,7 @@ module Spice
       # @option options [Numeric] :start The number by which to offset the results
       # @option options [Numeric] :rows The maximum number of rows to return
       def search(index, options=Mash.new)
+        index = index.to_s
         options = {:q => options} if options.is_a? String
         options.symbolize_keys!
 

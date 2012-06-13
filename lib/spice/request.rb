@@ -32,26 +32,30 @@ module Spice
         :headers => {
           :accept => 'application/json',
           :content_type => 'application/json',
-          :user_agent => Spice.user_agent
+          :user_agent => user_agent
         }
       }
       
-      options = default_options.deep_merge(Spice.connection_options)
+      options = default_options.deep_merge(connection_options)
       
       # @connection = Faraday.new(Spice.server_url, options, &Spice.middleware)
-      Faraday.new(Spice.server_url, options, &Spice.middleware)
+      Faraday.new(server_url, options, &middleware)
     end
 
     def request(method, path, params, options)
       json_params = params ? Yajl.dump(params) : ""
-      uri = Spice.server_url
+      uri = server_url
       uri = URI(uri) unless uri.respond_to?(:host)
       uri += path
       
       headers = signature_headers(method.to_sym.upcase, uri.path, json_params)
-      
+      # puts headers.inspect
+      # puts client_key.inspect
       response = connection.run_request(method.to_sym, path, nil, headers) do |request|
         request.options[:raw] = true if options[:raw]
+        
+        # puts request.inspect
+        
         unless params.nil?
           if request.method == :post || :put
             request.body = json_params
@@ -64,6 +68,10 @@ module Spice
 
       options[:raw] ? response : response.body
       
+      # File.open(File.expand_path("../../../spec/fixtures/#{path.gsub(/\?.*/, '')}.json", __FILE__), "w") do |f|
+      #   f.write Yajl.dump(response.body)
+      # end
+      # 
     rescue Faraday::Error::ClientError
       raise Spice::Error::ClientError
     end

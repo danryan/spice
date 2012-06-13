@@ -19,16 +19,17 @@ module Spice
     DEFAULT_CONNECTION_OPTIONS = {}
     
     # Default client name
-    DEFAULT_CLIENT_NAME = nil
+    DEFAULT_CLIENT_NAME = ""
     
     # Default key file
-    DEFAULT_KEY_FILE = nil
+    DEFAULT_CLIENT_KEY = ""
     
     # An array of valid config options
+    
     VALID_OPTIONS_KEYS = [
       :server_url,
       :client_name,
-      :key_file,
+      :client_key,
       :chef_version,
       :user_agent,
       :connection_options,
@@ -56,11 +57,10 @@ module Spice
     #   Spice.setup do |s|
     #     s.server_url  = "http://chef.example.com:4000"
     #     s.client_name = "admin"
-    #     s.key_file    = "/home/admin/.chef/admin.pem"
+    #     s.client_key    = Spice.read_key_file("/path/to/key_file.pem")
     #   end
     # @yieldparam Spice
-    # @yieldreturn Spice    
-    
+    # @yieldreturn Spice
     def setup
       yield self
       self
@@ -79,7 +79,7 @@ module Spice
       self.server_url         = DEFAULT_SERVER_URL
       self.chef_version       = DEFAULT_CHEF_VERSION
       self.client_name        = DEFAULT_CLIENT_NAME
-      self.key_file           = DEFAULT_KEY_FILE
+      self.client_key         = DEFAULT_CLIENT_KEY
       self.connection_options = DEFAULT_CONNECTION_OPTIONS
       self.middleware         = DEFAULT_MIDDLEWARE
       self
