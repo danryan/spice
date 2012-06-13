@@ -7,3 +7,7 @@ rvm:
   - rbx-18mode
   - rbx-19mode
 bundler_args: --without doc
+script: "bundle exec rake spec:ci"
+branches:
+  only:
+    - master
