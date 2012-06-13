@@ -20,5 +20,9 @@ group :local do
   gem 'simplecov'
 end
 
+# JSON
 gem 'json', :platform => :jruby
 gem 'yajl-ruby', :platform => [ :ruby_18, :ruby_19 ]
+
+# OpenSSL
+gem 'jruby-openssl', :platform => :jruby
