@@ -48,7 +48,7 @@ module Spice
       uri = URI(uri) unless uri.respond_to?(:host)
       uri += path
       
-      headers = signature_headers(method.to_sym.upcase, uri.path, json_params)
+      headers = signature_headers(method.to_s.upcase.to_sym, uri.path, json_params)
       # puts headers.inspect
       # puts client_key.inspect
       response = connection.run_request(method.to_sym, path, nil, headers) do |request|
