@@ -26,3 +26,4 @@ gem 'yajl-ruby', :platform => [ :ruby_18, :ruby_19 ]
 
 # OpenSSL
 gem 'jruby-openssl', :platform => :jruby
+
