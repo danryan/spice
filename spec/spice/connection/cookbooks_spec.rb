@@ -82,5 +82,4 @@ describe Spice::Connection do
     end   
 
   end
-  
 end
