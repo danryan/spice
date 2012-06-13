@@ -7,19 +7,19 @@ require 'spice/core_ext/hash'
 module Spice
   module Request
     
-    def get(path, params=nil, options=Mash.new)
+    def get(path, params={}, options=Mash.new)
       request(:get, path, params, options)
     end
     
-    def post(path, params=nil, options=Mash.new)
+    def post(path, params={}, options=Mash.new)
       request(:post, path, params, options)
     end
     
-    def put(path, params=nil, options=Mash.new)
+    def put(path, params={}, options=Mash.new)
       request(:put, path, params, options)
     end
     
-    def delete(path, params=nil, options=Mash.new)
+    def delete(path, params={}, options=Mash.new)
       request(:delete, path, params, options)
     end
     
@@ -66,7 +66,16 @@ module Spice
         yield request if block_given?
       end
 
-      options[:raw] ? response : response.body
+      if options[:raw]
+        return response
+      end
+      
+      if options[:json]
+        return Yajl.dump(response.body)
+      end
+      
+      return response.body
+      # options[:raw] ? response : response.body
       
       # File.open(File.expand_path("../../../spec/fixtures/#{path.gsub(/\?.*/, '')}.json", __FILE__), "w") do |f|
       #   f.write Yajl.dump(response.body)

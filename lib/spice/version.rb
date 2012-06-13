@@ -1,3 +1,3 @@
 module Spice
-  VERSION = "1.0.0.rc"
+  VERSION = "1.0.0"
 end

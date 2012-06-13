@@ -18,12 +18,11 @@ task :spork do
   sh %{bundle exec spork}
 end
 
-
 Bundler.require(:doc)
 desc "Generate documentation"
 YARD::Rake::YardocTask.new do |t|
   t.files = [ 'lib/**/*.rb' ]
-  # t.options = [ "-M redcarpet" ]
+  t.options = [ "--markup-provider=redcarpet", "--markup=markdown" ]
 end
 
 desc "Generate docs"

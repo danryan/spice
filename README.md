@@ -24,7 +24,7 @@ Explicitly setting a `host`, `port`, and `scheme` value has been removed in favo
 
 ### Hat tip
 
-The design and organization of Spice is very heavily inspired by the [Spice gem](http://github.com/jnunemaker/twitter). Mad props to those folks.
+The design and organization of Spice is very heavily inspired by the [Twitter gem](http://github.com/jnunemaker/twitter). Mad props to those folks.
 
 ## Contributing to spice
  
