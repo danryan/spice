@@ -1,0 +1,9 @@
+{
+  "name": "Spice",
+  "twitter": [
+    "iamdanryan"
+  ],
+  "google_analytics": "UA-8670854-16",
+  "travis": true,
+  "issues": true
+}
