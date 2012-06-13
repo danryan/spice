@@ -1,3 +1,11 @@
+# Release Notes - Spice - Version 1.0.2
+
+* Fixed issue with bad variable when checking the format of a client key.
+
+# Release Notes - Spice - Version 1.0.1
+
+* Fixed an incompatibility with JRuby and Yajl by switching to MultiJson.
+
 # Release Notes - Spice - Version 1.0.0
 
 * Note: this version of Spice is a major version bump, which means it is *not* backwards-compatible with previous versions.
