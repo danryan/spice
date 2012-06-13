@@ -21,7 +21,7 @@ group :local do
 end
 
 # JSON
-gem 'json', :platform => :jruby
+# gem 'json', :platform => :jruby
 gem 'yajl-ruby', :platform => [ :ruby_18, :ruby_19 ]
 
 # OpenSSL
