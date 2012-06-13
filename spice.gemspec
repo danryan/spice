@@ -20,6 +20,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'rspec', '>= 2.8.0'
   s.add_development_dependency "webmock", ">= 1.8.2"
   s.add_development_dependency "timecop", ">= 0.3.5"
+  s.add_development_dependency 'spork', '>= 1.0.0.rc2'
   
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- spec/*`.split("\n")
