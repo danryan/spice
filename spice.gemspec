@@ -11,6 +11,7 @@ Gem::Specification.new do |s|
   s.homepage    = "https://github.com/danryan/spice"
   s.summary     = %q{Chef API wrapper}
   s.description = %q{Spice is a zesty Chef API wrapper. Its primary purpose is to let you easily integrate your apps with a Chef server easily.  Spice provides support for the entire released Chef API}
+  s.license     = "MIT"
 
   s.rubyforge_project = "spice"
   s.add_dependency "faraday", "~> 0.8.0"
