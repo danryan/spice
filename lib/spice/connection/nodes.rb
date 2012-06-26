@@ -25,12 +25,11 @@ module Spice
       end # def node
 
       alias :get_node :node
-      
+
       def create_node(params=Mash.new)
         node = Spice::Node.new(params)
-        node_attributes = post("/nodes", node.to_hash)
-        get_node("/nodes/#{node.name}")
-        Spice::Node.get_or_new(attributes)
+        post("/nodes", node.attrs)
+        get_node(node.name)
       end # def create_node
 
       # TODO(dryan): be able to update a node
