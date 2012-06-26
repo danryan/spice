@@ -32,14 +32,13 @@ module Spice
         get_node(node.name)
       end # def create_node
 
-      # TODO(dryan): be able to update a node
-      # def update_node(params=Mash.new)
-      #   node = Spice::Node.new(params)
-      #   node.attrs.update get_node(node.name)
-      #   attributes = put("/nodes/#{node.name}", node.attrs)
-      #   Spice::Node.get_or_new(attributes)
-      # end
-      
+      def update_node(params=Mash.new)
+        node = get_node(params[:name])
+        node.attrs.update Spice::Node.new(params)
+        put("/nodes/#{node.name}", node.attrs)
+        get_node(node.name)
+      end
+
     end # module Nodes
   end # class Connection
 end # module Spice
