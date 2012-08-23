@@ -25,7 +25,7 @@ module Spice
     end # def respond_to?
     
     def mock
-      Spice.server_url = 'http://localhost:4000'
+      Spice.server_url = 'http://localhost:4000/organizations/spice'
       Spice.client_name = "testclient"
       Spice.client_key = Spice.read_key_file(File.expand_path("../../spec/fixtures/client.pem", __FILE__))
       Spice.chef_version = "0.10.10"
