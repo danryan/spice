@@ -46,12 +46,13 @@ module Spice
       json_params = params ? MultiJson.dump(params) : ""
       uri = server_url
       uri = URI(uri) unless uri.respond_to?(:host)
-      uri += path
-      
-      headers = signature_headers(method.to_s.upcase.to_sym, uri.path, json_params)
+      full_path = uri.path + URI(path).path
+      full_path_and_params = uri.path + path
+
+      headers = signature_headers(method.to_s.upcase.to_sym, full_path, json_params)
       # puts headers.inspect
       # puts client_key.inspect
-      response = connection.run_request(method.to_sym, path, nil, headers) do |request|
+      response = connection.run_request(method.to_sym, full_path_and_params, nil, headers) do |request|
         request.options[:raw] = true if options[:raw]
         
         # puts request.inspect
