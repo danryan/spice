@@ -1,3 +1,8 @@
+# Release Notes - Spice - Version 1.0.4
+
+* Fix hosted Chef usage - https://github.com/danryan/spice/pull/23
+* 
+
 # Release Notes - Spice - Version 1.0.3
 
 * Fix create_node method. This was throwing a Spice::Error::NotFound exception because it was generating a wrong path (/nodes//nodes/...). The get_node() call at the end of the method returns the full node object. If just the attributes were used to create the node object, many things were missing.
