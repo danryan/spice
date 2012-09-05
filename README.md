@@ -2,7 +2,7 @@
 
 Spice lets you easily integrate your apps with a [Chef](http://opscode.com/chef) server. Spice provides support for the [Chef API](http://wiki.opscode.com/display/chef/Server+API)
 
-## Installation
+### Installation
 
 Install this beast via Rubygems:
 
@@ -10,7 +10,7 @@ Install this beast via Rubygems:
     
 Of course, You can always grab the source from http://github.com/danryan/spice.
 
-## Usage
+### Usage
 
 For configuration and usage patterns, [check out the wiki.](https://github.com/danryan/spice/wiki)
 
@@ -28,7 +28,7 @@ Explicitly setting a `host`, `port`, and `scheme` value has been removed in favo
 
 The design and organization of Spice is very heavily inspired by the [Twitter gem](http://github.com/jnunemaker/twitter). Mad props to those folks.
 
-## Contributing to spice
+### Contributing to spice
  
 * Check out the latest master to make sure the feature hasn't been implemented or the bug hasn't been fixed yet
 * Check out the issue tracker to make sure someone already hasn't requested it and/or contributed it
@@ -38,8 +38,9 @@ The design and organization of Spice is very heavily inspired by the [Twitter ge
 * Make sure to add tests for it. This is important so I don't break it in a future version unintentionally.
 * Please try not to mess with the Rakefile, version, or history. If you want to have your own version, or is otherwise necessary, that is fine, but please isolate to its own commit so I can cherry-pick around it.
 
-## Copyright
+### Copyright
 
 Copyright (c) 2011 Dan Ryan. See LICENSE.txt for
 further details.
 
+Chef and related trademarks are Copyright (c) 2008-2012 Opscode, Inc. Chef is released under the Apache 2.0 license.
