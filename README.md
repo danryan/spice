@@ -10,6 +10,10 @@ Install this beast via Rubygems:
     
 Of course, You can always grab the source from http://github.com/danryan/spice.
 
+## Usage
+
+For configuration and usage patterns, [check out the wiki.](https://github.com/danryan/spice/wiki)
+
 ### Deprecation notice
 
 Explicitly setting a `host`, `port`, and `scheme` value has been removed in favor of setting a single variable, `server_url`, which matches the format of Chef's client config parameter, `chef_server_url`.
