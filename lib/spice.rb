@@ -32,8 +32,9 @@ module Spice
       self
     end # def mock
     
-    def read_key_file(key_file_path)
-
+    def read_key_file(path)
+      key_file_path = File.expand_path(path)
+      
       begin
         raw_key = File.read(key_file_path).strip
       rescue SystemCallError, IOError => e
