@@ -1,3 +1,7 @@
+# Release Notes - Spice - Version 1.0.6
+
+* Passing a string for the client key is now valid, as it should have been for a while.
+
 # Release Notes - Spice - Version 1.0.5
 
 * `mixlib-authentication` introduced a breaking change in their bump to 1.3.0. Pinned mixlib-auth to 1.1.4 so Spice works again.
