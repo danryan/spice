@@ -42,6 +42,11 @@ module Spice
     
     def initialize(attrs=Mash.new)
       attrs = Spice.options.merge(attrs)
+
+      unless attrs[:client_key].is_a?(OpenSSL::PKey::RSA)
+        attrs[:client_key] = OpenSSL::PKey::RSA.new(attrs[:client_key])
+      end
+      
       Config::VALID_OPTIONS_KEYS.each do |key|
         instance_variable_set("@#{key}".to_sym, attrs[key])
       end
