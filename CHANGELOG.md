@@ -1,3 +1,8 @@
+# Release Notes - Spice - Version 1.0.5
+
+* `mixlib-authentication` introduced a breaking change in their bump to 1.3.0. Pinned mixlib-auth to 1.1.4 so Spice works again.
+* `Spice.read_key_file` can now parse a relative path
+
 # Release Notes - Spice - Version 1.0.4
 
 * Fix hosted Chef usage - https://github.com/danryan/spice/pull/23
