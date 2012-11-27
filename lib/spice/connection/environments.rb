@@ -22,6 +22,15 @@ module Spice
         Spice::Environment.get_or_new(attributes)
       end # def environment
 
+      #
+      def update_environment(params=Mash.new)
+          environment = environment(params[:name])
+
+          environment.attrs.update Spice::Environment.new(params)
+          put("/environments/#{environment.name}", environment.attrs)
+          environment(environment.name)
+      end
+
     end # module Environments
   end # class Connection
 end # module Spice
