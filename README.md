@@ -1,3 +1,9 @@
+# Spice Deprecation Notice
+
+Spice is no longer being actively maintained.
+
+Consider using [Ridley](https://github.com/RiotGames/ridley) instead.
+
 # Spice - Chef API Wrapper
 
 Spice lets you easily integrate your apps with a [Chef](http://opscode.com/chef) server. Spice provides support for the [Chef API](http://wiki.opscode.com/display/chef/Server+API)
